@@ -1,887 +1,264 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClipToNotion - 技术支持</title>
+    <title>ClipToNotion - Technical Support</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0a0b;
-            --surface: #141416;
-            --surface-hover: #1c1c20;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent: #3b82f6;
-            --accent-soft: rgba(59, 130, 246, 0.12);
-            --green: #22c55e;
-            --green-soft: rgba(34, 197, 94, 0.12);
-            --amber: #f59e0b;
-            --amber-soft: rgba(245, 158, 11, 0.12);
-            --red: #ef4444;
-            --red-soft: rgba(239, 68, 68, 0.12);
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Noise texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .header {
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-        }
-
-        .nav-links a.active {
-            color: var(--text);
-            background: var(--surface);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 80px 0 60px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-size: 40px;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            margin-bottom: 16px;
-        }
-
-        .hero p {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        /* Quick Contact */
-        .quick-contact {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 36px;
-            flex-wrap: wrap;
-        }
-
-        .contact-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.25s;
-            min-width: 220px;
-        }
-
-        .contact-card:hover {
-            border-color: var(--accent);
-            background: var(--surface-hover);
-            transform: translateY(-2px);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        .contact-icon.email {
-            background: var(--accent-soft);
-        }
-
-        .contact-label {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .contact-value {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Sections */
-        .section {
-            padding: 60px 0;
-        }
-
-        .section + .section {
-            border-top: 1px solid var(--border);
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 32px;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 12px;
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-
-        .faq-item:hover {
-            border-color: #3f3f46;
-        }
-
-        .faq-question {
-            padding: 20px 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            user-select: none;
-        }
-
-        .faq-question h3 {
-            font-size: 15px;
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .faq-toggle {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: var(--surface-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.3s, background 0.2s;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .faq-item.open .faq-toggle {
-            transform: rotate(45deg);
-            background: var(--accent-soft);
-            color: var(--accent);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease;
-        }
-
-        .faq-answer-inner {
-            padding: 0 24px 20px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .faq-answer-inner code {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--surface-hover);
-            padding: 2px 7px;
-            border-radius: 5px;
-            font-size: 13px;
-            color: var(--accent);
-        }
-
-        .faq-answer-inner ol, .faq-answer-inner ul {
-            padding-left: 20px;
-            margin: 8px 0;
-        }
-
-        .faq-answer-inner li {
-            margin: 6px 0;
-        }
-
-        .faq-answer-inner a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .faq-answer-inner a:hover {
-            text-decoration: underline;
-        }
-
-        /* Steps */
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .step {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .step h4 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .step p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Troubleshoot Tags */
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .tag.green { background: var(--green-soft); color: var(--green); }
-        .tag.amber { background: var(--amber-soft); color: var(--amber); }
-        .tag.red { background: var(--red-soft); color: var(--red); }
-
-        /* System Requirements */
-        .req-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
-
-        .req-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
-        }
-
-        .req-card .label {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        .req-card .value {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        .footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        /* Language switcher */
-        .lang-switch {
-            position: relative;
-            display: inline-flex;
-        }
-
-        .lang-switch select {
-            appearance: none;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 6px 30px 6px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .lang-switch::after {
-            content: '▾';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 11px;
-            pointer-events: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .hero h1 { font-size: 28px; }
-            .hero { padding: 60px 0 40px; }
-            .quick-contact { flex-direction: column; align-items: center; }
-            .contact-card { width: 100%; }
-            .step { flex-direction: column; gap: 12px; }
-            .header-inner { flex-wrap: wrap; gap: 12px; }
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            white-space: nowrap;
-        }
-
-        .lang-toggle:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-            border-color: #3f3f46;
-        }
-
-        .lang-toggle .globe {
-            font-size: 14px;
-        }
+        :root{--bg:#0a0a0b;--surface:#141416;--surface-hover:#1c1c20;--border:#27272a;--text:#fafafa;--text-secondary:#a1a1aa;--text-muted:#71717a;--accent:#3b82f6;--accent-soft:rgba(59,130,246,0.12);--green:#22c55e;--green-soft:rgba(34,197,94,0.12);--amber:#f59e0b;--amber-soft:rgba(245,158,11,0.12);--red:#ef4444;--red-soft:rgba(239,68,68,0.12);--radius:12px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+        body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000}
+        .header{border-bottom:1px solid var(--border);padding:20px 0;position:sticky;top:0;background:rgba(10,10,11,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:100}
+        .container{max-width:780px;margin:0 auto;padding:0 24px}
+        .header-inner{display:flex;align-items:center;justify-content:space-between}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+        .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+        .logo-text{font-size:17px;font-weight:600;letter-spacing:-0.02em}
+        .nav-links{display:flex;gap:8px}
+        .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;padding:6px 14px;border-radius:8px;transition:all 0.2s}
+        .nav-links a:hover{color:var(--text);background:var(--surface-hover)}
+        .nav-links a.active{color:var(--text);background:var(--surface)}
+        .hero{padding:80px 0 60px;text-align:center}
+        .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--accent-soft);color:var(--accent);border-radius:100px;font-size:13px;font-weight:500;margin-bottom:24px}
+        .hero h1{font-size:40px;font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:16px}
+        .hero p{font-size:17px;color:var(--text-secondary);max-width:520px;margin:0 auto}
+        .quick-contact{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+        .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 24px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);transition:all 0.25s;min-width:220px}
+        .contact-card:hover{border-color:var(--accent);background:var(--surface-hover);transform:translateY(-2px)}
+        .contact-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+        .contact-icon.email{background:var(--accent-soft)}
+        .contact-label{font-size:12px;color:var(--text-muted)}
+        .contact-value{font-size:14px;font-weight:500}
+        .section{padding:60px 0}
+        .section+.section{border-top:1px solid var(--border)}
+        .section-title{font-size:24px;font-weight:700;letter-spacing:-0.02em;margin-bottom:32px}
+        .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;transition:border-color 0.2s}
+        .faq-item:hover{border-color:#3f3f46}
+        .faq-question{padding:20px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none}
+        .faq-question h3{font-size:15px;font-weight:500;line-height:1.5}
+        .faq-toggle{width:28px;height:28px;border-radius:8px;background:var(--surface-hover);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s,background 0.2s;font-size:14px;color:var(--text-muted)}
+        .faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--accent-soft);color:var(--accent)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.35s ease}
+        .faq-answer-inner{padding:0 24px 20px;color:var(--text-secondary);font-size:14px;line-height:1.8}
+        .faq-answer-inner code{font-family:'JetBrains Mono',monospace;background:var(--surface-hover);padding:2px 7px;border-radius:5px;font-size:13px;color:var(--accent)}
+        .faq-answer-inner ol,.faq-answer-inner ul{padding-left:20px;margin:8px 0}
+        .faq-answer-inner li{margin:6px 0}
+        .faq-answer-inner a{color:var(--accent);text-decoration:none}
+        .faq-answer-inner a:hover{text-decoration:underline}
+        .steps{display:flex;flex-direction:column;gap:16px}
+        .step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;gap:20px;align-items:flex-start}
+        .step-number{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0}
+        .step h4{font-size:15px;font-weight:600;margin-bottom:6px}
+        .step p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+        .tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:500}
+        .tag.green{background:var(--green-soft);color:var(--green)}
+        .tag.amber{background:var(--amber-soft);color:var(--amber)}
+        .tag.red{background:var(--red-soft);color:var(--red)}
+        .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+        .req-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+        .req-card .label{font-size:12px;color:var(--text-muted);margin-bottom:6px}
+        .req-card .value{font-size:15px;font-weight:600}
+        .footer{border-top:1px solid var(--border);padding:40px 0;text-align:center}
+        .footer p{font-size:13px;color:var(--text-muted)}
+        .footer a{color:var(--text-secondary);text-decoration:none}
+        .footer a:hover{color:var(--text)}
+        .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px}
+        @media(max-width:640px){.hero h1{font-size:28px}.hero{padding:60px 0 40px}.quick-contact{flex-direction:column;align-items:center}.contact-card{width:100%}.step{flex-direction:column;gap:12px}.header-inner{flex-wrap:wrap;gap:12px}}
+        .lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;font-family:inherit;white-space:nowrap}
+        .lang-toggle:hover{color:var(--text);background:var(--surface-hover);border-color:#3f3f46}
+        .lang-toggle .globe{font-size:14px}
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">📋</div>
-                    <span class="logo-text">ClipToNotion</span>
-                </a>
-                <nav class="nav-links">
-                    <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
-                    <a href="support.html" class="active">技术支持</a>
-                    <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
-                </nav>
-                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
-                    <span class="globe">🌐</span>
-                    <span class="lang-label">EN</span>
-                </button>
-            </div>
+    <header class="header"><div class="container"><div class="header-inner">
+        <a href="index.html" class="logo"><div class="logo-icon">📋</div><span class="logo-text">ClipToNotion</span></a>
+        <nav class="nav-links">
+            <a href="index.html"><span data-zh="首页" data-en="Home">Home</span></a>
+            <a href="support.html" class="active"><span data-zh="技术支持" data-en="Support">Support</span></a>
+            <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
+        </nav>
+        <button id="langToggle" class="lang-toggle" aria-label="Switch Language"><span class="globe">🌐</span><span class="lang-label">中文</span></button>
+    </div></div></header>
+
+    <div class="hero"><div class="container">
+        <div class="hero-badge"><span data-zh="💬 我们随时为你提供帮助" data-en="💬 We're here to help">💬 We're here to help</span></div>
+        <h1><span data-zh="技术支持" data-en="Technical Support">Technical Support</span></h1>
+        <p><span data-zh="遇到问题？在这里查找解决方案，或直接联系我们获取帮助。" data-en="Having issues? Find solutions here or contact us for help.">Having issues? Find solutions here or contact us for help.</span></p>
+        <div class="quick-contact">
+            <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion Feedback】" class="contact-card">
+                <div class="contact-icon email">✉️</div>
+                <div><div class="contact-label"><span data-zh="邮件联系" data-en="Email Us">Email Us</span></div><div class="contact-value">lleowang@foxmail.com</div></div>
+            </a>
         </div>
-    </header>
+    </div></div>
 
-    <div class="hero">
-        <div class="container">
-            <div class="hero-badge"><span data-zh="💬 我们随时为你提供帮助" data-en="💬 We're here to help">💬 我们随时为你提供帮助</span></div>
-            <h1><span data-zh="技术支持" data-en="Technical Support">技术支持</span></h1>
-            <p><span data-zh="遇到问题？在这里查找解决方案，或直接联系我们获取帮助。" data-en="Having issues? Find solutions here or contact us for help.">遇到问题？在这里查找解决方案，或直接联系我们获取帮助。</span></p>
-
-            <div class="quick-contact">
-                <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion 问题反馈】" class="contact-card">
-                    <div class="contact-icon email">✉️</div>
-                    <div>
-                        <div class="contact-label"><span data-zh="邮件联系" data-en="Email Us">邮件联系</span></div>
-                        <div class="contact-value">lleowang@foxmail.com</div>
-                    </div>
-                </a>
-            </div>
+    <div class="section"><div class="container">
+        <h2 class="section-title"><span data-zh="🚀 快速开始" data-en="🚀 Quick Start">🚀 Quick Start</span></h2>
+        <div class="steps">
+            <div class="step"><div class="step-number">1</div><div>
+                <h4><span data-zh="创建 Notion Integration" data-en="Create Notion Integration">Create Notion Integration</span></h4>
+                <p><span data-zh="前往 Notion Integrations 页面，点击「New integration」创建一个新的 Integration，并复制 API Token（以 ntn_ 或 secret_ 开头）。" data-en="Go to the Notion Integrations page, click &quot;New integration&quot;, create a new Integration, and copy the API Token (starting with ntn_ or secret_).">Go to the <a href="https://www.notion.so/profile/integrations" target="_blank" style="color:var(--accent)">Notion Integrations</a> page, click "New integration", create a new Integration, and copy the API Token (starting with <code>ntn_</code> or <code>secret_</code>).</span></p>
+            </div></div>
+            <div class="step"><div class="step-number">2</div><div>
+                <h4><span data-zh="关联目标页面" data-en="Connect Target Page">Connect Target Page</span></h4>
+                <p><span data-zh="在 Notion 中打开你想要发送内容的目标页面，点击页面右上角的 ··· 菜单 → 「Connections」→ 添加刚创建的 Integration。" data-en="Open your target Notion page, click the ··· menu → &quot;Connections&quot; → add the Integration you just created.">Open your target Notion page, click the <code>···</code> menu → "Connections" → add the Integration you just created.</span></p>
+            </div></div>
+            <div class="step"><div class="step-number">3</div><div>
+                <h4><span data-zh="配置 ClipToNotion" data-en="Configure ClipToNotion">Configure ClipToNotion</span></h4>
+                <p><span data-zh="打开 ClipToNotion 设置界面，粘贴 API Token 和目标页面 URL（或 Page ID），点击「测试连接」确认连接成功。" data-en="Open ClipToNotion settings, paste the API Token and target page URL (or Page ID), click &quot;Test Connection&quot; to confirm.">Open ClipToNotion settings, paste the API Token and target page URL (or Page ID), click "Test Connection" to confirm.</span></p>
+            </div></div>
+            <div class="step"><div class="step-number">4</div><div>
+                <h4><span data-zh="开始使用" data-en="Start Using">Start Using</span></h4>
+                <p><span data-zh="复制任意文字内容，按下全局快捷键（默认 ⌘⇧V），剪贴板内容即刻发送到 Notion！" data-en="Copy any text, press the global hotkey (default ⌘⇧V), and clipboard content is instantly sent to Notion!">Copy any text, press the global hotkey (default <code>⌘⇧V</code>), and clipboard content is instantly sent to Notion!</span></p>
+            </div></div>
         </div>
-    </div>
+    </div></div>
 
-    <!-- Getting Started -->
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title"><span data-zh="🚀 快速开始" data-en="🚀 Quick Start">🚀 快速开始</span></h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h4><span data-zh="创建 Notion Integration" data-en="Create Notion Integration">创建 Notion Integration</span></h4>
-                        <p>前往 <a href="https://www.notion.so/profile/integrations" target="_blank" style="color:var(--accent)">Notion Integrations</a> 页面，点击「New integration」创建一个新的 Integration，并复制 API Token（以 <code>ntn_</code> 或 <code>secret_</code> 开头）。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div>
-                        <h4><span data-zh="关联目标页面" data-en="Connect Target Page">关联目标页面</span></h4>
-                        <p>在 Notion 中打开你想要发送内容的目标页面，点击页面右上角的 <code>···</code> 菜单 → 「Connections」→ 添加刚创建的 Integration。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div>
-                        <h4><span data-zh="配置 ClipToNotion" data-en="Configure ClipToNotion">配置 ClipToNotion</span></h4>
-                        <p>打开 ClipToNotion 设置界面，粘贴 API Token 和目标页面 URL（或 Page ID），点击「测试连接」确认连接成功。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div>
-                        <h4><span data-zh="开始使用" data-en="Start Using">开始使用</span></h4>
-                        <p>复制任意文字内容，按下全局快捷键（默认 <code>⌘⇧V</code>），剪贴板内容即刻发送到 Notion！</p>
-                    </div>
-                </div>
-            </div>
+    <div class="section"><div class="container">
+        <h2 class="section-title"><span data-zh="❓ 常见问题" data-en="❓ FAQ">❓ FAQ</span></h2>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="连接测试失败，提示「TLS 安全连接失败」" data-en="Connection test failed: &quot;TLS secure connection failed&quot;">Connection test failed: "TLS secure connection failed"</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag amber"><span data-zh="⚠ 网络相关" data-en="⚠ Network">⚠ Network</span></span>
+            <p style="margin-top:10px"><span data-zh="这通常是网络代理或 VPN 干扰了与 Notion 服务器的加密通信。请尝试：" data-en="This is usually caused by a proxy or VPN interfering with encrypted communication to Notion. Try:">This is usually caused by a proxy or VPN interfering with encrypted communication to Notion. Try:</span></p>
+            <ol>
+                <li><span data-zh="切换代理节点，或开启全局代理模式" data-en="Switch proxy nodes or enable global proxy mode">Switch proxy nodes or enable global proxy mode</span></li>
+                <li><span data-zh="暂时关闭代理/VPN 后重试" data-en="Temporarily disable proxy/VPN and retry">Temporarily disable proxy/VPN and retry</span></li>
+                <li><span data-zh="如果使用公司网络，可能防火墙阻止了对 api.notion.com 的访问" data-en="Corporate firewalls may block access to api.notion.com">Corporate firewalls may block access to <code>api.notion.com</code></span></li>
+            </ol>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="连接测试失败，提示「无效的 API Token」" data-en="Connection test failed: &quot;Invalid API Token&quot;">Connection test failed: "Invalid API Token"</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag red"><span data-zh="⚠ 配置相关" data-en="⚠ Configuration">⚠ Configuration</span></span>
+            <p style="margin-top:10px"><span data-zh="请检查以下几点：" data-en="Please check the following:">Please check the following:</span></p>
+            <ol>
+                <li><span data-zh="确认 Token 以 ntn_ 或 secret_ 开头" data-en="Confirm Token starts with ntn_ or secret_">Confirm Token starts with <code>ntn_</code> or <code>secret_</code></span></li>
+                <li><span data-zh="确保复制时没有多余的空格" data-en="Ensure no extra spaces when copying">Ensure no extra spaces when copying</span></li>
+                <li><span data-zh="前往 Notion Integrations 确认 Token 未被撤销" data-en="Check Notion Integrations to confirm Token is not revoked">Check <a href="https://www.notion.so/profile/integrations" target="_blank">Notion Integrations</a> to confirm Token is not revoked</span></li>
+            </ol>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="快捷键无法触发" data-en="Hotkey not working">Hotkey not working</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag green"><span data-zh="⚠ 权限相关" data-en="⚠ Permissions">⚠ Permissions</span></span>
+            <p style="margin-top:10px"><span data-zh="全局快捷键需要「辅助功能」权限。请前往：" data-en="Global hotkeys require Accessibility permission. Go to:">Global hotkeys require Accessibility permission. Go to:</span></p>
+            <p><strong><span data-zh="系统设置 → 隐私与安全性 → 辅助功能" data-en="System Settings → Privacy & Security → Accessibility">System Settings → Privacy & Security → Accessibility</span></strong></p>
+            <p><span data-zh="在列表中找到 ClipToNotion 并启用。如果已启用但仍不生效，可以取消勾选后重新勾选。" data-en="Find ClipToNotion in the list and enable it. If already enabled but not working, uncheck and recheck.">Find ClipToNotion in the list and enable it. If already enabled but not working, uncheck and recheck.</span></p>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="提示「无效的 Page ID」怎么办？" data-en="What if it says &quot;Invalid Page ID&quot;?">What if it says "Invalid Page ID"?</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag red"><span data-zh="⚠ 配置相关" data-en="⚠ Configuration">⚠ Configuration</span></span>
+            <p style="margin-top:10px"><span data-zh="ClipToNotion 支持直接粘贴 Notion 页面的完整 URL，例如：" data-en="ClipToNotion supports pasting the full Notion page URL, e.g.:">ClipToNotion supports pasting the full Notion page URL, e.g.:</span></p>
+            <p><code>https://www.notion.so/Your-Page-Title-abc123def456</code></p>
+            <p><span data-zh="也支持直接填写 32 位的 Page ID。请确保：" data-en="You can also enter the 32-character Page ID. Make sure:">You can also enter the 32-character Page ID. Make sure:</span></p>
+            <ol>
+                <li><span data-zh="目标页面已经关联了你的 Integration" data-en="The target page has your Integration connected">The target page has your Integration connected</span></li>
+                <li><span data-zh="URL 或 ID 复制完整，没有遗漏字符" data-en="URL or ID is fully copied without missing characters">URL or ID is fully copied without missing characters</span></li>
+            </ol>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="发送成功但 Notion 页面看不到内容？" data-en="Sent successfully but can't see content in Notion?">Sent successfully but can't see content in Notion?</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag amber"><span data-zh="⚠ 使用相关" data-en="⚠ Usage">⚠ Usage</span></span>
+            <p style="margin-top:10px"><span data-zh="内容默认追加到页面顶部。请尝试：" data-en="Content is appended to the top of the page by default. Try:">Content is appended to the top of the page by default. Try:</span></p>
+            <ol>
+                <li><span data-zh="刷新 Notion 页面（按 ⌘R）" data-en="Refresh the Notion page (press ⌘R)">Refresh the Notion page (press <code>⌘R</code>)</span></li>
+                <li><span data-zh="滚动到页面顶部查看" data-en="Scroll to the top of the page">Scroll to the top of the page</span></li>
+                <li><span data-zh="确认你查看的页面与设置中配置的 Page ID 一致" data-en="Confirm the page matches the configured Page ID">Confirm the page matches the configured Page ID</span></li>
+            </ol>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="如何切换 App 界面语言？" data-en="How to switch app language?">How to switch app language?</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag green"><span data-zh="ℹ 功能相关" data-en="ℹ Feature">ℹ Feature</span></span>
+            <p style="margin-top:10px"><span data-zh="ClipToNotion 支持 39 种语言。默认跟随系统语言，也可以在设置中手动切换：" data-en="ClipToNotion supports 39 languages. It follows system language by default, or you can switch manually:">ClipToNotion supports 39 languages. It follows system language by default, or you can switch manually:</span></p>
+            <p><strong><span data-zh="设置 → 语言设置 → 界面语言" data-en="Settings → Language → Interface Language">Settings → Language → Interface Language</span></strong></p>
+            <p><span data-zh="切换后部分界面需要重新打开才能生效。" data-en="Some interfaces need to be reopened after switching.">Some interfaces need to be reopened after switching.</span></p>
+        </div></div></div>
+
+        <div class="faq-item"><div class="faq-question">
+            <h3><span data-zh="App 是否会上传我的数据到第三方服务器？" data-en="Does the app upload data to third-party servers?">Does the app upload data to third-party servers?</span></h3>
+            <div class="faq-toggle">+</div>
+        </div><div class="faq-answer"><div class="faq-answer-inner">
+            <span class="tag green"><span data-zh="🔒 隐私相关" data-en="🔒 Privacy">🔒 Privacy</span></span>
+            <p style="margin-top:10px"><span data-zh="不会。ClipToNotion 仅在你的设备本地运行，所有剪贴板数据通过 Notion 官方 API 直接发送到你的 Notion 账户，全程不经过任何第三方服务器。API Token 仅存储在你的 macOS 系统中。" data-en="No. ClipToNotion runs locally on your device. All clipboard data is sent directly to your Notion account via the official API, never through third-party servers. API Token is stored only on your macOS system."><strong>No.</strong> ClipToNotion runs locally on your device. All clipboard data is sent directly to your Notion account via the official API, never through third-party servers. API Token is stored only on your macOS system.</span></p>
+        </div></div></div>
+    </div></div>
+
+    <div class="section"><div class="container">
+        <h2 class="section-title"><span data-zh="💻 系统要求" data-en="💻 System Requirements">💻 System Requirements</span></h2>
+        <div class="req-grid">
+            <div class="req-card"><div class="label"><span data-zh="操作系统" data-en="Operating System">Operating System</span></div><div class="value">macOS 13.0+</div></div>
+            <div class="req-card"><div class="label"><span data-zh="芯片架构" data-en="Chip Architecture">Chip Architecture</span></div><div class="value">Apple Silicon / Intel</div></div>
+            <div class="req-card"><div class="label"><span data-zh="网络连接" data-en="Network">Network</span></div><div class="value"><span data-zh="需要互联网" data-en="Internet Required">Internet Required</span></div></div>
+            <div class="req-card"><div class="label"><span data-zh="Notion 账户" data-en="Notion Account">Notion Account</span></div><div class="value"><span data-zh="需要免费或付费版" data-en="Free or paid plan required">Free or paid plan required</span></div></div>
         </div>
-    </div>
+    </div></div>
 
-    <!-- FAQ -->
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title"><span data-zh="❓ 常见问题" data-en="❓ FAQ">❓ 常见问题</span></h2>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="连接测试失败，提示「TLS 安全连接失败」" data-en="Connection test failed: &quot;TLS secure connection failed&quot;">连接测试失败，提示「TLS 安全连接失败」</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag amber">⚠ 网络相关</span>
-                        <p style="margin-top:10px">这通常是网络代理或 VPN 干扰了与 Notion 服务器的加密通信。请尝试：</p>
-                        <ol>
-                            <li>切换代理节点，或开启全局代理模式</li>
-                            <li>暂时关闭代理/VPN 后重试</li>
-                            <li>如果使用公司网络，可能防火墙阻止了对 <code>api.notion.com</code> 的访问</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="连接测试失败，提示「无效的 API Token」" data-en="Connection test failed: &quot;Invalid API Token&quot;">连接测试失败，提示「无效的 API Token」</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag red">⚠ 配置相关</span>
-                        <p style="margin-top:10px">请检查以下几点：</p>
-                        <ol>
-                            <li>确认 Token 以 <code>ntn_</code> 或 <code>secret_</code> 开头</li>
-                            <li>确保复制时没有多余的空格</li>
-                            <li>前往 <a href="https://www.notion.so/profile/integrations" target="_blank">Notion Integrations</a> 确认 Token 未被撤销</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="快捷键无法触发" data-en="Hotkey not working">快捷键无法触发</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag green">⚠ 权限相关</span>
-                        <p style="margin-top:10px">全局快捷键需要「辅助功能」权限。请前往：</p>
-                        <p><strong>系统设置 → 隐私与安全性 → 辅助功能</strong></p>
-                        <p>在列表中找到 ClipToNotion 并启用。如果已启用但仍不生效，可以取消勾选后重新勾选。</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="提示「无效的 Page ID」怎么办？" data-en="What if it says &quot;Invalid Page ID&quot;?">提示「无效的 Page ID」怎么办？</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag red">⚠ 配置相关</span>
-                        <p style="margin-top:10px">ClipToNotion 支持直接粘贴 Notion 页面的完整 URL，例如：</p>
-                        <p><code>https://www.notion.so/Your-Page-Title-abc123def456</code></p>
-                        <p>也支持直接填写 32 位的 Page ID。请确保：</p>
-                        <ol>
-                            <li>目标页面已经关联了你的 Integration</li>
-                            <li>URL 或 ID 复制完整，没有遗漏字符</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="发送成功但 Notion 页面看不到内容？" data-en="Sent successfully but can't see content in Notion?">发送成功但 Notion 页面看不到内容？</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag amber">⚠ 使用相关</span>
-                        <p style="margin-top:10px">内容默认追加到页面顶部。请尝试：</p>
-                        <ol>
-                            <li>刷新 Notion 页面（按 <code>⌘R</code>）</li>
-                            <li>滚动到页面顶部查看</li>
-                            <li>确认你查看的页面与设置中配置的 Page ID 一致</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="如何切换 App 界面语言？" data-en="How to switch app language?">如何切换 App 界面语言？</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag green">ℹ 功能相关</span>
-                        <p style="margin-top:10px">ClipToNotion 支持 39 种语言。默认跟随系统语言，也可以在设置中手动切换：</p>
-                        <p><strong>设置 → 语言设置 → 界面语言</strong></p>
-                        <p>切换后部分界面需要重新打开才能生效。</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3><span data-zh="App 是否会上传我的数据到第三方服务器？" data-en="Does the app upload data to third-party servers?">App 是否会上传我的数据到第三方服务器？</span></h3>
-                    <div class="faq-toggle">+</div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <span class="tag green">🔒 隐私相关</span>
-                        <p style="margin-top:10px"><strong>不会。</strong>ClipToNotion 仅在你的设备本地运行，所有剪贴板数据通过 Notion 官方 API 直接发送到你的 Notion 账户，全程不经过任何第三方服务器。API Token 仅存储在你的 macOS 系统中。</p>
-                    </div>
-                </div>
-            </div>
+    <div class="section"><div class="container">
+        <h2 class="section-title"><span data-zh="📬 联系我们" data-en="📬 Contact Us">📬 Contact Us</span></h2>
+        <p style="color:var(--text-secondary);margin-bottom:20px;"><span data-zh="如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。" data-en="If the above didn't solve your issue, feel free to contact us. We typically reply within 48 hours.">If the above didn't solve your issue, feel free to contact us. We typically reply within 48 hours.</span></p>
+        <div class="quick-contact" style="justify-content:flex-start;">
+            <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion Feedback】" class="contact-card">
+                <div class="contact-icon email">✉️</div>
+                <div><div class="contact-label"><span data-zh="技术支持邮箱" data-en="Support Email">Support Email</span></div><div class="contact-value">lleowang@foxmail.com</div></div>
+            </a>
         </div>
-    </div>
+        <p style="color:var(--text-muted);font-size:13px;margin-top:16px;"><span data-zh="发送邮件时请附上你的 macOS 版本和 ClipToNotion 版本号，以便我们更快定位问题。" data-en="Please include your macOS version and ClipToNotion version in the email to help us locate the issue faster.">Please include your macOS version and ClipToNotion version in the email to help us locate the issue faster.</span></p>
+    </div></div>
 
-    <!-- System Requirements -->
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title"><span data-zh="💻 系统要求" data-en="💻 System Requirements">💻 系统要求</span></h2>
-            <div class="req-grid">
-                <div class="req-card">
-                    <div class="label"><span data-zh="操作系统" data-en="Operating System">操作系统</span></div>
-                    <div class="value">macOS 13.0+</div>
-                </div>
-                <div class="req-card">
-                    <div class="label"><span data-zh="芯片架构" data-en="Chip Architecture">芯片架构</span></div>
-                    <div class="value">Apple Silicon / Intel</div>
-                </div>
-                <div class="req-card">
-                    <div class="label"><span data-zh="网络连接" data-en="Network">网络连接</span></div>
-                    <div class="value"><span data-zh="需要互联网" data-en="Internet Required">需要互联网</span></div>
-                </div>
-                <div class="req-card">
-                    <div class="label"><span data-zh="Notion 账户" data-en="Notion Account">Notion 账户</span></div>
-                    <div class="value"><span data-zh="需要免费或付费版" data-en="Free or paid plan required">需要免费或付费版</span></div>
-                </div>
-            </div>
+    <footer class="footer"><div class="container">
+        <div class="footer-links">
+            <a href="index.html"><span data-zh="首页" data-en="Home">Home</span></a>
+            <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
+            <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
         </div>
-    </div>
-
-    <!-- Contact -->
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title"><span data-zh="📬 联系我们" data-en="📬 Contact Us">📬 联系我们</span></h2>
-            <p style="color:var(--text-secondary);margin-bottom:20px;"><span data-zh="如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。" data-en="If the above didn't solve your issue, feel free to contact us. We typically reply within 48 hours.">如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。</span></p>
-            <div class="quick-contact" style="justify-content:flex-start;">
-                <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion 问题反馈】" class="contact-card">
-                    <div class="contact-icon email">✉️</div>
-                    <div>
-                        <div class="contact-label"><span data-zh="技术支持邮箱" data-en="Support Email">技术支持邮箱</span></div>
-                        <div class="contact-value">lleowang@foxmail.com</div>
-                    </div>
-                </a>
-            </div>
-            <p style="color:var(--text-muted);font-size:13px;margin-top:16px;">发送邮件时请附上你的 macOS 版本和 ClipToNotion 版本号，以便我们更快定位问题。</p>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="index.html">首页</a>
-                <a href="support.html">技术支持</a>
-                <a href="privacy.html">隐私政策</a>
-            </div>
-            <p>© 2026 ClipToNotion. All rights reserved.</p>
-        </div>
-    </footer>
+        <p>© 2026 ClipToNotion. All rights reserved.</p>
+    </div></footer>
 
     <script>
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', () => {
-                const item = q.parentElement;
-                const answer = item.querySelector('.faq-answer');
-                const inner = answer.querySelector('.faq-answer-inner');
-                const isOpen = item.classList.contains('open');
-
-                // Close all others
-                document.querySelectorAll('.faq-item.open').forEach(other => {
-                    if (other !== item) {
-                        other.classList.remove('open');
-                        other.querySelector('.faq-answer').style.maxHeight = '0';
-                    }
-                });
-
-                if (isOpen) {
-                    item.classList.remove('open');
-                    answer.style.maxHeight = '0';
-                } else {
-                    item.classList.add('open');
-                    answer.style.maxHeight = inner.scrollHeight + 'px';
-                }
-            });
+    document.querySelectorAll('.faq-question').forEach(function(q){
+        q.addEventListener('click',function(){
+            var item=q.parentElement,answer=item.querySelector('.faq-answer'),inner=answer.querySelector('.faq-answer-inner'),isOpen=item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function(o){if(o!==item){o.classList.remove('open');o.querySelector('.faq-answer').style.maxHeight='0';}});
+            if(isOpen){item.classList.remove('open');answer.style.maxHeight='0';}else{item.classList.add('open');answer.style.maxHeight=inner.scrollHeight+'px';}
         });
+    });
     </script>
-
     <script>
-    (function() {
-        const K = 'declaration_lang';
-        const T = {
-        "首页": "Home",
-        "技术支持": "Technical Support",
-        "隐私政策": "Privacy",
-        "联系我们": "Contact Us",
-        "💬 我们随时为你提供帮助": "💬 We're here to help",
-        "遇到问题？在这里查找解决方案，或直接联系我们获取帮助。": "Having issues? Find solutions here or contact us for help.",
-        "邮件联系": "Email Us",
-        "🚀 快速开始": "🚀 Quick Start",
-        "❓ 常见问题": "❓ FAQ",
-        "💻 系统要求": "💻 System Requirements",
-        "📬 联系我们": "📬 Contact Us",
-        "操作系统": "Operating System",
-        "芯片架构": "Chip Architecture",
-        "网络连接": "Network",
-        "技术支持邮箱": "Support Email",
-        "如何切换 App 界面语言？": "How to switch app language?",
-        "设置 → 语言设置 → 界面语言": "Settings → Language → Interface Language",
-        "切换后部分界面需要重新打开才能生效。": "Some interfaces need to be reopened after switching.",
-        "创建 Notion Integration": "Create Notion Integration",
-        "前往 Notion 开发者页面，创建一个新的 Integration，复制生成的 API Token。": "Go to Notion developer page, create Integration, copy API Token.",
-        "关联目标页面": "Connect Target Page",
-        "在你想要发送内容的 Notion 页面中，点击右上角「...」→「添加连接」，选择你创建的 Integration。": "In the Notion page, click '...' → 'Add connections', select your Integration.",
-        "配置 ClipToNotion": "Configure ClipToNotion",
-        "打开 ClipToNotion，粘贴 API Token 和页面链接，点击测试连接。成功后即可开始使用。": "Open ClipToNotion, paste API Token and page link, click test connection.",
-        "开始使用": "Start Using",
-        "在任何应用中复制文本，按下全局快捷键（默认 ⌘⇧V），内容立即发送到 Notion！": "Copy text in any app, press global hotkey (default ⌘⇧V), sent to Notion!",
-        "连接测试失败，提示「TLS 安全连接失败」": "Connection test failed: \"TLS secure connection failed\"",
-        "这通常是由于网络环境限制导致无法连接 Notion API 服务器。请尝试：": "Usually caused by network restrictions. Please try:",
-        "检查网络连接是否正常": "Check network connection",
-        "如果使用了代理，确认代理设置正确": "Confirm proxy settings if using one",
-        "尝试切换到其他网络环境": "Try a different network",
-        "Notion API 服务器位于海外，部分网络环境可能需要代理才能访问": "Notion API servers are overseas; proxy may be needed",
-        "连接测试失败，提示「无效的 API Token」": "Connection test failed: \"Invalid API Token\"",
-        "请检查以下几点：": "Please check the following:",
-        "确认复制的是 Integration 的 Internal Integration Secret（以 ntn_ 或 secret_ 开头）": "Confirm you copied the Internal Integration Secret (starts with ntn_ or secret_)",
-        "检查 Token 是否完整复制，没有多余空格": "Check Token is fully copied without extra spaces",
-        "在 Notion 设置中确认该 Integration 未被禁用": "Confirm Integration is not disabled",
-        "快捷键无法触发": "Hotkey not working",
-        "全局快捷键需要「辅助功能」权限。请检查：": "Global hotkeys require Accessibility permission:",
-        "系统设置 → 隐私与安全性 → 辅助功能": "System Settings → Privacy & Security → Accessibility",
-        "确认 ClipToNotion 已在列表中并已启用": "Confirm ClipToNotion is in the list and enabled",
-        "如果已启用但不生效，取消勾选后重新勾选，然后重启 App": "If enabled but not working, uncheck/recheck, restart app",
-        "提示「无效的 Page ID」怎么办？": "What if \"Invalid Page ID\"?",
-        "页面链接来自 Notion 中的「复制链接」，格式类似": "Page link from Notion's 'Copy link'",
-        "该页面已关联了你的 Integration（步骤 2）": "Page has Integration connected (step 2)",
-        "尝试使用页面的完整 URL 而不是短链接": "Use full URL instead of short link",
-        "发送成功但 Notion 页面看不到内容？": "Sent but can't see content in Notion?",
-        "刷新 Notion 页面（⌘R 或 F5）": "Refresh Notion page (⌘R or F5)",
-        "如果启用了「新内容置顶」，内容会出现在页面顶部": "If 'New content on top' enabled, content at page top",
-        "确认发送的目标页面是否正确": "Confirm target page is correct",
-        "ClipToNotion 支持 39 种语言。默认跟随系统语言，也可以手动切换：": "ClipToNotion supports 39 languages. Default follows system language.",
-        "App 是否会上传我的数据到第三方服务器？": "Does the app upload data to third-party servers?",
-        "ClipToNotion 仅通过 Notion 官方 API 将你的剪贴板内容发送到你自己的 Notion 账户。不存在任何第三方服务器中转或数据收集行为。你的 API Token 使用 macOS Keychain 安全存储。": "ClipToNotion only sends to your own Notion via official API. No third-party relay. Token in Keychain.",
-        "需要互联网": "Internet Required",
-        "Notion 账户": "Notion Account",
-        "需要免费或付费版": "Free or paid plan required",
-        "如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。": "If not solved, contact us. We typically reply within 48 hours.",
-        "发送邮件时请附上你的 macOS 版本和 ClipToNotion 版本号，以便我们更快定位问题。": "Include macOS/ClipToNotion version in your email.",
-        "请确认：": "Please confirm:",
-        "前往": "Go to",
-        "不会。": "No.",
-        "请检查：": "Please check:"
-};
-        function gL(){return localStorage.getItem(K)||'zh'}
-        function sL(l){localStorage.setItem(K,l)}
-        function apply(lang) {
-            // 1. Handle data-zh/data-en elements
-            document.querySelectorAll('[data-zh]').forEach(function(el){
-                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
-            });
-            // 2. Walk all text nodes for dictionary-based translation
-            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-                acceptNode: function(n) {
-                    var p = n.parentElement;
-                    if (!p) return NodeFilter.FILTER_REJECT;
-                    var t = p.tagName;
-                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
-                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
-                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
-                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
-                    return NodeFilter.FILTER_ACCEPT;
-                }
-            });
-            var nodes=[];
-            while(walker.nextNode()) nodes.push(walker.currentNode);
-            nodes.forEach(function(nd){
-                var txt = nd.textContent.trim();
-                if (!txt) return;
-                if (lang==='en') {
-                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
-                } else {
-                    for (var zh in T) {
-                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
-                    }
-                }
-            });
-            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
-            var btn = document.getElementById('langToggle');
-            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+    (function(){
+        var K='declaration_lang';
+        function gL(){return localStorage.getItem(K)||'en';}
+        function sL(l){localStorage.setItem(K,l);}
+        function apply(lang){
+            document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});
+            document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
+            document.title=lang==='zh'?'ClipToNotion - 技术支持':'ClipToNotion - Technical Support';
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
         }
-        document.addEventListener('DOMContentLoaded', function(){
-            if(gL()==='en') apply('en');
-            var btn = document.getElementById('langToggle');
-            if(btn) btn.addEventListener('click', function(){
-                var next = gL()==='en' ? 'zh' : 'en';
-                sL(next); apply(next);
-            });
+        document.addEventListener('DOMContentLoaded',function(){
+            var lang=gL();if(lang==='zh')apply('zh');
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});
         });
     })();
     </script>
