@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropShelf - 隐私政策</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --surface: #141416;
+            --surface-hover: #1c1c20;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #5B6EF5;
+            --accent-soft: rgba(91, 110, 245, 0.12);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.12);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #5B6EF5, #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+        }
+
+        .nav-links a.active {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        /* Content */
+        .content {
+            padding: 80px 0;
+        }
+
+        .content h1 {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+        }
+
+        .content h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .content h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .content ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .content li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+
+        .content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: var(--green-soft);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            color: var(--green);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 14px 20px;
+            background: var(--surface-hover);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 14px 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--text);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .content h1 { font-size: 28px; }
+            .content { padding: 60px 0; }
+            .header-inner { flex-wrap: wrap; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">📂</div>
+                    <span class="logo-text">DropShelf</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="support.html">技术支持</a>
+                    <a href="privacy.html" class="active">隐私政策</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="container">
+            <h1>隐私政策</h1>
+            <p class="last-updated">最后更新日期：2026 年 3 月 23 日</p>
+
+            <div class="highlight-box">
+                <p>🛡️ DropShelf 是一款完全离线运行的本地工具，不收集、不存储、不传输任何用户数据到远程服务器。你的文件永远留在你的 Mac 上。</p>
+            </div>
+
+            <h2>概述</h2>
+            <p>DropShelf（以下简称「本应用」）是一款 macOS 原生文件搁置架工具，帮助用户在拖拽文件时将文件暂存到浮动面板中进行管理和操作。本隐私政策说明了本应用如何处理你的信息。</p>
+
+            <h2>数据收集</h2>
+            <p><strong>本应用不收集任何个人信息。</strong></p>
+            <p>具体而言：</p>
+            <ul>
+                <li>不收集用户身份信息（姓名、邮箱、设备标识符等）</li>
+                <li>不收集使用分析数据或行为数据</li>
+                <li>不使用任何第三方分析或追踪 SDK</li>
+                <li>不包含广告或广告追踪</li>
+                <li>不使用 Cookie 或类似追踪技术</li>
+            </ul>
+
+            <h2>网络通信</h2>
+            <p><strong>本应用不进行任何网络通信。</strong></p>
+            <p>DropShelf 是一款完全离线运行的工具，不连接任何远程服务器，不发送任何网络请求。所有文件操作（暂存、压缩、转换、重命名、合并）均在你的 Mac 本地完成。</p>
+
+            <div class="info-box">
+                <p>💡 DropShelf 不需要互联网连接即可正常使用。你的文件内容永远不会通过网络传输到任何地方。</p>
+            </div>
+
+            <h2>本地存储的数据</h2>
+            <p>本应用会在你的设备本地存储以下信息，这些数据<strong>仅保存在你的 macOS 系统中</strong>：</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>数据类型</th>
+                        <th>用途</th>
+                        <th>存储方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>搁置架内容</td>
+                        <td>持久化暂存的文件引用，重启后恢复</td>
+                        <td>本地 JSON 文件（Application Support）</td>
+                    </tr>
+                    <tr>
+                        <td>文件书签</td>
+                        <td>Security-Scoped Bookmark，跨会话访问文件</td>
+                        <td>本地 JSON 文件（Application Support）</td>
+                    </tr>
+                    <tr>
+                        <td>快捷键设置</td>
+                        <td>记录用户自定义的全局快捷键</td>
+                        <td>macOS UserDefaults</td>
+                    </tr>
+                    <tr>
+                        <td>面板位置</td>
+                        <td>记住浮动面板的位置和大小</td>
+                        <td>macOS UserDefaults</td>
+                    </tr>
+                    <tr>
+                        <td>语言偏好</td>
+                        <td>记录用户选择的界面语言</td>
+                        <td>macOS UserDefaults</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>文件访问</h2>
+            <p>本应用会读取和操作你拖入搁置架的文件，<strong>仅在以下情况下发生</strong>：</p>
+            <ul>
+                <li>当你将文件拖入搁置架时（创建文件引用）</li>
+                <li>当你对文件执行操作时（压缩、转换、重命名、合并等）</li>
+                <li>当你预览搁置架中的文件时（Quick Look）</li>
+                <li>当你将文件从搁置架拖出到目标位置时</li>
+            </ul>
+            <p>本应用不会在后台扫描你的文件系统，也不会访问搁置架之外的文件。</p>
+
+            <h2>辅助功能权限</h2>
+            <p>本应用需要 macOS 辅助功能（Accessibility）权限来实现以下功能：</p>
+            <ul>
+                <li><strong>全局快捷键</strong> — 注册和响应全局键盘快捷键（默认 ⌥Space）</li>
+                <li><strong>拖拽监听</strong> — 检测系统级文件拖拽事件以自动弹出搁置架面板</li>
+            </ul>
+            <p>该权限不用于其他任何目的，不会监控键盘输入或屏幕内容。</p>
+
+            <h2>第三方服务</h2>
+            <p><strong>本应用不集成任何第三方 SDK、框架或服务。</strong>所有功能均使用 macOS 原生框架（AppKit、SwiftUI、PDFKit、ImageIO 等）实现。</p>
+
+            <h2>儿童隐私</h2>
+            <p>本应用不针对 13 岁以下的儿童。本应用不会有意收集任何儿童的个人信息。</p>
+
+            <h2>隐私政策变更</h2>
+            <p>如本隐私政策有重大变更，我们将通过应用更新或本页面进行通知。建议你定期查看本页面以了解最新的隐私政策。</p>
+
+            <h2>联系我们</h2>
+            <p>如果你对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
+            <p>📧 <a href="mailto:lleowang@foxmail.com">lleowang@foxmail.com</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">首页</a>
+                <a href="support.html">技术支持</a>
+                <a href="privacy.html">隐私政策</a>
+            </div>
+            <p>© 2026 DropShelf. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
