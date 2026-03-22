@@ -634,6 +634,33 @@
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -644,10 +671,14 @@
                 <span class="logo-text">PicFlow</span>
             </a>
             <nav class="nav-links">
-                <a href="index.html" class="active">首页</a>
-                <a href="support.html">技术支持</a>
-                <a href="privacy.html">隐私政策</a>
+                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a>
+                <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
             </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
         </div>
     </header>
 
@@ -660,7 +691,7 @@
             </div>
             <h1>
                 截图，拖拽<br>
-                <span class="gradient">一键上云</span>
+                <span class="gradient"><span data-zh="一键上云" data-en="One-Click Upload">一键上云</span></span>
             </h1>
             <p class="subtitle">
                 一款精致的 macOS 菜单栏图床应用。<br>
@@ -671,7 +702,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                 在 Mac App Store 下载
             </a>
-            <p class="hero-meta">免费下载 · macOS 14.0+ · Apple Silicon & Intel</p>
+            <p class="hero-meta"><span data-zh="免费下载 · macOS 14.0+ · Apple Silicon & Intel" data-en="Free · macOS 14.0+ · Apple Silicon & Intel">免费下载 · macOS 14.0+ · Apple Silicon & Intel</span></p>
 
             <div class="upload-demo">
                 <div class="demo-card">
@@ -684,7 +715,7 @@
                     上传到云端
                 </div>
                 <span class="demo-arrow">→</span>
-                <div class="demo-result">✅ 链接已复制</div>
+                <div class="demo-result"><span data-zh="✅ 链接已复制" data-en="✅ Link Copied">✅ 链接已复制</span></div>
             </div>
         </div>
     </section>
@@ -693,44 +724,44 @@
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2>为创作者而生</h2>
-                <p>从截图到分享，全程自动化，专注你的创作</p>
+                <h2><span data-zh="为创作者而生" data-en="Built for Creators">为创作者而生</span></h2>
+                <p><span data-zh="从截图到分享，全程自动化，专注你的创作" data-en="From screenshot to sharing, fully automated — focus on your creation">从截图到分享，全程自动化，专注你的创作</span></p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon indigo">📸</div>
-                    <h3>截图自动检测</h3>
+                    <h3><span data-zh="截图自动检测" data-en="Auto Screenshot Detection">截图自动检测</span></h3>
                     <p>智能监控系统截图行为，截图后自动弹出上传提示。无需手动操作，截图即上传，链接即可用。搭配全局快捷键，效率拉满。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon purple">🖱</div>
-                    <h3>拖拽上传</h3>
+                    <h3><span data-zh="拖拽上传" data-en="Drag & Upload">拖拽上传</span></h3>
                     <p>将图片直接拖入菜单栏弹窗，支持多图批量上传，进度实时显示。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon green">📋</div>
-                    <h3>剪贴板监听</h3>
+                    <h3><span data-zh="剪贴板监听" data-en="Clipboard Monitor">剪贴板监听</span></h3>
                     <p>自动检测剪贴板中的图片内容，一键上传。复制即就绪，快捷键即发送。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon amber">🗜</div>
-                    <h3>智能压缩</h3>
+                    <h3><span data-zh="智能压缩" data-en="Smart Compression">智能压缩</span></h3>
                     <p>上传前自动压缩图片，可自定义压缩质量和最大尺寸，节省存储空间和带宽。</p>
                 </div>
 
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon cyan">☁️</div>
-                    <h3>多平台云存储</h3>
+                    <h3><span data-zh="多平台云存储" data-en="Multi-Platform Cloud Storage">多平台云存储</span></h3>
                     <p>支持 GitHub、阿里云 OSS、腾讯云 COS 三大存储平台，自由切换。每个平台独立配置，灵活管理多个存储方案，满足不同场景的需求。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon rose">📊</div>
-                    <h3>历史记录</h3>
+                    <h3><span data-zh="历史记录" data-en="Upload History">历史记录</span></h3>
                     <p>完整的上传历史，支持搜索、筛选、预览，随时回溯和重新复制链接。</p>
                 </div>
             </div>
@@ -741,29 +772,29 @@
     <section class="how-it-works">
         <div class="container">
             <div class="how-header">
-                <h2>三步开始，即刻使用</h2>
-                <p>简洁的引导流程，几分钟完成设置</p>
+                <h2><span data-zh="三步开始，即刻使用" data-en="Three Steps to Get Started">三步开始，即刻使用</span></h2>
+                <p><span data-zh="简洁的引导流程，几分钟完成设置" data-en="Simple guided setup in minutes">简洁的引导流程，几分钟完成设置</span></p>
             </div>
 
             <div class="flow">
                 <div class="flow-step">
                     <div class="flow-number">1</div>
                     <div class="flow-icon">⚙️</div>
-                    <h4>配置存储平台</h4>
+                    <h4><span data-zh="配置存储平台" data-en="Configure Storage">配置存储平台</span></h4>
                     <p>选择 GitHub / OSS / COS，填入密钥和存储桶信息</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
                     <div class="flow-icon">📸</div>
-                    <h4>截图或拖拽</h4>
+                    <h4><span data-zh="截图或拖拽" data-en="Screenshot or Drag">截图或拖拽</span></h4>
                     <p>截图自动检测，或将图片拖入菜单栏弹窗</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">3</div>
                     <div class="flow-icon">🔗</div>
-                    <h4>链接已就绪</h4>
+                    <h4><span data-zh="链接已就绪" data-en="Link Ready">链接已就绪</span></h4>
                     <p>上传完成自动复制 URL，直接粘贴到任何地方</p>
                 </div>
             </div>
@@ -774,25 +805,25 @@
     <section class="providers">
         <div class="container">
             <div class="providers-header">
-                <h2>支持主流存储平台</h2>
-                <p>灵活选择，自由切换</p>
+                <h2><span data-zh="支持主流存储平台" data-en="Major Storage Platforms Supported">支持主流存储平台</span></h2>
+                <p><span data-zh="灵活选择，自由切换" data-en="Flexible choices, free switching">灵活选择，自由切换</span></p>
             </div>
 
             <div class="provider-grid">
                 <div class="provider-card animate-in">
                     <div class="p-icon">🐙</div>
                     <h4>GitHub</h4>
-                    <p>免费 · 全球 CDN · 开源友好</p>
+                    <p><span data-zh="免费 · 全球 CDN · 开源友好" data-en="Free · Global CDN · Open Source Friendly">免费 · 全球 CDN · 开源友好</span></p>
                 </div>
                 <div class="provider-card animate-in">
                     <div class="p-icon">🟠</div>
-                    <h4>阿里云 OSS</h4>
-                    <p>高速 · 稳定 · 国内首选</p>
+                    <h4><span data-zh="阿里云 OSS" data-en="Alibaba Cloud OSS">阿里云 OSS</span></h4>
+                    <p><span data-zh="高速 · 稳定 · 国内首选" data-en="Fast · Stable · China's Top Choice">高速 · 稳定 · 国内首选</span></p>
                 </div>
                 <div class="provider-card animate-in">
                     <div class="p-icon">🔵</div>
-                    <h4>腾讯云 COS</h4>
-                    <p>安全 · 可靠 · 灵活计费</p>
+                    <h4><span data-zh="腾讯云 COS" data-en="Tencent Cloud COS">腾讯云 COS</span></h4>
+                    <p><span data-zh="安全 · 可靠 · 灵活计费" data-en="Secure · Reliable · Flexible Pricing">安全 · 可靠 · 灵活计费</span></p>
                 </div>
             </div>
         </div>
@@ -803,16 +834,16 @@
         <div class="container-narrow">
             <div class="privacy-box">
                 <div class="shield">🛡️</div>
-                <h3>隐私安全，值得信赖</h3>
+                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">隐私安全，值得信赖</span></h3>
                 <p>
                     PicFlow 注重你的隐私安全。所有配置信息通过 macOS Keychain 加密存储，
                     图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。
                 </p>
                 <div class="privacy-tags">
-                    <span class="privacy-tag">✓ 无第三方中转</span>
-                    <span class="privacy-tag">✓ Keychain 加密存储</span>
-                    <span class="privacy-tag">✓ 直连你的云存储</span>
-                    <span class="privacy-tag">✓ 无数据收集</span>
+                    <span class="privacy-tag"><span data-zh="✓ 无第三方中转" data-en="✓ No Third-Party Relay">✓ 无第三方中转</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ Keychain 加密存储" data-en="✓ Keychain Encrypted Storage">✓ Keychain 加密存储</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 直连你的云存储" data-en="✓ Direct to Your Cloud">✓ 直连你的云存储</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ 无数据收集</span></span>
                 </div>
             </div>
         </div>
@@ -824,10 +855,113 @@
                 <a href="index.html">首页</a>
                 <a href="support.html">技术支持</a>
                 <a href="privacy.html">隐私政策</a>
-                <a href="mailto:lleowang@foxmail.com">联系我们</a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">联系我们</span></a>
             </div>
             <p>© 2026 PicFlow. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact",
+        "macOS 菜单栏图床工具": "macOS Menu Bar Image Hosting",
+        "截图，拖拽": "Screenshot, Drag",
+        "一键上云": "One-Click Upload",
+        "一款精致的 macOS 菜单栏图床应用。": "A refined macOS menu bar image hosting app.",
+        "截图自动检测、拖拽上传、全局快捷键，图片瞬间上传到云端并复制链接。": "Auto-detect screenshots, drag-to-upload, hotkeys — upload and copy link instantly.",
+        "在 Mac App Store 下载": "Download on Mac App Store",
+        "免费下载 · macOS 14.0+ · Apple Silicon & Intel": "Free · macOS 14.0+ · Apple Silicon & Intel",
+        "截图 / 拖拽图片": "Screenshot / Drag Image",
+        "上传到云端": "Upload to Cloud",
+        "✅ 链接已复制": "✅ Link Copied",
+        "为创作者而生": "Built for Creators",
+        "从截图到分享，全程自动化，专注你的创作": "From screenshot to sharing, fully automated",
+        "截图自动检测": "Auto Screenshot Detection",
+        "监听系统截图操作，截图完成后自动弹出上传提示。无需手动找文件，截完即传。": "Monitors screenshots, auto-shows upload prompt.",
+        "拖拽上传": "Drag & Upload",
+        "将图片直接拖拽到菜单栏图标上，自动上传并复制链接。写文档、写博客时随手即可插入图片。": "Drag to menu bar, auto-upload and copy link.",
+        "剪贴板监听": "Clipboard Monitor",
+        "复制图片后自动检测，一键上传剪贴板中的图片。适合从网页或设计工具中快速提取图片。": "Auto-detects copied images, one-click upload.",
+        "智能压缩": "Smart Compression",
+        "上传前可选智能压缩，在保持画质的前提下大幅减小文件体积，加快上传速度和页面加载。": "Optional compression — smaller files, maintained quality.",
+        "多平台云存储": "Multi-Platform Cloud Storage",
+        "支持 GitHub、阿里云 OSS、腾讯云 COS 三大存储平台，自由切换，灵活配置。": "GitHub, Alibaba OSS, Tencent COS — switch freely.",
+        "历史记录": "Upload History",
+        "自动保存每次上传记录，包含图片预览、链接和上传时间。随时回顾，一键复制链接。": "Auto-saves uploads with preview, link, timestamp.",
+        "三步开始，即刻使用": "Three Steps to Get Started",
+        "简洁的引导流程，几分钟完成设置": "Simple guided setup in minutes",
+        "配置存储平台": "Configure Storage",
+        "选择你的云存储（GitHub / 阿里云 OSS / 腾讯云 COS），填入密钥完成配置": "Choose cloud storage, enter keys",
+        "截图或拖拽": "Screenshot or Drag",
+        "截图自动弹出上传提示，拖拽图片到菜单栏，或使用快捷键上传": "Auto-prompt, drag, or hotkey",
+        "链接已就绪": "Link Ready",
+        "图片上传完成，链接自动复制到剪贴板，直接粘贴使用": "Link auto-copied, paste to use",
+        "支持主流存储平台": "Major Storage Platforms Supported",
+        "灵活选择，自由切换": "Flexible choices, free switching",
+        "免费 · 全球 CDN · 开源友好": "Free · Global CDN · Open Source Friendly",
+        "高速 · 稳定 · 国内首选": "Fast · Stable · China's Top Choice",
+        "阿里云 OSS": "Alibaba Cloud OSS",
+        "腾讯云 COS": "Tencent Cloud COS",
+        "安全 · 可靠 · 灵活计费": "Secure · Reliable · Flexible Pricing",
+        "隐私安全，值得信赖": "Privacy First, Trustworthy",
+        "PicFlow 注重你的隐私安全。图片直接从你的 Mac 上传到你配置的云存储，": "PicFlow values your privacy. Images upload directly to your cloud,",
+        "不经过任何第三方中转服务器。API 密钥使用 macOS Keychain 安全加密存储。": "never through third-party servers. Keys in macOS Keychain.",
+        "✓ 无第三方中转": "✓ No Third-Party Relay",
+        "✓ Keychain 加密存储": "✓ Keychain Encrypted",
+        "✓ 直连你的云存储": "✓ Direct to Your Cloud",
+        "✓ 无数据收集": "✓ No Data Collection"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -272,6 +272,33 @@
             .content { padding: 60px 0; }
             .header-inner { flex-wrap: wrap; gap: 12px; }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -283,27 +310,31 @@
                     <span class="logo-text">ClipVault</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="index.html">首页</a>
-                    <a href="support.html">技术支持</a>
+                    <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
+                    <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
                     <a href="privacy.html" class="active">隐私政策</a>
                 </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
             </div>
         </div>
     </header>
 
     <div class="content">
         <div class="container">
-            <h1>隐私政策</h1>
+            <h1><span data-zh="隐私政策" data-en="Privacy Policy">隐私政策</span></h1>
             <p class="last-updated">最后更新日期：2026 年 3 月 23 日</p>
 
             <div class="highlight-box">
                 <p>🛡️ ClipVault 是一款 100% 离线应用。不收集、不存储、不传输任何用户数据到任何服务器。你的隐私是我们的首要考量。</p>
             </div>
 
-            <h2>概述</h2>
+            <h2><span data-zh="概述" data-en="Overview">概述</span></h2>
             <p>ClipVault（以下简称「本应用」）是一款 macOS 智能剪贴板管理器，帮助用户自动捕获和管理剪贴板历史，并提供区域截图与屏幕录制功能。本隐私政策说明了本应用如何处理你的信息。</p>
 
-            <h2>数据收集</h2>
+            <h2><span data-zh="数据收集" data-en="Data Collection">数据收集</span></h2>
             <p><strong>本应用不收集任何个人信息。</strong></p>
             <p>具体而言：</p>
             <ul>
@@ -314,7 +345,7 @@
                 <li>不使用 Cookie 或类似追踪技术</li>
             </ul>
 
-            <h2>网络通信</h2>
+            <h2><span data-zh="网络通信" data-en="Network Communication">网络通信</span></h2>
             <p><strong>本应用不建立任何网络连接。</strong></p>
             <p>ClipVault 是一款完全离线的应用，不与任何服务器通信。没有 API 调用、没有云同步、没有遥测数据上报。应用的所有功能均在你的 Mac 本地完成。</p>
 
@@ -322,15 +353,15 @@
                 <p>💡 ClipVault 不需要互联网连接即可正常工作。你的剪贴板数据、截图和录屏文件始终存储在你的 Mac 本地，从不离开你的设备。</p>
             </div>
 
-            <h2>本地存储的数据</h2>
+            <h2><span data-zh="本地存储的数据" data-en="Locally Stored Data">本地存储的数据</span></h2>
             <p>本应用会在你的设备本地存储以下信息，这些数据<strong>仅保存在你的 macOS 系统中</strong>，不会上传到任何服务器：</p>
 
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>数据类型</th>
-                        <th>用途</th>
-                        <th>存储方式</th>
+                        <th><span data-zh="数据类型" data-en="DATA TYPE">数据类型</span></th>
+                        <th><span data-zh="用途" data-en="PURPOSE">用途</span></th>
+                        <th><span data-zh="存储方式" data-en="STORAGE METHOD">存储方式</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -372,11 +403,11 @@
                 </tbody>
             </table>
 
-            <h2>剪贴板访问</h2>
+            <h2><span data-zh="剪贴板访问" data-en="Clipboard Access">剪贴板访问</span></h2>
             <p>本应用的核心功能是监控和管理系统剪贴板内容。当「自动捕获剪贴板」功能开启时，本应用会以 1.5 秒的间隔检查系统剪贴板是否有新内容，并将新内容保存到本地数据库。</p>
             <p>你可以随时在设置中关闭自动捕获功能。关闭后，本应用不会读取剪贴板。</p>
 
-            <h2>屏幕录制权限</h2>
+            <h2><span data-zh="屏幕录制权限" data-en="Screen Recording Permission">屏幕录制权限</span></h2>
             <p>本应用的区域截图和屏幕录制功能需要 macOS「屏幕录制」权限。该权限仅用于以下目的：</p>
             <ul>
                 <li><strong>区域截图</strong>：使用 <code>CGWindowListCreateImage</code> API 截取用户选定的屏幕区域</li>
@@ -384,13 +415,13 @@
             </ul>
             <p>截取或录制的内容仅保存在你的 Mac 本地，不会传输到任何服务器。你可以随时在系统设置中撤销该权限。</p>
 
-            <h2>OCR 文字识别</h2>
+            <h2><span data-zh="OCR 文字识别" data-en="OCR Text Recognition">OCR 文字识别</span></h2>
             <p>本应用使用 Apple Vision 框架在本地对图片进行 OCR 文字识别。整个识别过程完全在你的设备上进行，图片数据不会被发送到任何服务器。</p>
 
-            <h2>开机自启</h2>
+            <h2><span data-zh="开机自启" data-en="Launch at Login">开机自启</span></h2>
             <p>本应用可选设置为登录项，使用 macOS <code>SMAppService</code> API 实现开机自启。该功能仅在你主动开启时生效，且可以随时在设置中关闭。</p>
 
-            <h2>数据删除</h2>
+            <h2><span data-zh="数据删除" data-en="Data Deletion">数据删除</span></h2>
             <p>你对自己的数据拥有完全控制权：</p>
             <ul>
                 <li>可以逐条删除历史记录</li>
@@ -400,16 +431,16 @@
                 <li>卸载本应用后，删除 <code>~/Library/Application Support/ClipVault/</code> 目录即可清除所有数据</li>
             </ul>
 
-            <h2>第三方服务</h2>
+            <h2><span data-zh="第三方服务" data-en="Third-Party Services">第三方服务</span></h2>
             <p><strong>本应用不集成任何第三方 SDK 或服务。</strong>没有广告、没有分析工具、没有崩溃报告平台、没有社交媒体 SDK。应用完全使用 Apple 原生框架构建。</p>
 
-            <h2>儿童隐私</h2>
+            <h2><span data-zh="儿童隐私" data-en="Children's Privacy">儿童隐私</span></h2>
             <p>本应用不针对 13 岁以下的儿童。本应用不会有意收集任何儿童的个人信息。</p>
 
-            <h2>隐私政策变更</h2>
+            <h2><span data-zh="隐私政策变更" data-en="Policy Changes">隐私政策变更</span></h2>
             <p>如本隐私政策有重大变更，我们将通过应用更新或本页面进行通知。建议你定期查看本页面以了解最新的隐私政策。</p>
 
-            <h2>联系我们</h2>
+            <h2><span data-zh="联系我们" data-en="Contact Us">联系我们</span></h2>
             <p>如果你对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
             <p>📧 <a href="mailto:lleowang@foxmail.com">lleowang@foxmail.com</a></p>
         </div>
@@ -425,5 +456,114 @@
             <p>© 2026 ClipVault. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy Policy",
+        "联系我们": "Contact Us",
+        "最后更新日期：2026 年 3 月 22 日": "Last updated: March 22, 2026",
+        "概述": "Overview",
+        "数据收集": "Data Collection",
+        "网络通信": "Network Communication",
+        "本地存储的数据": "Locally Stored Data",
+        "辅助功能权限": "Accessibility Permission",
+        "第三方服务": "Third-Party Services",
+        "儿童隐私": "Children's Privacy",
+        "隐私政策变更": "Policy Changes",
+        "数据类型": "DATA TYPE",
+        "用途": "PURPOSE",
+        "存储方式": "STORAGE",
+        "快捷键配置": "Hotkey Settings",
+        "用户自定义设置": "User Custom Settings",
+        "UserDefaults（沙盒内）": "UserDefaults (sandboxed)",
+        "剪贴板访问": "Clipboard Access",
+        "屏幕录制权限": "Screen Recording Permission",
+        "OCR 文字识别": "OCR Text Recognition",
+        "开机自启": "Launch at Login",
+        "数据删除": "Data Deletion",
+        "ClipVault 是一款 macOS 剪贴板管理器，集成了区域截图和屏幕录制功能。我们高度重视你的隐私，本政策说明 ClipVault 如何处理你的数据。": "ClipVault is a macOS clipboard manager with screenshot and recording. We take your privacy seriously.",
+        "ClipVault 不会收集、存储或传输任何个人信息到第三方服务器。": "Does not collect or transmit personal info to third-party servers.",
+        "所有操作数据仅保存在你的 Mac 本地。应用完全离线运行，不进行任何网络通信。": "All data saved locally. Runs entirely offline.",
+        "ClipVault 完全在本地运行，不进行任何网络通信。没有数据上传、遥测、分析或广告请求。": "Runs entirely locally. No upload, telemetry, analytics, or ads.",
+        "剪贴板历史": "Clipboard History",
+        "记录复制操作": "Record Copy Operations",
+        "本地 SwiftData 数据库": "Local SwiftData Database",
+        "截图 / 录屏文件": "Screenshots / Recordings",
+        "区域截图和录制": "Area Screenshot & Recording",
+        "本地文件系统": "Local File System",
+        "ClipVault 在后台持续监控系统剪贴板变化。当检测到新内容时：": "Monitors clipboard changes. When new content detected:",
+        "自动保存文本、图片或文件引用到本地历史": "Auto-saves to local history",
+        "不会将剪贴板内容发送到任何远程服务器": "Never sent to remote servers",
+        "用户可随时暂停/恢复监控": "Pause/resume monitoring anytime",
+        "ClipVault 的截图和录屏功能需要 macOS「屏幕录制」权限。此权限仅用于：": "Screenshot/recording need 'Screen Recording' permission. Only for:",
+        "用户主动触发的区域截图": "User-initiated screenshots",
+        "用户主动触发的屏幕录制": "User-initiated recordings",
+        "不会在后台偷偷截图或录屏": "No secret background captures",
+        "ClipVault 使用 macOS 原生 Vision 框架提供 OCR 文字识别功能：": "Uses macOS Vision framework for OCR:",
+        "所有识别处理完全在本地完成": "All processing done locally",
+        "不会将图片发送到云端进行识别": "Images never sent to cloud",
+        "识别结果仅保存在本地": "Results saved locally only",
+        "ClipVault 支持设置为登录项（开机自启），此功能使用 macOS 原生 Service Management 框架，不涉及任何网络通信。": "Launch at Login uses macOS native framework, no network.",
+        "用户可以随时：": "Users can anytime:",
+        "手动删除单条剪贴板记录": "Delete individual records",
+        "清空全部历史记录": "Clear all history",
+        "配置自动清理策略（按时间或数量）": "Configure auto-cleanup",
+        "删除截图和录屏文件": "Delete screenshot/recording files",
+        "ClipVault 不使用任何第三方服务、SDK 或追踪工具。所有功能均使用 macOS 原生框架实现。": "No third-party services, SDKs, or tracking. All macOS native.",
+        "ClipVault 不会故意收集 13 岁以下儿童的任何信息。": "Does not collect info from children under 13.",
+        "如果我们对本隐私政策进行重大变更，将通过应用内通知或在官方网站上发布更新通知。": "Significant changes notified via in-app or website.",
+        "如有任何关于隐私的问题或疑虑，请通过以下方式联系我们：": "For privacy questions, contact us:"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

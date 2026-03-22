@@ -462,6 +462,33 @@
             .step { flex-direction: column; gap: 12px; }
             .header-inner { flex-wrap: wrap; gap: 12px; }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -473,25 +500,29 @@
                     <span class="logo-text">ClipToNotion</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="index.html">首页</a>
+                    <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
                     <a href="support.html" class="active">技术支持</a>
-                    <a href="privacy.html">隐私政策</a>
+                    <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
                 </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
             </div>
         </div>
     </header>
 
     <div class="hero">
         <div class="container">
-            <div class="hero-badge">💬 我们随时为你提供帮助</div>
-            <h1>技术支持</h1>
-            <p>遇到问题？在这里查找解决方案，或直接联系我们获取帮助。</p>
+            <div class="hero-badge"><span data-zh="💬 我们随时为你提供帮助" data-en="💬 We're here to help">💬 我们随时为你提供帮助</span></div>
+            <h1><span data-zh="技术支持" data-en="Technical Support">技术支持</span></h1>
+            <p><span data-zh="遇到问题？在这里查找解决方案，或直接联系我们获取帮助。" data-en="Having issues? Find solutions here or contact us for help.">遇到问题？在这里查找解决方案，或直接联系我们获取帮助。</span></p>
 
             <div class="quick-contact">
                 <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion 问题反馈】" class="contact-card">
                     <div class="contact-icon email">✉️</div>
                     <div>
-                        <div class="contact-label">邮件联系</div>
+                        <div class="contact-label"><span data-zh="邮件联系" data-en="Email Us">邮件联系</span></div>
                         <div class="contact-value">lleowang@foxmail.com</div>
                     </div>
                 </a>
@@ -502,33 +533,33 @@
     <!-- Getting Started -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">🚀 快速开始</h2>
+            <h2 class="section-title"><span data-zh="🚀 快速开始" data-en="🚀 Quick Start">🚀 快速开始</span></h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div>
-                        <h4>创建 Notion Integration</h4>
+                        <h4><span data-zh="创建 Notion Integration" data-en="Create Notion Integration">创建 Notion Integration</span></h4>
                         <p>前往 <a href="https://www.notion.so/profile/integrations" target="_blank" style="color:var(--accent)">Notion Integrations</a> 页面，点击「New integration」创建一个新的 Integration，并复制 API Token（以 <code>ntn_</code> 或 <code>secret_</code> 开头）。</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <div>
-                        <h4>关联目标页面</h4>
+                        <h4><span data-zh="关联目标页面" data-en="Connect Target Page">关联目标页面</span></h4>
                         <p>在 Notion 中打开你想要发送内容的目标页面，点击页面右上角的 <code>···</code> 菜单 → 「Connections」→ 添加刚创建的 Integration。</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <div>
-                        <h4>配置 ClipToNotion</h4>
+                        <h4><span data-zh="配置 ClipToNotion" data-en="Configure ClipToNotion">配置 ClipToNotion</span></h4>
                         <p>打开 ClipToNotion 设置界面，粘贴 API Token 和目标页面 URL（或 Page ID），点击「测试连接」确认连接成功。</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <div>
-                        <h4>开始使用</h4>
+                        <h4><span data-zh="开始使用" data-en="Start Using">开始使用</span></h4>
                         <p>复制任意文字内容，按下全局快捷键（默认 <code>⌘⇧V</code>），剪贴板内容即刻发送到 Notion！</p>
                     </div>
                 </div>
@@ -539,11 +570,11 @@
     <!-- FAQ -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">❓ 常见问题</h2>
+            <h2 class="section-title"><span data-zh="❓ 常见问题" data-en="❓ FAQ">❓ 常见问题</span></h2>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>连接测试失败，提示「TLS 安全连接失败」</h3>
+                    <h3><span data-zh="连接测试失败，提示「TLS 安全连接失败」" data-en="Connection test failed: &quot;TLS secure connection failed&quot;">连接测试失败，提示「TLS 安全连接失败」</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -561,7 +592,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>连接测试失败，提示「无效的 API Token」</h3>
+                    <h3><span data-zh="连接测试失败，提示「无效的 API Token」" data-en="Connection test failed: &quot;Invalid API Token&quot;">连接测试失败，提示「无效的 API Token」</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -579,7 +610,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>快捷键无法触发</h3>
+                    <h3><span data-zh="快捷键无法触发" data-en="Hotkey not working">快捷键无法触发</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -594,7 +625,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>提示「无效的 Page ID」怎么办？</h3>
+                    <h3><span data-zh="提示「无效的 Page ID」怎么办？" data-en="What if it says &quot;Invalid Page ID&quot;?">提示「无效的 Page ID」怎么办？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -613,7 +644,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>发送成功但 Notion 页面看不到内容？</h3>
+                    <h3><span data-zh="发送成功但 Notion 页面看不到内容？" data-en="Sent successfully but can't see content in Notion?">发送成功但 Notion 页面看不到内容？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -631,7 +662,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>如何切换 App 界面语言？</h3>
+                    <h3><span data-zh="如何切换 App 界面语言？" data-en="How to switch app language?">如何切换 App 界面语言？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -646,7 +677,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>App 是否会上传我的数据到第三方服务器？</h3>
+                    <h3><span data-zh="App 是否会上传我的数据到第三方服务器？" data-en="Does the app upload data to third-party servers?">App 是否会上传我的数据到第三方服务器？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -662,23 +693,23 @@
     <!-- System Requirements -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">💻 系统要求</h2>
+            <h2 class="section-title"><span data-zh="💻 系统要求" data-en="💻 System Requirements">💻 系统要求</span></h2>
             <div class="req-grid">
                 <div class="req-card">
-                    <div class="label">操作系统</div>
+                    <div class="label"><span data-zh="操作系统" data-en="Operating System">操作系统</span></div>
                     <div class="value">macOS 13.0+</div>
                 </div>
                 <div class="req-card">
-                    <div class="label">芯片架构</div>
+                    <div class="label"><span data-zh="芯片架构" data-en="Chip Architecture">芯片架构</span></div>
                     <div class="value">Apple Silicon / Intel</div>
                 </div>
                 <div class="req-card">
-                    <div class="label">网络连接</div>
-                    <div class="value">需要互联网</div>
+                    <div class="label"><span data-zh="网络连接" data-en="Network">网络连接</span></div>
+                    <div class="value"><span data-zh="需要互联网" data-en="Internet Required">需要互联网</span></div>
                 </div>
                 <div class="req-card">
-                    <div class="label">Notion 账户</div>
-                    <div class="value">需要免费或付费版</div>
+                    <div class="label"><span data-zh="Notion 账户" data-en="Notion Account">Notion 账户</span></div>
+                    <div class="value"><span data-zh="需要免费或付费版" data-en="Free or paid plan required">需要免费或付费版</span></div>
                 </div>
             </div>
         </div>
@@ -687,13 +718,13 @@
     <!-- Contact -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">📬 联系我们</h2>
-            <p style="color:var(--text-secondary);margin-bottom:20px;">如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。</p>
+            <h2 class="section-title"><span data-zh="📬 联系我们" data-en="📬 Contact Us">📬 联系我们</span></h2>
+            <p style="color:var(--text-secondary);margin-bottom:20px;"><span data-zh="如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。" data-en="If the above didn't solve your issue, feel free to contact us. We typically reply within 48 hours.">如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。</span></p>
             <div class="quick-contact" style="justify-content:flex-start;">
                 <a href="mailto:lleowang@foxmail.com?subject=【ClipToNotion 问题反馈】" class="contact-card">
                     <div class="contact-icon email">✉️</div>
                     <div>
-                        <div class="contact-label">技术支持邮箱</div>
+                        <div class="contact-label"><span data-zh="技术支持邮箱" data-en="Support Email">技术支持邮箱</span></div>
                         <div class="contact-value">lleowang@foxmail.com</div>
                     </div>
                 </a>
@@ -738,6 +769,121 @@
                 }
             });
         });
+    </script>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Technical Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact Us",
+        "💬 我们随时为你提供帮助": "💬 We're here to help",
+        "遇到问题？在这里查找解决方案，或直接联系我们获取帮助。": "Having issues? Find solutions here or contact us for help.",
+        "邮件联系": "Email Us",
+        "🚀 快速开始": "🚀 Quick Start",
+        "❓ 常见问题": "❓ FAQ",
+        "💻 系统要求": "💻 System Requirements",
+        "📬 联系我们": "📬 Contact Us",
+        "操作系统": "Operating System",
+        "芯片架构": "Chip Architecture",
+        "网络连接": "Network",
+        "技术支持邮箱": "Support Email",
+        "如何切换 App 界面语言？": "How to switch app language?",
+        "设置 → 语言设置 → 界面语言": "Settings → Language → Interface Language",
+        "切换后部分界面需要重新打开才能生效。": "Some interfaces need to be reopened after switching.",
+        "创建 Notion Integration": "Create Notion Integration",
+        "前往 Notion 开发者页面，创建一个新的 Integration，复制生成的 API Token。": "Go to Notion developer page, create Integration, copy API Token.",
+        "关联目标页面": "Connect Target Page",
+        "在你想要发送内容的 Notion 页面中，点击右上角「...」→「添加连接」，选择你创建的 Integration。": "In the Notion page, click '...' → 'Add connections', select your Integration.",
+        "配置 ClipToNotion": "Configure ClipToNotion",
+        "打开 ClipToNotion，粘贴 API Token 和页面链接，点击测试连接。成功后即可开始使用。": "Open ClipToNotion, paste API Token and page link, click test connection.",
+        "开始使用": "Start Using",
+        "在任何应用中复制文本，按下全局快捷键（默认 ⌘⇧V），内容立即发送到 Notion！": "Copy text in any app, press global hotkey (default ⌘⇧V), sent to Notion!",
+        "连接测试失败，提示「TLS 安全连接失败」": "Connection test failed: \"TLS secure connection failed\"",
+        "这通常是由于网络环境限制导致无法连接 Notion API 服务器。请尝试：": "Usually caused by network restrictions. Please try:",
+        "检查网络连接是否正常": "Check network connection",
+        "如果使用了代理，确认代理设置正确": "Confirm proxy settings if using one",
+        "尝试切换到其他网络环境": "Try a different network",
+        "Notion API 服务器位于海外，部分网络环境可能需要代理才能访问": "Notion API servers are overseas; proxy may be needed",
+        "连接测试失败，提示「无效的 API Token」": "Connection test failed: \"Invalid API Token\"",
+        "请检查以下几点：": "Please check the following:",
+        "确认复制的是 Integration 的 Internal Integration Secret（以 ntn_ 或 secret_ 开头）": "Confirm you copied the Internal Integration Secret (starts with ntn_ or secret_)",
+        "检查 Token 是否完整复制，没有多余空格": "Check Token is fully copied without extra spaces",
+        "在 Notion 设置中确认该 Integration 未被禁用": "Confirm Integration is not disabled",
+        "快捷键无法触发": "Hotkey not working",
+        "全局快捷键需要「辅助功能」权限。请检查：": "Global hotkeys require Accessibility permission:",
+        "系统设置 → 隐私与安全性 → 辅助功能": "System Settings → Privacy & Security → Accessibility",
+        "确认 ClipToNotion 已在列表中并已启用": "Confirm ClipToNotion is in the list and enabled",
+        "如果已启用但不生效，取消勾选后重新勾选，然后重启 App": "If enabled but not working, uncheck/recheck, restart app",
+        "提示「无效的 Page ID」怎么办？": "What if \"Invalid Page ID\"?",
+        "页面链接来自 Notion 中的「复制链接」，格式类似": "Page link from Notion's 'Copy link'",
+        "该页面已关联了你的 Integration（步骤 2）": "Page has Integration connected (step 2)",
+        "尝试使用页面的完整 URL 而不是短链接": "Use full URL instead of short link",
+        "发送成功但 Notion 页面看不到内容？": "Sent but can't see content in Notion?",
+        "刷新 Notion 页面（⌘R 或 F5）": "Refresh Notion page (⌘R or F5)",
+        "如果启用了「新内容置顶」，内容会出现在页面顶部": "If 'New content on top' enabled, content at page top",
+        "确认发送的目标页面是否正确": "Confirm target page is correct",
+        "ClipToNotion 支持 39 种语言。默认跟随系统语言，也可以手动切换：": "ClipToNotion supports 39 languages. Default follows system language.",
+        "App 是否会上传我的数据到第三方服务器？": "Does the app upload data to third-party servers?",
+        "ClipToNotion 仅通过 Notion 官方 API 将你的剪贴板内容发送到你自己的 Notion 账户。不存在任何第三方服务器中转或数据收集行为。你的 API Token 使用 macOS Keychain 安全存储。": "ClipToNotion only sends to your own Notion via official API. No third-party relay. Token in Keychain.",
+        "需要互联网": "Internet Required",
+        "Notion 账户": "Notion Account",
+        "需要免费或付费版": "Free or paid plan required",
+        "如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。": "If not solved, contact us. We typically reply within 48 hours.",
+        "发送邮件时请附上你的 macOS 版本和 ClipToNotion 版本号，以便我们更快定位问题。": "Include macOS/ClipToNotion version in your email.",
+        "请确认：": "Please confirm:",
+        "前往": "Go to",
+        "不会。": "No.",
+        "请检查：": "Please check:"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
     </script>
 </body>
 </html>

@@ -432,6 +432,33 @@
             .step { flex-direction: column; gap: 12px; }
             .header-inner { flex-wrap: wrap; gap: 12px; }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -443,25 +470,29 @@
                     <span class="logo-text">DropShelf</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="index.html">首页</a>
+                    <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
                     <a href="support.html" class="active">技术支持</a>
-                    <a href="privacy.html">隐私政策</a>
+                    <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
                 </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
             </div>
         </div>
     </header>
 
     <div class="hero">
         <div class="container">
-            <div class="hero-badge">💬 我们随时为你提供帮助</div>
-            <h1>技术支持</h1>
-            <p>遇到问题？在这里查找解决方案，或直接联系我们获取帮助。</p>
+            <div class="hero-badge"><span data-zh="💬 我们随时为你提供帮助" data-en="💬 We're here to help">💬 我们随时为你提供帮助</span></div>
+            <h1><span data-zh="技术支持" data-en="Technical Support">技术支持</span></h1>
+            <p><span data-zh="遇到问题？在这里查找解决方案，或直接联系我们获取帮助。" data-en="Having issues? Find solutions here or contact us for help.">遇到问题？在这里查找解决方案，或直接联系我们获取帮助。</span></p>
 
             <div class="quick-contact">
                 <a href="mailto:lleowang@foxmail.com?subject=【DropShelf 问题反馈】" class="contact-card">
                     <div class="contact-icon email">✉️</div>
                     <div>
-                        <div class="contact-label">邮件联系</div>
+                        <div class="contact-label"><span data-zh="邮件联系" data-en="Email Us">邮件联系</span></div>
                         <div class="contact-value">lleowang@foxmail.com</div>
                     </div>
                 </a>
@@ -472,7 +503,7 @@
     <!-- Getting Started -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">🚀 快速开始</h2>
+            <h2 class="section-title"><span data-zh="🚀 快速开始" data-en="🚀 Quick Start">🚀 快速开始</span></h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -509,11 +540,11 @@
     <!-- FAQ -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">❓ 常见问题</h2>
+            <h2 class="section-title"><span data-zh="❓ 常见问题" data-en="❓ FAQ">❓ 常见问题</span></h2>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>拖拽文件时搁置架面板没有自动弹出</h3>
+                    <h3><span data-zh="拖拽文件时搁置架面板没有自动弹出" data-en="Shelf panel doesn't auto-appear when dragging">拖拽文件时搁置架面板没有自动弹出</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -531,7 +562,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>全局快捷键 ⌥Space 无法唤起面板</h3>
+                    <h3><span data-zh="全局快捷键 ⌥Space 无法唤起面板" data-en="Global hotkey ⌥Space doesn't open panel">全局快捷键 ⌥Space 无法唤起面板</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -549,7 +580,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>重启电脑后搁置架里的文件消失了</h3>
+                    <h3><span data-zh="重启电脑后搁置架里的文件消失了" data-en="Files disappeared after reboot">重启电脑后搁置架里的文件消失了</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -567,7 +598,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>图片转换后格式不正确或质量差</h3>
+                    <h3><span data-zh="图片转换后格式不正确或质量差" data-en="Image conversion format/quality issues">图片转换后格式不正确或质量差</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -585,7 +616,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>PDF 合并后顺序不对怎么办？</h3>
+                    <h3><span data-zh="PDF 合并后顺序不对怎么办？" data-en="PDF merge order is wrong?">PDF 合并后顺序不对怎么办？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -603,7 +634,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>如何切换 App 界面语言？</h3>
+                    <h3><span data-zh="如何切换 App 界面语言？" data-en="How to switch app language?">如何切换 App 界面语言？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -618,7 +649,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>DropShelf 是否会上传我的文件？</h3>
+                    <h3><span data-zh="DropShelf 是否会上传我的文件？" data-en="Does DropShelf upload my files?">DropShelf 是否会上传我的文件？</span></h3>
                     <div class="faq-toggle">+</div>
                 </div>
                 <div class="faq-answer">
@@ -634,23 +665,23 @@
     <!-- System Requirements -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">💻 系统要求</h2>
+            <h2 class="section-title"><span data-zh="💻 系统要求" data-en="💻 System Requirements">💻 系统要求</span></h2>
             <div class="req-grid">
                 <div class="req-card">
-                    <div class="label">操作系统</div>
+                    <div class="label"><span data-zh="操作系统" data-en="Operating System">操作系统</span></div>
                     <div class="value">macOS 13.0+</div>
                 </div>
                 <div class="req-card">
-                    <div class="label">芯片架构</div>
+                    <div class="label"><span data-zh="芯片架构" data-en="Chip Architecture">芯片架构</span></div>
                     <div class="value">Apple Silicon / Intel</div>
                 </div>
                 <div class="req-card">
-                    <div class="label">网络连接</div>
-                    <div class="value">不需要（完全离线）</div>
+                    <div class="label"><span data-zh="网络连接" data-en="Network">网络连接</span></div>
+                    <div class="value"><span data-zh="不需要（完全离线）" data-en="Not Required (Fully Offline)">不需要（完全离线）</span></div>
                 </div>
                 <div class="req-card">
-                    <div class="label">存储空间</div>
-                    <div class="value">约 10 MB</div>
+                    <div class="label"><span data-zh="存储空间" data-en="Storage">存储空间</span></div>
+                    <div class="value"><span data-zh="约 10 MB" data-en="~10 MB">约 10 MB</span></div>
                 </div>
             </div>
         </div>
@@ -659,13 +690,13 @@
     <!-- Contact -->
     <div class="section">
         <div class="container">
-            <h2 class="section-title">📬 联系我们</h2>
+            <h2 class="section-title"><span data-zh="📬 联系我们" data-en="📬 Contact Us">📬 联系我们</span></h2>
             <p style="color:var(--text-secondary);margin-bottom:20px;">如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。</p>
             <div class="quick-contact" style="justify-content:flex-start;">
                 <a href="mailto:lleowang@foxmail.com?subject=【DropShelf 问题反馈】" class="contact-card">
                     <div class="contact-icon email">✉️</div>
                     <div>
-                        <div class="contact-label">技术支持邮箱</div>
+                        <div class="contact-label"><span data-zh="技术支持邮箱" data-en="Support Email">技术支持邮箱</span></div>
                         <div class="contact-value">lleowang@foxmail.com</div>
                     </div>
                 </a>
@@ -709,6 +740,124 @@
                 }
             });
         });
+    </script>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Technical Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact Us",
+        "💬 我们随时为你提供帮助": "💬 We're here to help",
+        "遇到问题？在这里查找解决方案，或直接联系我们获取帮助。": "Having issues? Find solutions here or contact us for help.",
+        "邮件联系": "Email Us",
+        "🚀 快速开始": "🚀 Quick Start",
+        "❓ 常见问题": "❓ FAQ",
+        "💻 系统要求": "💻 System Requirements",
+        "📬 联系我们": "📬 Contact Us",
+        "操作系统": "Operating System",
+        "芯片架构": "Chip Architecture",
+        "网络连接": "Network",
+        "技术支持邮箱": "Support Email",
+        "如何切换 App 界面语言？": "How to switch app language?",
+        "设置 → 语言设置 → 界面语言": "Settings → Language → Interface Language",
+        "切换后部分界面需要重新打开才能生效。": "Some interfaces need to be reopened after switching.",
+        "启动 DropShelf": "Launch DropShelf",
+        "首次打开后，DropShelf 会常驻在菜单栏。点击菜单栏图标即可打开搁置架面板，或使用全局快捷键": "After launch, stays in menu bar. Click icon or use hotkey",
+        "快速唤起。": "to open.",
+        "授予辅助功能权限": "Grant Accessibility Permission",
+        "为了支持全局快捷键和拖拽监听，DropShelf 需要辅助功能权限。请在弹出的提示中点击「前往系统设置」，然后在": "Needs Accessibility for hotkeys and drag. Click 'Go to System Settings', enable in",
+        "系统设置 → 隐私与安全性 → 辅助功能": "System Settings → Privacy & Security → Accessibility",
+        "中启用 DropShelf。": ".",
+        "拖拽文件到搁置架": "Drag Files to Shelf",
+        "在 Finder 或其他应用中拖拽文件时，DropShelf 会自动弹出浮动面板。将文件拖到面板上即可暂存。你也可以通过屏幕边缘热区触发。": "Auto-shows panel when dragging. Drop to store. Also via screen edge.",
+        "整理 & 使用文件": "Organize & Use Files",
+        "在搁置架中你可以：右键重命名文件、批量压缩为 ZIP、转换图片格式、合并 PDF、按空格预览文件，然后将文件拖到目标位置使用。": "Rename, ZIP, convert, merge PDFs, Space preview, then drag to target.",
+        "拖拽文件时搁置架面板没有自动弹出": "Shelf doesn't auto-appear when dragging",
+        "拖拽监听需要「辅助功能」权限。请检查：": "Drag monitoring needs Accessibility:",
+        "前往": "Go to",
+        "确认 DropShelf 已在列表中并已启用": "Confirm DropShelf is enabled",
+        "如果已启用但不生效，取消勾选后重新勾选，然后重启 DropShelf": "Uncheck/recheck, restart DropShelf",
+        "全局快捷键 ⌥Space 无法唤起面板": "⌥Space doesn't open panel",
+        "默认快捷键是": "Default hotkey is",
+        "（Option + 空格），可能与其他应用冲突。请尝试：": "(Option+Space), may conflict. Try:",
+        "检查是否有其他应用占用了": "Check if other apps use",
+        "（如 Spotlight 替代工具）": "(like Spotlight alternatives)",
+        "在 DropShelf 设置中修改为其他快捷键组合": "Change hotkey in DropShelf settings",
+        "确认辅助功能权限已授予": "Confirm Accessibility granted",
+        "重启电脑后搁置架里的文件消失了": "Files disappeared after reboot",
+        "DropShelf 使用 Security-Scoped Bookmark 持久化文件引用。如果文件消失，可能是：": "Uses Security-Scoped Bookmarks. If disappeared:",
+        "原始文件被移动或删除——搁置架保存的是文件引用而非副本": "Original files moved/deleted — saves references not copies",
+        "文件来自外部设备（U盘、移动硬盘），设备已断开": "External device disconnected",
+        "持久化数据目录被意外清理（位于": "Persistence directory cleaned (at",
+        "图片转换后格式不正确或质量差": "Image conversion issues",
+        "DropShelf 支持 PNG、JPEG、HEIC、WebP、TIFF 等格式的互相转换。请注意：": "Supports PNG/JPEG/HEIC/WebP/TIFF conversion. Note:",
+        "JPEG 是有损压缩格式，转换自无损格式（PNG/TIFF）时文件更小但可能有轻微质量损失": "JPEG is lossy — slight quality loss from lossless",
+        "HEIC 格式需要 macOS 原生支持，通常在 macOS 13+ 上没有问题": "HEIC needs macOS native support, fine on 13+",
+        "转换后的文件保存在原文件同一目录": "Saved in same directory",
+        "PDF 合并后顺序不对怎么办？": "PDF merge order wrong?",
+        "PDF 合并时，文件按照在搁置架中的排列顺序合并。如果需要调整顺序：": "Merges in shelf order. To adjust:",
+        "在搁置架中先整理好文件的排列顺序": "Arrange files in desired order",
+        "选中需要合并的文件，右键选择「合并 PDF」": "Select files, right-click 'Merge PDF'",
+        "合并后的文件会以「Merged_日期时间.pdf」命名": "Named 'Merged_DateTime.pdf'",
+        "DropShelf 支持 39 种语言。默认跟随系统语言，也可以在设置中手动切换：": "Supports 39 languages. Default follows system.",
+        "DropShelf 是否会上传我的文件？": "Does DropShelf upload files?",
+        "绝对不会。": "Absolutely not.",
+        "DropShelf 是一款完全离线运行的本地工具，不连接任何远程服务器。所有文件操作（压缩、转换、重命名、合并）均在你的 Mac 本地完成，你的文件数据永远不会离开你的电脑。": "Fully offline. All operations done locally. Files never leave your computer.",
+        "不需要（完全离线）": "Not Required (Fully Offline)",
+        "存储空间": "Storage",
+        "约 10 MB": "~10 MB",
+        "如果上述内容没有解决你的问题，欢迎通过以下方式联系我们。我们通常会在 48 小时内回复。": "If not solved, contact us. Reply within 48 hours.",
+        "发送邮件时请附上你的 macOS 版本和 DropShelf 版本号，以便我们更快定位问题。": "Include macOS/DropShelf version in email."
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
     </script>
 </body>
 </html>

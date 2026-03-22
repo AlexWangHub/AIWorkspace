@@ -550,6 +550,33 @@
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -560,10 +587,14 @@
                 <span class="logo-text">VibeWhip</span>
             </a>
             <nav class="nav-links">
-                <a href="index.html" class="active">首页</a>
-                <a href="support.html">技术支持</a>
-                <a href="privacy.html">隐私政策</a>
+                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a>
+                <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
             </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
         </div>
     </header>
 
@@ -576,7 +607,7 @@
             </div>
             <h1>
                 Vibe Coding<br>
-                <span class="gradient">项目管理利器</span>
+                <span class="gradient"><span data-zh="项目管理利器" data-en="Project Management Powerhouse">项目管理利器</span></span>
             </h1>
             <p class="subtitle">
                 一站式 Vibe Coding 工作台。<br>
@@ -587,7 +618,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                 在 Mac App Store 下载
             </a>
-            <p class="hero-meta">免费下载 · macOS 14.0+ · Apple Silicon & Intel</p>
+            <p class="hero-meta"><span data-zh="免费下载 · macOS 14.0+ · Apple Silicon & Intel" data-en="Free · macOS 14.0+ · Apple Silicon & Intel">免费下载 · macOS 14.0+ · Apple Silicon & Intel</span></p>
 
             <div class="tagline-demo">
                 <span class="tag-item"><span class="icon">📝</span> Prompt 库</span>
@@ -602,44 +633,44 @@
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2>为 Vibe Coder 而生</h2>
-                <p>一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控</p>
+                <h2><span data-zh="为 Vibe Coder 而生" data-en="Built for Vibe Coders">为 Vibe Coder 而生</span></h2>
+                <p><span data-zh="一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控" data-en="Manage your AI coding workflow end-to-end, from prompts to delivery">一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控</span></p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon purple">📚</div>
-                    <h3>Prompt 库管理</h3>
+                    <h3><span data-zh="Prompt 库管理" data-en="Prompt Library Management">Prompt 库管理</span></h3>
                     <p>按阶段分类管理你的 Prompt：项目前、周期性、项目后、技巧型 Prompt 和技巧技能。支持一键复制，随时调用最佳实践，告别混乱的提示词管理。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon blue">📋</div>
-                    <h3>项目追踪</h3>
+                    <h3><span data-zh="项目追踪" data-en="Project Tracking">项目追踪</span></h3>
                     <p>为每个 Vibe Coding 项目创建独立面板，追踪进度、管理 Todo、记录关键笔记。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon green">🗒️</div>
-                    <h3>屏幕贴纸</h3>
+                    <h3><span data-zh="屏幕贴纸" data-en="Screen Stickers">屏幕贴纸</span></h3>
                     <p>在屏幕上放置浮动贴纸，随时记录想法、固定重要提醒。支持置顶、拖拽、自由排列。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon amber">🔀</div>
-                    <h3>IDE 切换器</h3>
+                    <h3><span data-zh="IDE 切换器" data-en="IDE Switcher">IDE 切换器</span></h3>
                     <p>一键在多个 IDE 之间快速切换——Cursor、Windsurf、VS Code、Xcode 等，告别 ⌘Tab 的痛苦。</p>
                 </div>
 
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon rose">🔥</div>
-                    <h3>WhipBoard 暴走模式</h3>
+                    <h3><span data-zh="WhipBoard 暴走模式" data-en="WhipBoard Rush Mode">WhipBoard 暴走模式</span></h3>
                     <p>激发编程灵感的看板。把你的待办、想法、灵感全部扔进来，以视觉化的方式快速整理和推进。配合 Prompt 库和项目管理，打造完整的 Vibe Coding 工作流。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon cyan">🌍</div>
-                    <h3>39 种语言</h3>
+                    <h3><span data-zh="39 种语言" data-en="39 Languages">39 种语言</span></h3>
                     <p>内置 39 种语言支持，自动跟随系统语言，也可手动切换，面向全球开发者。</p>
                 </div>
             </div>
@@ -650,29 +681,29 @@
     <section class="how-it-works">
         <div class="container">
             <div class="how-header">
-                <h2>三步开启高效 Vibe Coding</h2>
-                <p>无需配置，打开即用</p>
+                <h2><span data-zh="三步开启高效 Vibe Coding" data-en="Three Steps to Efficient Vibe Coding">三步开启高效 Vibe Coding</span></h2>
+                <p><span data-zh="无需配置，打开即用" data-en="No config needed, open and use">无需配置，打开即用</span></p>
             </div>
 
             <div class="flow">
                 <div class="flow-step">
                     <div class="flow-number">1</div>
                     <div class="flow-icon">📚</div>
-                    <h4>构建 Prompt 库</h4>
+                    <h4><span data-zh="构建 Prompt 库" data-en="Build Prompt Library">构建 Prompt 库</span></h4>
                     <p>把你的最佳 Prompt 按类别整理归档，随时一键复制调用</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
                     <div class="flow-icon">🚀</div>
-                    <h4>创建项目</h4>
+                    <h4><span data-zh="创建项目" data-en="Create Project">创建项目</span></h4>
                     <p>为每个 Vibe Coding 任务创建项目，追踪进度和 Todo</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">3</div>
                     <div class="flow-icon">⚡</div>
-                    <h4>高效推进</h4>
+                    <h4><span data-zh="高效推进" data-en="Boost Efficiency">高效推进</span></h4>
                     <p>贴纸提醒 + IDE 切换 + WhipBoard，全面提升编码效率</p>
                 </div>
             </div>
@@ -684,17 +715,17 @@
         <div class="container-narrow">
             <div class="privacy-box">
                 <div class="shield">🛡️</div>
-                <h3>隐私安全，值得信赖</h3>
+                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">隐私安全，值得信赖</span></h3>
                 <p>
                     VibeWhip 所有数据完全存储在你的本地设备上，
                     支持 iCloud 同步到你自己的 Apple 账户。
                     我们不收集任何个人信息，不使用任何第三方追踪服务。
                 </p>
                 <div class="privacy-tags">
-                    <span class="privacy-tag">✓ 数据本地存储</span>
-                    <span class="privacy-tag">✓ iCloud 同步</span>
-                    <span class="privacy-tag">✓ 无数据收集</span>
-                    <span class="privacy-tag">✓ 无第三方追踪</span>
+                    <span class="privacy-tag"><span data-zh="✓ 数据本地存储" data-en="✓ Local Data Storage">✓ 数据本地存储</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ iCloud 同步" data-en="✓ iCloud Sync">✓ iCloud 同步</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ 无数据收集</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无第三方追踪" data-en="✓ No Third-Party Tracking">✓ 无第三方追踪</span></span>
                 </div>
             </div>
         </div>
@@ -706,10 +737,105 @@
                 <a href="index.html">首页</a>
                 <a href="support.html">技术支持</a>
                 <a href="privacy.html">隐私政策</a>
-                <a href="mailto:lleowang@foxmail.com">联系我们</a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">联系我们</span></a>
             </div>
             <p>© 2026 VibeWhip. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact",
+        "macOS 开发者工具": "macOS Developer Tool",
+        "项目管理利器": "Project Management Powerhouse",
+        "一站式 Vibe Coding 工作台。": "All-in-one Vibe Coding workstation.",
+        "管理 Prompt、追踪项目、屏幕贴纸提醒、一键切换 IDE，让你的 AI 编程体验更高效。": "Manage prompts, track projects, stickers, IDE switch — supercharge AI coding.",
+        "在 Mac App Store 下载": "Download on Mac App Store",
+        "免费下载 · macOS 14.0+ · Apple Silicon & Intel": "Free · macOS 14.0+ · Apple Silicon & Intel",
+        "Prompt 库": "Prompt Library",
+        "项目管理": "Project Management",
+        "屏幕贴纸": "Screen Stickers",
+        "IDE 切换": "IDE Switch",
+        "为 Vibe Coder 而生": "Built for Vibe Coders",
+        "一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控": "Manage AI coding workflow end-to-end",
+        "Prompt 库管理": "Prompt Library Management",
+        "分类管理你的 AI Prompt，支持标签、收藏和快速搜索。一键复制到剪贴板，随时调用你的最佳 Prompt。": "Categorize prompts with tags, favorites, search. One-click copy.",
+        "项目追踪": "Project Tracking",
+        "看板式项目管理，从需求到完成全程可视化。支持需求描述、子任务拆分和进度追踪。": "Kanban management with visualization. Requirements, subtasks, tracking.",
+        "IDE 切换器": "IDE Switcher",
+        "一键在 Cursor、Windsurf、VS Code、Xcode、Trae 等主流 IDE 间切换打开同一项目，告别手动找路径的繁琐。": "One-click switch between Cursor, VS Code, Xcode, etc.",
+        "WhipBoard 暴走模式": "WhipBoard Rush Mode",
+        "屏幕贴纸功能，将重要提醒钉在屏幕上。半透明、可拖拽，编码时始终可见关键信息。": "Pin reminders on screen. Semi-transparent, draggable.",
+        "39 种语言": "39 Languages",
+        "支持 39 种语言本地化，包括中文、英语、日语、韩语等。全球开发者无障碍使用。": "Supports 39 languages. Accessible worldwide.",
+        "三步开启高效 Vibe Coding": "Three Steps to Efficient Vibe Coding",
+        "无需配置，打开即用": "No config needed, open and use",
+        "构建 Prompt 库": "Build Prompt Library",
+        "收集和整理你常用的 AI Prompt，分类标签方便查找": "Collect and organize AI prompts with tags",
+        "创建项目": "Create Project",
+        "在看板中创建项目，添加需求和子任务，开始追踪进度": "Create projects on kanban, add requirements",
+        "高效推进": "Boost Efficiency",
+        "用屏幕贴纸提醒关键任务，一键切换 IDE，让 AI 编程如虎添翼": "Stickers for reminders, switch IDE, supercharge coding",
+        "隐私安全，值得信赖": "Privacy First, Trustworthy",
+        "VibeWhip 注重你的隐私安全。所有数据本地存储，": "VibeWhip values your privacy. All data stored locally,",
+        "可选 iCloud 同步在你自己的 Apple 账户之间。": "optional iCloud sync between your Apple accounts.",
+        "不收集任何用户数据，不连接第三方服务器。": "No data collection, no third-party servers.",
+        "✓ 数据本地存储": "✓ Local Data Storage",
+        "✓ iCloud 同步": "✓ iCloud Sync",
+        "✓ 无数据收集": "✓ No Data Collection",
+        "✓ 无第三方追踪": "✓ No Third-Party Tracking"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

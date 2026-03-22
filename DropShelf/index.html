@@ -581,6 +581,33 @@
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -591,10 +618,14 @@
                 <span class="logo-text">DropShelf</span>
             </a>
             <nav class="nav-links">
-                <a href="index.html" class="active">首页</a>
-                <a href="support.html">技术支持</a>
-                <a href="privacy.html">隐私政策</a>
+                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a>
+                <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
             </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
         </div>
     </header>
 
@@ -607,7 +638,7 @@
             </div>
             <h1>
                 拖拽文件<br>
-                <span class="gradient">随手搁置</span>
+                <span class="gradient"><span data-zh="随手搁置" data-en="Drop Anywhere">随手搁置</span></span>
             </h1>
             <p class="subtitle">
                 一款精巧的 macOS 文件搁置架。<br>
@@ -618,7 +649,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                 在 Mac App Store 下载
             </a>
-            <p class="hero-meta">免费下载 · macOS 13.0+ · Apple Silicon & Intel</p>
+            <p class="hero-meta"><span data-zh="免费下载 · macOS 13.0+ · Apple Silicon & Intel" data-en="Free · macOS 13.0+ · Apple Silicon & Intel">免费下载 · macOS 13.0+ · Apple Silicon & Intel</span></p>
 
             <div class="drag-demo">
                 <div class="drag-file">
@@ -626,9 +657,7 @@
                     report.pdf
                 </div>
                 <span class="drag-arrow">→</span>
-                <div class="drag-shelf">
-                    📂 DropShelf 面板
-                </div>
+                <div class="drag-shelf"><span data-zh="📂 DropShelf 面板" data-en="📂 DropShelf Panel">📂 DropShelf 面板</span></div>
             </div>
         </div>
     </section>
@@ -637,56 +666,56 @@
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2>为拖拽而生</h2>
-                <p>不打断操作流，暂存、整理、批量处理一气呵成</p>
+                <h2><span data-zh="为拖拽而生" data-en="Built for Drag & Drop">为拖拽而生</span></h2>
+                <p><span data-zh="不打断操作流，暂存、整理、批量处理一气呵成" data-en="Without interrupting your workflow — store, organize, batch process seamlessly">不打断操作流，暂存、整理、批量处理一气呵成</span></p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon blue">🖱️</div>
-                    <h3>多种触发方式</h3>
+                    <h3><span data-zh="多种触发方式" data-en="Multiple Trigger Methods">多种触发方式</span></h3>
                     <p>拖拽文件时自动弹出、屏幕边缘热区激活、全局快捷键唤起（⌥Space）、菜单栏图标点击——四种触发方式覆盖各种使用场景，随时随地打开搁置架。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon purple">📚</div>
-                    <h3>多架管理</h3>
+                    <h3><span data-zh="多架管理" data-en="Multi-Shelf Management">多架管理</span></h3>
                     <p>创建多个搁置架，按项目或任务分类。切换 Tab 即可在不同架之间自由操作。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon green">💾</div>
-                    <h3>持久化存储</h3>
+                    <h3><span data-zh="持久化存储" data-en="Persistent Storage">持久化存储</span></h3>
                     <p>文件暂存不会因重启丢失。所有搁置架内容自动持久化，下次开机数据依然完好。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon amber">🗜️</div>
-                    <h3>ZIP 压缩</h3>
+                    <h3><span data-zh="ZIP 压缩" data-en="ZIP Compression">ZIP 压缩</span></h3>
                     <p>选中多个文件一键压缩为 ZIP 归档，省去额外工具，进度实时可见。</p>
                 </div>
 
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon cyan">🖼️</div>
-                    <h3>图片转换 & PDF 合并</h3>
+                    <h3><span data-zh="图片转换 & PDF 合并" data-en="Image Conversion & PDF Merge">图片转换 & PDF 合并</span></h3>
                     <p>图片格式批量转换（PNG、JPEG、HEIC、WebP、TIFF），多图/多PDF一键合并。强大的文件操作能力让搁置架不只是暂存，更是轻量级工作台。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon rose">👁️</div>
-                    <h3>Quick Look 预览</h3>
+                    <h3><span data-zh="Quick Look 预览" data-en="Quick Look Preview">Quick Look 预览</span></h3>
                     <p>按空格键快速预览搁置架中的文件，支持图片、PDF、文档等多种格式。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon blue">✏️</div>
-                    <h3>批量重命名</h3>
+                    <h3><span data-zh="批量重命名" data-en="Batch Rename">批量重命名</span></h3>
                     <p>选中文件直接重命名，支持批量操作，文件整理更高效。</p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon purple">📌</div>
-                    <h3>菜单栏常驻</h3>
+                    <h3><span data-zh="菜单栏常驻" data-en="Menu Bar Resident">菜单栏常驻</span></h3>
                     <p>安静地待在菜单栏，不占 Dock 栏位。纯原生实现，轻量无负担，开机自启随时待命。</p>
                 </div>
             </div>
@@ -697,29 +726,29 @@
     <section class="how-it-works">
         <div class="container">
             <div class="how-header">
-                <h2>三步上手，即刻使用</h2>
-                <p>零配置开箱即用，拖拽就对了</p>
+                <h2><span data-zh="三步上手，即刻使用" data-en="Three Steps to Get Started">三步上手，即刻使用</span></h2>
+                <p><span data-zh="零配置开箱即用，拖拽就对了" data-en="Zero config, just drag and drop">零配置开箱即用，拖拽就对了</span></p>
             </div>
 
             <div class="flow">
                 <div class="flow-step">
                     <div class="flow-number">1</div>
                     <div class="flow-icon">📥</div>
-                    <h4>拖拽暂存</h4>
+                    <h4><span data-zh="拖拽暂存" data-en="Drag & Store">拖拽暂存</span></h4>
                     <p>拖拽文件时浮动面板自动弹出，松手即暂存到搁置架</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
                     <div class="flow-icon">⚡</div>
-                    <h4>整理操作</h4>
+                    <h4><span data-zh="整理操作" data-en="Organize & Process">整理操作</span></h4>
                     <p>在搁置架中预览、重命名、压缩、转换——一站式处理</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">3</div>
                     <div class="flow-icon">📤</div>
-                    <h4>拖出使用</h4>
+                    <h4><span data-zh="拖出使用" data-en="Drag Out & Use">拖出使用</span></h4>
                     <p>将文件从搁置架拖到目标位置，或直接在 Finder 中打开</p>
                 </div>
             </div>
@@ -731,17 +760,17 @@
         <div class="container-narrow">
             <div class="privacy-box">
                 <div class="shield">🛡️</div>
-                <h3>隐私安全，值得信赖</h3>
+                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">隐私安全，值得信赖</span></h3>
                 <p>
                     DropShelf 注重你的隐私安全。所有文件操作均在本地完成，
                     不连接任何远程服务器，不上传任何文件内容，
                     你的数据始终留在你的 Mac 上。
                 </p>
                 <div class="privacy-tags">
-                    <span class="privacy-tag">✓ 完全离线运行</span>
-                    <span class="privacy-tag">✓ 数据本地存储</span>
-                    <span class="privacy-tag">✓ 无网络通信</span>
-                    <span class="privacy-tag">✓ 无数据收集</span>
+                    <span class="privacy-tag"><span data-zh="✓ 完全离线运行" data-en="✓ Fully Offline">✓ 完全离线运行</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 数据本地存储" data-en="✓ Local Data Storage">✓ 数据本地存储</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无网络通信" data-en="✓ No Network Communication">✓ 无网络通信</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ 无数据收集</span></span>
                 </div>
             </div>
         </div>
@@ -753,10 +782,109 @@
                 <a href="index.html">首页</a>
                 <a href="support.html">技术支持</a>
                 <a href="privacy.html">隐私政策</a>
-                <a href="mailto:lleowang@foxmail.com">联系我们</a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">联系我们</span></a>
             </div>
             <p>© 2026 DropShelf. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact",
+        "macOS 原生文件工具": "macOS Native File Tool",
+        "拖拽文件": "Drag Files",
+        "随手搁置": "Drop Anywhere",
+        "一款精巧的 macOS 文件搁置架。": "A sleek macOS file shelf tool.",
+        "拖拽时暂存文件到浮动面板，支持多架管理、批量操作，让文件整理行云流水。": "Store files on floating panel while dragging. Multi-shelf and batch operations.",
+        "在 Mac App Store 下载": "Download on Mac App Store",
+        "免费下载 · macOS 13.0+ · Apple Silicon & Intel": "Free · macOS 13.0+ · Apple Silicon & Intel",
+        "📂 DropShelf 面板": "📂 DropShelf Panel",
+        "为拖拽而生": "Built for Drag & Drop",
+        "不打断操作流，暂存、整理、批量处理一气呵成": "Store, organize, batch process seamlessly",
+        "多种触发方式": "Multiple Trigger Methods",
+        "拖拽文件时自动弹出面板，也可以通过全局快捷键 ⌥Space、屏幕边缘热区或菜单栏图标唤起。多种方式，按你喜好。": "Auto-appears when dragging. Also via ⌥Space, screen edge, or menu bar.",
+        "多架管理": "Multi-Shelf Management",
+        "支持创建多个搁置架标签页，按项目或用途分类文件。切换方便，互不干扰。": "Multiple shelf tabs by project. Easy switching.",
+        "持久化存储": "Persistent Storage",
+        "文件引用通过 Security-Scoped Bookmark 持久化，重启后搁置架内容不丢失。": "Persists via Security-Scoped Bookmarks, survives restarts.",
+        "ZIP 压缩": "ZIP Compression",
+        "选中多个文件一键压缩为 ZIP，压缩完成后自动添加到搁置架。": "One-click ZIP, auto-added to shelf.",
+        "图片转换 & PDF 合并": "Image Conversion & PDF Merge",
+        "支持 PNG、JPEG、HEIC、WebP、TIFF 等格式互转，多个 PDF 一键合并。": "Convert between formats; merge PDFs.",
+        "Quick Look 预览": "Quick Look Preview",
+        "选中文件按空格键即可快速预览，和 Finder 一致的原生体验。": "Press Space to preview — Finder-like.",
+        "批量重命名": "Batch Rename",
+        "右键即可重命名文件，支持搁置架内直接操作，无需切换到 Finder。": "Right-click to rename directly in shelf.",
+        "菜单栏常驻": "Menu Bar Resident",
+        "安静地待在菜单栏，不占用 Dock 栏位。需要时一键唤起，不需要时隐身后台。": "Stays in menu bar. One click to invoke.",
+        "三步上手，即刻使用": "Three Steps to Get Started",
+        "零配置开箱即用，拖拽就对了": "Zero config, just drag and drop",
+        "拖拽暂存": "Drag & Store",
+        "在 Finder 中拖拽文件，搁置架自动弹出，松手即暂存": "Drag in Finder, shelf auto-appears, release to store",
+        "整理操作": "Organize & Process",
+        "在搁置架中重命名、压缩、转换格式、合并 PDF": "Rename, compress, convert, merge PDFs",
+        "拖出使用": "Drag Out & Use",
+        "将文件从搁置架拖到目标位置，操作完成": "Drag from shelf to target, done",
+        "隐私安全，值得信赖": "Privacy First, Trustworthy",
+        "DropShelf 完全在本地运行，不连接任何远程服务器。": "DropShelf runs entirely locally.",
+        "你的文件数据安全地保存在 Mac 上，": "Your file data is safely stored on your Mac,",
+        "绝不会被上传或分享。": "never uploaded or shared.",
+        "✓ 完全离线运行": "✓ Fully Offline",
+        "✓ 数据本地存储": "✓ Local Data Storage",
+        "✓ 无网络通信": "✓ No Network Communication",
+        "✓ 无数据收集": "✓ No Data Collection"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -578,6 +578,33 @@
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -588,10 +615,14 @@
                 <span class="logo-text">ClipToNotion</span>
             </a>
             <nav class="nav-links">
-                <a href="index.html" class="active">首页</a>
-                <a href="support.html">技术支持</a>
-                <a href="privacy.html">隐私政策</a>
+                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a>
+                <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
             </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
         </div>
     </header>
 
@@ -604,7 +635,7 @@
             </div>
             <h1>
                 复制，按键<br>
-                <span class="gradient">直达 Notion</span>
+                <span class="gradient"><span data-zh="直达 Notion" data-en="Straight to Notion">直达 Notion</span></span>
             </h1>
             <p class="subtitle">
                 一款极简的 macOS 菜单栏应用。<br>
@@ -615,13 +646,13 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                 在 Mac App Store 下载
             </a>
-            <p class="hero-meta">免费下载 · macOS 13.0+ · Apple Silicon & Intel</p>
+            <p class="hero-meta"><span data-zh="免费下载 · macOS 13.0+ · Apple Silicon & Intel" data-en="Free · macOS 13.0+ · Apple Silicon & Intel">免费下载 · macOS 13.0+ · Apple Silicon & Intel</span></p>
 
             <div class="keyboard-demo">
                 <span class="key">⌘</span>
                 <span class="key">⇧</span>
                 <span class="key">V</span>
-                <span class="key-result">✅ 已发送到 Notion</span>
+                <span class="key-result"><span data-zh="✅ 已发送到 Notion" data-en="✅ Sent to Notion">✅ 已发送到 Notion</span></span>
             </div>
         </div>
     </section>
@@ -630,45 +661,45 @@
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2>为效率而生</h2>
-                <p>不切换窗口，不打断心流，一个快捷键搞定一切</p>
+                <h2><span data-zh="为效率而生" data-en="Built for Efficiency">为效率而生</span></h2>
+                <p><span data-zh="不切换窗口，不打断心流，一个快捷键搞定一切" data-en="No window switching, no flow interruption — one hotkey does it all">不切换窗口，不打断心流，一个快捷键搞定一切</span></p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon blue">⌨️</div>
-                    <h3>全局快捷键发送</h3>
-                    <p>在任何应用中按下快捷键，剪贴板中的文字立即追加到你的 Notion 页面。无需切换窗口，无需打开浏览器，复制即发。</p>
+                    <h3><span data-zh="全局快捷键发送" data-en="Global Hotkey Send">全局快捷键发送</span></h3>
+                    <p><span data-zh="在任何应用中按下快捷键，剪贴板中的文字立即追加到你的 Notion 页面。无需切换窗口，无需打开浏览器，复制即发。" data-en="Press the hotkey in any app to instantly append clipboard text to your Notion page. No window switching, no browser needed.">在任何应用中按下快捷键，剪贴板中的文字立即追加到你的 Notion 页面。无需切换窗口，无需打开浏览器，复制即发。</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon purple">📌</div>
-                    <h3>菜单栏常驻</h3>
-                    <p>安静地待在菜单栏，不占用 Dock 栏位。需要时一键唤起，不需要时隐身后台。</p>
+                    <h3><span data-zh="菜单栏常驻" data-en="Menu Bar Resident">菜单栏常驻</span></h3>
+                    <p><span data-zh="安静地待在菜单栏，不占用 Dock 栏位。需要时一键唤起，不需要时隐身后台。" data-en="Stays quietly in the menu bar. One click to invoke, invisible when not needed.">安静地待在菜单栏，不占用 Dock 栏位。需要时一键唤起，不需要时隐身后台。</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon green">📋</div>
-                    <h3>剪贴板面板</h3>
-                    <p>点击菜单栏图标或使用第二个快捷键，预览当前剪贴板内容，确认后一键发送。</p>
+                    <h3><span data-zh="剪贴板面板" data-en="Clipboard Panel">剪贴板面板</span></h3>
+                    <p><span data-zh="点击菜单栏图标或使用第二个快捷键，预览当前剪贴板内容，确认后一键发送。" data-en="Click the menu bar icon or use a second hotkey to preview and send clipboard content.">点击菜单栏图标或使用第二个快捷键，预览当前剪贴板内容，确认后一键发送。</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon amber">📜</div>
-                    <h3>上传记录</h3>
-                    <p>自动保存每次发送记录，按日期分组查看，随时回顾历史内容。</p>
+                    <h3><span data-zh="上传记录" data-en="Upload History">上传记录</span></h3>
+                    <p><span data-zh="自动保存每次发送记录，按日期分组查看，随时回顾历史内容。" data-en="Automatically saves each send record, grouped by date for easy review.">自动保存每次发送记录，按日期分组查看，随时回顾历史内容。</span></p>
                 </div>
 
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon cyan">🔝</div>
-                    <h3>新内容置顶</h3>
-                    <p>最新发送的内容自动出现在 Notion 页面顶部，按时间倒序排列，始终保持最新内容最醒目。配合上传记录功能，轻松管理所有发送内容。</p>
+                    <h3><span data-zh="新内容置顶" data-en="New Content on Top">新内容置顶</span></h3>
+                    <p><span data-zh="最新发送的内容自动出现在 Notion 页面顶部，按时间倒序排列，始终保持最新内容最醒目。配合上传记录功能，轻松管理所有发送内容。" data-en="Latest content appears at the top of your Notion page in reverse chronological order. Combined with upload history for easy content management.">最新发送的内容自动出现在 Notion 页面顶部，按时间倒序排列，始终保持最新内容最醒目。配合上传记录功能，轻松管理所有发送内容。</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon rose">🚀</div>
-                    <h3>开机自启</h3>
-                    <p>支持设置为登录项，电脑开机后自动在后台就绪，无需手动启动。</p>
+                    <h3><span data-zh="开机自启" data-en="Launch at Login">开机自启</span></h3>
+                    <p><span data-zh="支持设置为登录项，电脑开机后自动在后台就绪，无需手动启动。" data-en="Set as login item to auto-start in the background when your Mac boots.">支持设置为登录项，电脑开机后自动在后台就绪，无需手动启动。</span></p>
                 </div>
             </div>
         </div>
@@ -678,30 +709,30 @@
     <section class="how-it-works">
         <div class="container">
             <div class="how-header">
-                <h2>三步配置，即刻使用</h2>
-                <p>简洁的引导流程，几分钟完成设置</p>
+                <h2><span data-zh="三步配置，即刻使用" data-en="Three Steps to Get Started">三步配置，即刻使用</span></h2>
+                <p><span data-zh="简洁的引导流程，几分钟完成设置" data-en="Simple guided setup in minutes">简洁的引导流程，几分钟完成设置</span></p>
             </div>
 
             <div class="flow">
                 <div class="flow-step">
                     <div class="flow-number">1</div>
                     <div class="flow-icon">🔑</div>
-                    <h4>获取 API Token</h4>
-                    <p>在 Notion 中创建 Integration 并复制 Token</p>
+                    <h4><span data-zh="获取 API Token" data-en="Get API Token">获取 API Token</span></h4>
+                    <p><span data-zh="在 Notion 中创建 Integration 并复制 Token" data-en="Create a Notion Integration and copy the Token">在 Notion 中创建 Integration 并复制 Token</span></p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
                     <div class="flow-icon">🔗</div>
-                    <h4>关联页面</h4>
-                    <p>在目标页面中添加 Integration 连接</p>
+                    <h4><span data-zh="关联页面" data-en="Connect Page">关联页面</span></h4>
+                    <p><span data-zh="在目标页面中添加 Integration 连接" data-en="Add the Integration connection to your target page">在目标页面中添加 Integration 连接</span></p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">3</div>
                     <div class="flow-icon">⚡</div>
-                    <h4>复制 & 发送</h4>
-                    <p>复制任意文字，按下快捷键即可发送</p>
+                    <h4><span data-zh="复制 & 发送" data-en="Copy & Send">复制 & 发送</span></h4>
+                    <p><span data-zh="复制任意文字，按下快捷键即可发送" data-en="Copy any text and press the hotkey to send">复制任意文字，按下快捷键即可发送</span></p>
                 </div>
             </div>
         </div>
@@ -712,17 +743,17 @@
         <div class="container-narrow">
             <div class="privacy-box">
                 <div class="shield">🛡️</div>
-                <h3>隐私安全，值得信赖</h3>
-                <p>
-                    ClipToNotion 注重你的隐私安全。所有数据仅在本地存储，
+                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">隐私安全，值得信赖</span></h3>
+                <p><span data-zh="ClipToNotion 注重你的隐私安全。所有数据仅在本地存储，
                     剪贴板内容通过 Notion 官方 API 直接发送到你的账户，
-                    全程不经过任何第三方服务器。
-                </p>
+                    全程不经过任何第三方服务器。" data-en="ClipToNotion values your privacy. All data is stored locally. Clipboard content is sent directly to your Notion account via the official API, never through third-party servers.">ClipToNotion 注重你的隐私安全。所有数据仅在本地存储，
+                    剪贴板内容通过 Notion 官方 API 直接发送到你的账户，
+                    全程不经过任何第三方服务器。</span></p>
                 <div class="privacy-tags">
-                    <span class="privacy-tag">✓ 无第三方服务器</span>
-                    <span class="privacy-tag">✓ 数据本地存储</span>
-                    <span class="privacy-tag">✓ Notion 官方 API</span>
-                    <span class="privacy-tag">✓ 无数据收集</span>
+                    <span class="privacy-tag"><span data-zh="✓ 无第三方服务器" data-en="✓ No Third-Party Servers">✓ 无第三方服务器</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 数据本地存储" data-en="✓ Local Data Storage">✓ 数据本地存储</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ Notion 官方 API" data-en="✓ Official Notion API">✓ Notion 官方 API</span></span>
+                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ 无数据收集</span></span>
                 </div>
             </div>
         </div>
@@ -734,10 +765,105 @@
                 <a href="index.html">首页</a>
                 <a href="support.html">技术支持</a>
                 <a href="privacy.html">隐私政策</a>
-                <a href="mailto:lleowang@foxmail.com">联系我们</a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">联系我们</span></a>
             </div>
             <p>© 2026 ClipToNotion. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy",
+        "联系我们": "Contact",
+        "macOS 菜单栏工具": "macOS Menu Bar Tool",
+        "复制，按键": "Copy, Press",
+        "直达 Notion": "Straight to Notion",
+        "一款极简的 macOS 菜单栏应用。": "A minimalist macOS menu bar app.",
+        "复制任意文字，按下快捷键，内容瞬间发送到你的 Notion 页面。": "Copy any text, press a hotkey, and it's instantly sent to your Notion page.",
+        "在 Mac App Store 下载": "Download on Mac App Store",
+        "免费下载 · macOS 13.0+ · Apple Silicon & Intel": "Free · macOS 13.0+ · Apple Silicon & Intel",
+        "✅ 已发送到 Notion": "✅ Sent to Notion",
+        "为效率而生": "Built for Efficiency",
+        "不切换窗口，不打断心流，一个快捷键搞定一切": "No window switching, no flow interruption — one hotkey does it all",
+        "全局快捷键发送": "Global Hotkey Send",
+        "在任何应用中按下快捷键，剪贴板中的文字立即追加到你的 Notion 页面。无需切换窗口，无需打开浏览器，复制即发。": "Press the hotkey in any app to instantly append clipboard text to your Notion page.",
+        "菜单栏常驻": "Menu Bar Resident",
+        "安静地待在菜单栏，不占用 Dock 栏位。需要时一键唤起，不需要时隐身后台。": "Stays quietly in the menu bar. One click to invoke, invisible when not needed.",
+        "剪贴板面板": "Clipboard Panel",
+        "点击菜单栏图标或使用第二个快捷键，预览当前剪贴板内容，确认后一键发送。": "Click the menu bar icon or use a second hotkey to preview and send clipboard content.",
+        "上传记录": "Upload History",
+        "自动保存每次发送记录，按日期分组查看，随时回顾历史内容。": "Auto-saves each send record, grouped by date for easy review.",
+        "新内容置顶": "New Content on Top",
+        "最新发送的内容自动出现在 Notion 页面顶部，按时间倒序排列，始终保持最新内容最醒目。配合上传记录功能，轻松管理所有发送内容。": "Latest content appears at the top of your Notion page in reverse chronological order.",
+        "开机自启": "Launch at Login",
+        "支持设置为登录项，电脑开机后自动在后台就绪，无需手动启动。": "Set as login item to auto-start in the background when your Mac boots.",
+        "三步配置，即刻使用": "Three Steps to Get Started",
+        "简洁的引导流程，几分钟完成设置": "Simple guided setup in minutes",
+        "获取 API Token": "Get API Token",
+        "在 Notion 中创建 Integration 并复制 Token": "Create a Notion Integration and copy the Token",
+        "关联页面": "Connect Page",
+        "在目标页面中添加 Integration 连接": "Add the Integration connection to your target page",
+        "复制 & 发送": "Copy & Send",
+        "复制任意文字，按下快捷键即可发送": "Copy any text and press the hotkey to send",
+        "隐私安全，值得信赖": "Privacy First, Trustworthy",
+        "ClipToNotion 注重你的隐私安全。所有数据仅在本地存储，": "ClipToNotion values your privacy. All data is stored locally.",
+        "剪贴板内容通过 Notion 官方 API 直接发送到你的账户，": "Clipboard content is sent directly via the official API,",
+        "全程不经过任何第三方服务器。": "never through third-party servers.",
+        "✓ 无第三方服务器": "✓ No Third-Party Servers",
+        "✓ 数据本地存储": "✓ Local Data Storage",
+        "✓ Notion 官方 API": "✓ Official Notion API",
+        "✓ 无数据收集": "✓ No Data Collection"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

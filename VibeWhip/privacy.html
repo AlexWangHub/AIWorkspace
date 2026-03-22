@@ -270,6 +270,33 @@
             .content { padding: 60px 0; }
             .header-inner { flex-wrap: wrap; gap: 12px; }
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -281,27 +308,31 @@
                     <span class="logo-text">VibeWhip</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="index.html">首页</a>
-                    <a href="support.html">技术支持</a>
+                    <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
+                    <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
                     <a href="privacy.html" class="active">隐私政策</a>
                 </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
             </div>
         </div>
     </header>
 
     <div class="content">
         <div class="container">
-            <h1>隐私政策</h1>
+            <h1><span data-zh="隐私政策" data-en="Privacy Policy">隐私政策</span></h1>
             <p class="last-updated">最后更新日期：2026 年 3 月 23 日</p>
 
             <div class="highlight-box">
                 <p>🛡️ VibeWhip 不收集、不存储、不传输任何用户个人数据到第三方服务器。你的隐私是我们的首要考量。</p>
             </div>
 
-            <h2>概述</h2>
+            <h2><span data-zh="概述" data-en="Overview">概述</span></h2>
             <p>VibeWhip（以下简称「本应用」）是一款 macOS 项目管理工具，专为 Vibe Coding 工作流设计，提供 Prompt 库管理、项目追踪、屏幕贴纸、IDE 切换器等功能。本隐私政策说明了本应用如何处理你的信息。</p>
 
-            <h2>数据收集</h2>
+            <h2><span data-zh="数据收集" data-en="Data Collection">数据收集</span></h2>
             <p><strong>本应用不收集任何个人信息。</strong></p>
             <p>具体而言：</p>
             <ul>
@@ -312,15 +343,15 @@
                 <li>不使用 Cookie 或类似追踪技术</li>
             </ul>
 
-            <h2>本地存储的数据</h2>
+            <h2><span data-zh="本地存储的数据" data-en="Locally Stored Data">本地存储的数据</span></h2>
             <p>本应用会在你的设备本地存储以下信息，这些数据<strong>仅保存在你的 macOS 系统中</strong>，不会上传到任何第三方服务器：</p>
 
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>数据类型</th>
-                        <th>用途</th>
-                        <th>存储方式</th>
+                        <th><span data-zh="数据类型" data-en="DATA TYPE">数据类型</span></th>
+                        <th><span data-zh="用途" data-en="PURPOSE">用途</span></th>
+                        <th><span data-zh="存储方式" data-en="STORAGE METHOD">存储方式</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -357,7 +388,7 @@
                 </tbody>
             </table>
 
-            <h2>iCloud 同步</h2>
+            <h2><span data-zh="iCloud 同步" data-en="iCloud Sync">iCloud 同步</span></h2>
             <p>本应用支持通过 <strong>Apple iCloud</strong> 在你的多台 Mac 之间同步数据。</p>
             <ul>
                 <li>同步的数据包括：Prompt 库、项目数据、屏幕贴纸等</li>
@@ -370,10 +401,10 @@
                 <p>💡 iCloud 同步完全由 Apple 管理，你的数据在传输和存储过程中均受到 Apple 的端到端加密保护。</p>
             </div>
 
-            <h2>网络通信</h2>
+            <h2><span data-zh="网络通信" data-en="Network Communication">网络通信</span></h2>
             <p>本应用<strong>不会主动连接任何外部服务器</strong>。唯一的网络通信发生在启用 iCloud 同步时，由 macOS 系统自动完成，本应用不直接参与网络请求。</p>
 
-            <h2>辅助功能权限</h2>
+            <h2><span data-zh="辅助功能权限" data-en="Accessibility Permission">辅助功能权限</span></h2>
             <p>本应用需要 macOS 辅助功能（Accessibility）权限来实现以下功能：</p>
             <ul>
                 <li><strong>IDE 切换器</strong>：枚举并切换正在运行的 IDE 窗口</li>
@@ -381,17 +412,17 @@
             </ul>
             <p>该权限仅用于上述功能，不用于其他任何目的。本应用不会通过辅助功能权限读取或记录你的键盘输入。</p>
 
-            <h2>第三方服务</h2>
+            <h2><span data-zh="第三方服务" data-en="Third-Party Services">第三方服务</span></h2>
             <p><strong>本应用不集成任何第三方 SDK 或服务。</strong></p>
             <p>不使用 Firebase、Google Analytics、Facebook SDK 或任何其他第三方追踪、分析或广告服务。</p>
 
-            <h2>儿童隐私</h2>
+            <h2><span data-zh="儿童隐私" data-en="Children's Privacy">儿童隐私</span></h2>
             <p>本应用不针对 13 岁以下的儿童。本应用不会有意收集任何儿童的个人信息。</p>
 
-            <h2>隐私政策变更</h2>
+            <h2><span data-zh="隐私政策变更" data-en="Policy Changes">隐私政策变更</span></h2>
             <p>如本隐私政策有重大变更，我们将通过应用更新或本页面进行通知。建议你定期查看本页面以了解最新的隐私政策。</p>
 
-            <h2>联系我们</h2>
+            <h2><span data-zh="联系我们" data-en="Contact Us">联系我们</span></h2>
             <p>如果你对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
             <p>📧 <a href="mailto:lleowang@foxmail.com">lleowang@foxmail.com</a></p>
         </div>
@@ -407,5 +438,99 @@
             <p>© 2026 VibeWhip. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const K = 'declaration_lang';
+        const T = {
+        "首页": "Home",
+        "技术支持": "Support",
+        "隐私政策": "Privacy Policy",
+        "联系我们": "Contact Us",
+        "最后更新日期：2026 年 3 月 22 日": "Last updated: March 22, 2026",
+        "概述": "Overview",
+        "数据收集": "Data Collection",
+        "网络通信": "Network Communication",
+        "本地存储的数据": "Locally Stored Data",
+        "辅助功能权限": "Accessibility Permission",
+        "第三方服务": "Third-Party Services",
+        "儿童隐私": "Children's Privacy",
+        "隐私政策变更": "Policy Changes",
+        "数据类型": "DATA TYPE",
+        "用途": "PURPOSE",
+        "存储方式": "STORAGE",
+        "快捷键配置": "Hotkey Settings",
+        "用户自定义设置": "User Custom Settings",
+        "UserDefaults（沙盒内）": "UserDefaults (sandboxed)",
+        "iCloud 同步": "iCloud Sync",
+        "VibeWhip 是一款 macOS 开发者工具，帮助 Vibe Coding 开发者管理 Prompt、追踪项目进度并提升编码效率。我们高度重视你的隐私，本政策说明 VibeWhip 如何处理你的数据。": "VibeWhip is a macOS developer tool. We take your privacy seriously.",
+        "VibeWhip 不会收集、存储或传输任何个人信息到第三方服务器。": "Does not collect/transmit personal info to third-party servers.",
+        "所有数据仅保存在你的 Mac 本地，或通过 iCloud 同步到你自己的 Apple 账户。": "Data saved locally or synced to your Apple account via iCloud.",
+        "Prompt 库": "Prompt Library",
+        "存储和管理 AI Prompt": "Store & Manage AI Prompts",
+        "本地 SwiftData / iCloud": "Local SwiftData / iCloud",
+        "项目数据": "Project Data",
+        "项目追踪与管理": "Project Tracking & Management",
+        "屏幕贴纸": "Screen Stickers",
+        "桌面提醒": "Desktop Reminders",
+        "VibeWhip 支持通过 iCloud 同步数据。此功能：": "Supports iCloud sync. This feature:",
+        "由用户自主选择是否开启": "User chooses to enable",
+        "数据仅在用户自己的 Apple 账户之间同步": "Only syncs between user's Apple accounts",
+        "使用 Apple 官方 CloudKit 框架，数据加密传输": "Uses Apple CloudKit, encrypted transfer",
+        "不经过任何第三方服务器": "No third-party servers",
+        "除 iCloud 同步外，VibeWhip 不进行任何网络通信。没有数据上传、遥测、分析或广告请求。": "Besides iCloud, no network. No telemetry/analytics/ads.",
+        "VibeWhip 需要 macOS 辅助功能权限来注册全局快捷键。此权限仅用于快捷键功能，不会用于读取屏幕内容或控制其他应用。": "Needs Accessibility for hotkeys only.",
+        "VibeWhip 不使用任何第三方分析、广告或追踪 SDK。唯一的外部服务是 Apple 官方的 iCloud/CloudKit，且完全由用户控制是否启用。": "No third-party analytics/tracking. Only Apple iCloud, user-controlled.",
+        "VibeWhip 不会故意收集 13 岁以下儿童的任何信息。": "Does not collect info from children under 13.",
+        "如果我们对本隐私政策进行重大变更，将通过应用内通知或在官方网站上发布更新通知。": "Significant changes notified via in-app or website.",
+        "如有任何关于隐私的问题或疑虑，请通过以下方式联系我们：": "For privacy questions, contact us:"
+};
+        function gL(){return localStorage.getItem(K)||'zh'}
+        function sL(l){localStorage.setItem(K,l)}
+        function apply(lang) {
+            // 1. Handle data-zh/data-en elements
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+            });
+            // 2. Walk all text nodes for dictionary-based translation
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function(n) {
+                    var p = n.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var t = p.tagName;
+                    if (t==='SCRIPT'||t==='STYLE'||t==='CODE') return NodeFilter.FILTER_REJECT;
+                    if (p.hasAttribute('data-zh')) return NodeFilter.FILTER_REJECT;
+                    if (p.classList.contains('lang-label')||p.classList.contains('globe')) return NodeFilter.FILTER_REJECT;
+                    if (n.textContent.trim().length===0) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            var nodes=[];
+            while(walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(function(nd){
+                var txt = nd.textContent.trim();
+                if (!txt) return;
+                if (lang==='en') {
+                    if (T[txt]) { nd.textContent = nd.textContent.replace(txt, T[txt]); }
+                } else {
+                    for (var zh in T) {
+                        if (T[zh]===txt) { nd.textContent = nd.textContent.replace(txt, zh); break; }
+                    }
+                }
+            });
+            document.documentElement.lang = lang==='en' ? 'en' : 'zh-Hans';
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.querySelector('.lang-label').textContent = lang==='en' ? '中文' : 'EN';
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            if(gL()==='en') apply('en');
+            var btn = document.getElementById('langToggle');
+            if(btn) btn.addEventListener('click', function(){
+                var next = gL()==='en' ? 'zh' : 'en';
+                sL(next); apply(next);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
