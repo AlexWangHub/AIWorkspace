@@ -20,6 +20,14 @@ Declaration/
 │   ├── index.html         # 营销页面（产品首页）
 │   ├── support.html       # 技术支持页面
 │   └── privacy.html       # 隐私政策页面
+├── PicFlow/               # PicFlow App 声明页面
+│   ├── index.html         # 营销页面（产品首页）
+│   ├── support.html       # 技术支持页面
+│   └── privacy.html       # 隐私政策页面
+├── VibeWhip/              # VibeWhip App 声明页面
+│   ├── index.html         # 营销页面（产品首页）
+│   ├── support.html       # 技术支持页面
+│   └── privacy.html       # 隐私政策页面
 └── README.md
 ```
 
@@ -39,3 +47,13 @@ Declaration/
 - 营销网址：https://alexwanghub.github.io/AIWorkspace/DropShelf/
 - 技术支持：https://alexwanghub.github.io/AIWorkspace/DropShelf/support.html
 - 隐私政策：https://alexwanghub.github.io/AIWorkspace/DropShelf/privacy.html
+
+### PicFlow
+- 营销网址：https://alexwanghub.github.io/AIWorkspace/PicFlow/
+- 技术支持：https://alexwanghub.github.io/AIWorkspace/PicFlow/support.html
+- 隐私政策：https://alexwanghub.github.io/AIWorkspace/PicFlow/privacy.html
+
+### VibeWhip
+- 营销网址：https://alexwanghub.github.io/AIWorkspace/VibeWhip/
+- 技术支持：https://alexwanghub.github.io/AIWorkspace/VibeWhip/support.html
+- 隐私政策：https://alexwanghub.github.io/AIWorkspace/VibeWhip/privacy.html
