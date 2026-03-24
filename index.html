@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeWhip — Developer Hub</title>
+    <meta name="description" content="VibeWhip Developer Hub — Quality blog posts and macOS native app showcase. Built by an indie developer passionate about crafting elegant tools.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --surface: #141416;
+            --surface-hover: #1c1c20;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #8b5cf6;
+            --accent-soft: rgba(139, 92, 246, 0.12);
+            --accent-glow: rgba(139, 92, 246, 0.25);
+            --blue: #3b82f6;
+            --blue-soft: rgba(59, 130, 246, 0.12);
+            --cyan: #06b6d4;
+            --cyan-soft: rgba(6, 182, 212, 0.12);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.12);
+            --amber: #f59e0b;
+            --amber-soft: rgba(245, 158, 11, 0.12);
+            --rose: #f43f5e;
+            --rose-soft: rgba(244, 63, 94, 0.12);
+            --indigo: #5B6EF5;
+            --indigo-soft: rgba(91, 110, 245, 0.12);
+            --purple-soft: rgba(99, 102, 241, 0.12);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .lang-toggle:hover {
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe { font-size: 14px; }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 28px;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .gradient {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* Section styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .blog-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.08);
+        }
+
+        .blog-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .blog-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .blog-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .blog-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .blog-arrow {
+            color: var(--text-muted);
+            font-size: 18px;
+            transition: all 0.3s;
+            align-self: center;
+            flex-shrink: 0;
+        }
+
+        .blog-card:hover .blog-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* App Showcase */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .app-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .app-card:hover {
+            background: var(--surface-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-icon-wrapper {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .app-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .app-card:hover .app-icon-wrapper::after {
+            opacity: 1;
+        }
+
+        .app-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .app-card .app-tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .app-link {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        /* Per-app accent colors */
+        .app-card.vibewhip:hover { border-color: #8b5cf6; }
+        .app-card.vibewhip .app-icon-wrapper { background: var(--accent-soft); }
+        .app-card.vibewhip .app-icon-wrapper::after { box-shadow: 0 0 30px var(--accent-glow); }
+        .app-card.vibewhip .app-link { background: var(--accent-soft); color: #8b5cf6; }
+        .app-card.vibewhip .app-link:hover { background: #8b5cf6; color: #fff; }
+
+        .app-card.clipvault:hover { border-color: #00f0ff; }
+        .app-card.clipvault .app-icon-wrapper { background: rgba(0, 240, 255, 0.10); }
+        .app-card.clipvault .app-icon-wrapper::after { box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); }
+        .app-card.clipvault .app-link { background: rgba(0, 240, 255, 0.10); color: #00f0ff; }
+        .app-card.clipvault .app-link:hover { background: #00f0ff; color: #000; }
+
+        .app-card.dropshelf:hover { border-color: #5B6EF5; }
+        .app-card.dropshelf .app-icon-wrapper { background: var(--indigo-soft); }
+        .app-card.dropshelf .app-icon-wrapper::after { box-shadow: 0 0 30px rgba(91, 110, 245, 0.25); }
+        .app-card.dropshelf .app-link { background: var(--indigo-soft); color: #5B6EF5; }
+        .app-card.dropshelf .app-link:hover { background: #5B6EF5; color: #fff; }
+
+        .app-card.picflow:hover { border-color: #6366f1; }
+        .app-card.picflow .app-icon-wrapper { background: var(--purple-soft); }
+        .app-card.picflow .app-icon-wrapper::after { box-shadow: 0 0 30px rgba(99, 102, 241, 0.25); }
+        .app-card.picflow .app-link { background: var(--purple-soft); color: #6366f1; }
+        .app-card.picflow .app-link:hover { background: #6366f1; color: #fff; }
+
+        .app-card.cliptonotion:hover { border-color: #3b82f6; }
+        .app-card.cliptonotion .app-icon-wrapper { background: var(--blue-soft); }
+        .app-card.cliptonotion .app-icon-wrapper::after { box-shadow: 0 0 30px rgba(59, 130, 246, 0.25); }
+        .app-card.cliptonotion .app-link { background: var(--blue-soft); color: #3b82f6; }
+        .app-card.cliptonotion .app-link:hover { background: #3b82f6; color: #fff; }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Animations */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 0 40px; }
+            .hero h1 { font-size: 32px; }
+            .section { padding: 50px 0; }
+            .section-header h2 { font-size: 24px; }
+            .app-grid { grid-template-columns: 1fr; }
+            .blog-card { flex-direction: column; gap: 16px; }
+            .blog-arrow { display: none; }
+            .nav-links { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner { padding: 0 16px; }
+            .container { padding: 0 16px; }
+            .blog-card { padding: 20px; }
+            .app-card { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🚀</div>
+                <span class="logo-text">VibeWhip Hub</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#blogs" class="active"><span data-zh="博客" data-en="Blogs">Blogs</span></a>
+                <a href="#apps"><span data-zh="应用" data-en="Apps">Apps</span></a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">Contact</span></a>
+            </nav>
+            <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                <span class="globe">🌐</span>
+                <span class="lang-label">中文</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-zh="独立开发者工作站" data-en="Indie Developer Hub">Indie Developer Hub</span>
+            </div>
+            <h1>
+                <span data-zh="创造优雅的" data-en="Crafting Elegant">Crafting Elegant</span><br>
+                <span class="gradient"><span data-zh="macOS 原生工具" data-en="macOS Native Tools">macOS Native Tools</span></span>
+            </h1>
+            <p class="subtitle">
+                <span data-zh="分享技术博客，展示独立作品。用 Swift 和热情，打造 macOS 平台上的精品工具。" data-en="Sharing tech insights and showcasing indie creations. Building premium macOS tools with Swift and passion.">Sharing tech insights and showcasing indie creations. Building premium macOS tools with Swift and passion.</span>
+            </p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Blog Section -->
+    <section class="section" id="blogs">
+        <div class="container">
+            <div class="section-header">
+                <h2>📝 <span data-zh="优质博客" data-en="Featured Blogs">Featured Blogs</span></h2>
+                <p><span data-zh="技术探索与实践心得" data-en="Tech explorations and practical insights">Tech explorations and practical insights</span></p>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Blog 1: Git Worktree -->
+                <a class="blog-card animate-in" href="blogs/git-worktree-tutorial.html">
+                    <div class="blog-icon" style="background: var(--amber-soft);">🌳</div>
+                    <div class="blog-content">
+                        <h3><span data-zh="Git Worktree 完全指南" data-en="Git Worktree Complete Guide">Git Worktree Complete Guide</span></h3>
+                        <p><span data-zh="深入了解 Git Worktree：在同一仓库创建多个工作目录，并行开发不同分支，节省 55% 磁盘空间。从基本操作到实战案例，一篇文章全面掌握。" data-en="Deep dive into Git Worktree: create multiple working directories in one repo, develop branches in parallel, save 55% disk space. From basics to real-world cases, master it all in one article.">Deep dive into Git Worktree: create multiple working directories in one repo, develop branches in parallel, save 55% disk space. From basics to real-world cases, master it all in one article.</span></p>
+                        <div class="blog-meta">
+                            <span class="blog-tag" style="background: var(--amber-soft); color: var(--amber);">Git</span>
+                            <span class="blog-tag" style="background: var(--green-soft); color: var(--green);">DevOps</span>
+                            <span>2026-03-24</span>
+                        </div>
+                    </div>
+                    <span class="blog-arrow">→</span>
+                </a>
+
+                <!-- Placeholder: More coming -->
+                <div class="blog-card animate-in" style="border-style: dashed; opacity: 0.5; cursor: default; justify-content: center; align-items: center; padding: 32px;">
+                    <div style="text-align: center; color: var(--text-muted);">
+                        <div style="font-size: 32px; margin-bottom: 8px;">✍️</div>
+                        <p style="font-size: 14px; margin: 0;"><span data-zh="更多博客即将发布，敬请期待..." data-en="More blogs coming soon, stay tuned...">More blogs coming soon, stay tuned...</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- App Showcase -->
+    <section class="section" id="apps">
+        <div class="container">
+            <div class="section-header">
+                <h2>🖥️ <span data-zh="App 作品集" data-en="App Showcase">App Showcase</span></h2>
+                <p><span data-zh="用 Swift 打造的 macOS 原生应用，注重隐私、体验与细节" data-en="macOS native apps built with Swift — privacy-first, experience-driven, detail-obsessed">macOS native apps built with Swift — privacy-first, experience-driven, detail-obsessed</span></p>
+            </div>
+
+            <div class="app-grid">
+                <!-- VibeWhip -->
+                <a class="app-card vibewhip animate-in" href="VibeWhip/">
+                    <div class="app-icon-wrapper">⚡</div>
+                    <h3>VibeWhip</h3>
+                    <p class="app-tagline"><span data-zh="Vibe Coding 项目管理利器。Prompt 库、项目追踪、屏幕贴纸、IDE 切换、白板、沉浸模式，支持 40 种语言。" data-en="Vibe Coding project powerhouse. Prompt Library, Project Tracking, Stickers, IDE Switcher, Whip Board, Vibing Mode. 40 languages.">Vibe Coding project powerhouse. Prompt Library, Project Tracking, Stickers, IDE Switcher, Whip Board, Vibing Mode. 40 languages.</span></p>
+                    <div class="app-links">
+                        <span class="app-link"><span data-zh="首页" data-en="Home">Home</span></span>
+                    </div>
+                </a>
+
+                <!-- ClipVault -->
+                <a class="app-card clipvault animate-in" href="ClipVault/">
+                    <div class="app-icon-wrapper">📋</div>
+                    <h3>ClipVault</h3>
+                    <p class="app-tagline"><span data-zh="赛博朋克风智能剪贴板管理器。自动捕获剪贴板历史，内置截图与录屏，全局快捷键一键呼出。" data-en="Cyberpunk-style smart clipboard manager. Auto-capture history, built-in screenshots & recording, global hotkey.">Cyberpunk-style smart clipboard manager. Auto-capture history, built-in screenshots & recording, global hotkey.</span></p>
+                    <div class="app-links">
+                        <span class="app-link"><span data-zh="首页" data-en="Home">Home</span></span>
+                    </div>
+                </a>
+
+                <!-- DropShelf -->
+                <a class="app-card dropshelf animate-in" href="DropShelf/">
+                    <div class="app-icon-wrapper">📂</div>
+                    <h3>DropShelf</h3>
+                    <p class="app-tagline"><span data-zh="macOS 拖拽文件暂存架。浮动面板暂存文件，多架子管理，ZIP 压缩、重命名、图片转换、PDF 合并。" data-en="macOS drag & drop file shelf. Float panel to stash files, multi-shelf, ZIP, rename, image conversion, PDF merge.">macOS drag & drop file shelf. Float panel to stash files, multi-shelf, ZIP, rename, image conversion, PDF merge.</span></p>
+                    <div class="app-links">
+                        <span class="app-link"><span data-zh="首页" data-en="Home">Home</span></span>
+                    </div>
+                </a>
+
+                <!-- PicFlow -->
+                <a class="app-card picflow animate-in" href="PicFlow/">
+                    <div class="app-icon-wrapper">🖼️</div>
+                    <h3>PicFlow</h3>
+                    <p class="app-tagline"><span data-zh="精致的菜单栏图床工具。支持 GitHub、阿里云 OSS、腾讯云 COS，自动截图检测，拖拽上传，一键复制链接。" data-en="Refined menu bar image hosting. Supports GitHub, Alibaba Cloud OSS, Tencent COS. Auto screenshot detection, drag-to-upload, one-click link copy.">Refined menu bar image hosting. Supports GitHub, Alibaba Cloud OSS, Tencent COS. Auto screenshot detection, drag-to-upload, one-click link copy.</span></p>
+                    <div class="app-links">
+                        <span class="app-link"><span data-zh="首页" data-en="Home">Home</span></span>
+                    </div>
+                </a>
+
+                <!-- ClipToNotion -->
+                <a class="app-card cliptonotion animate-in" href="ClipToNotion/">
+                    <div class="app-icon-wrapper">📤</div>
+                    <h3>ClipToNotion</h3>
+                    <p class="app-tagline"><span data-zh="剪贴板一键发送到 Notion。轻量级菜单栏工具，全局快捷键将剪贴板内容发送到 Notion 页面。" data-en="One-click clipboard to Notion. Lightweight menu bar tool, global hotkey to send clipboard content to Notion pages.">One-click clipboard to Notion. Lightweight menu bar tool, global hotkey to send clipboard content to Notion pages.</span></p>
+                    <div class="app-links">
+                        <span class="app-link"><span data-zh="首页" data-en="Home">Home</span></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#blogs"><span data-zh="博客" data-en="Blogs">Blogs</span></a>
+                <a href="#apps"><span data-zh="应用" data-en="Apps">Apps</span></a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">Contact</span></a>
+            </div>
+            <p>© 2026 VibeWhip Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Language toggle
+    (function(){
+        var K='declaration_lang';
+        function gL(){return localStorage.getItem(K)||'en';}
+        function sL(l){localStorage.setItem(K,l);}
+        function apply(lang){
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');
+            });
+            document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
+            document.title=lang==='zh'?'VibeWhip — 开发者中心':'VibeWhip — Developer Hub';
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
+        }
+        document.addEventListener('DOMContentLoaded',function(){
+            var lang=gL();if(lang==='zh')apply('zh');
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});
+        });
+    })();
+
+    // Scroll animation
+    (function(){
+        var observer = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.animate-in').forEach(function(el){
+                observer.observe(el);
+            });
+        });
+    })();
+    </script>
+</body>
+</html>

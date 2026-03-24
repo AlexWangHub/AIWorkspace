@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeWhip — macOS Developer Productivity Tool</title>
-    <meta name="description" content="VibeWhip is a macOS project management tool built for Vibe Coding, combining Prompt Library, Project Management, Screen Stickers, and IDE Switcher in one app.">
+    <meta name="description" content="VibeWhip is a macOS project management tool built for Vibe Coding, combining Prompt Library, Project Management, Screen Stickers, IDE Switcher, Whip Board, Vibing Mode, Think Notes, and iCloud Sync in one app. Supports 40 languages.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -241,6 +241,7 @@
             justify-content: center;
             gap: 16px;
             position: relative;
+            flex-wrap: wrap;
         }
 
         .tag-item {
@@ -259,9 +260,11 @@
         }
 
         .tag-item:nth-child(1) { animation-delay: 0.1s; }
-        .tag-item:nth-child(2) { animation-delay: 0.3s; }
-        .tag-item:nth-child(3) { animation-delay: 0.5s; }
-        .tag-item:nth-child(4) { animation-delay: 0.7s; }
+        .tag-item:nth-child(2) { animation-delay: 0.25s; }
+        .tag-item:nth-child(3) { animation-delay: 0.4s; }
+        .tag-item:nth-child(4) { animation-delay: 0.55s; }
+        .tag-item:nth-child(5) { animation-delay: 0.7s; }
+        .tag-item:nth-child(6) { animation-delay: 0.85s; }
 
         .tag-item .icon { font-size: 18px; }
 
@@ -546,6 +549,9 @@
         .animate-in:nth-child(4) { animation-delay: 0.2s; }
         .animate-in:nth-child(5) { animation-delay: 0.25s; }
         .animate-in:nth-child(6) { animation-delay: 0.3s; }
+        .animate-in:nth-child(7) { animation-delay: 0.35s; }
+        .animate-in:nth-child(8) { animation-delay: 0.4s; }
+        .animate-in:nth-child(9) { animation-delay: 0.45s; }
 
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
@@ -611,7 +617,7 @@
             </h1>
             <p class="subtitle">
                 <span data-zh="一站式 Vibe Coding 工作台。" data-en="All-in-one Vibe Coding workstation.">All-in-one Vibe Coding workstation.</span><br>
-                <span data-zh="管理 Prompt、追踪项目、屏幕贴纸提醒、一键切换 IDE，让你的 AI 编程体验更高效。" data-en="Manage prompts, track projects, use stickers, switch IDEs — supercharge your AI coding experience.">Manage prompts, track projects, use stickers, switch IDEs — supercharge your AI coding experience.</span>
+                <span data-zh="管理 Prompt、追踪项目、屏幕贴纸、IDE 切换、Vibing 模式、Think Notes，配合 iCloud 同步，让你的 AI 编程体验全面升级。" data-en="Manage prompts, track projects, use stickers, switch IDEs, enter Vibing mode, capture Think Notes — all with iCloud sync for a supercharged AI coding experience.">Manage prompts, track projects, use stickers, switch IDEs, enter Vibing mode, capture Think Notes — all with iCloud sync for a supercharged AI coding experience.</span>
             </p>
 
             <a href="https://apps.apple.com/app/vibewhip" class="hero-cta">
@@ -622,9 +628,11 @@
 
             <div class="tagline-demo">
                 <span class="tag-item"><span class="icon">📝</span> <span data-zh="Prompt 库" data-en="Prompt Library">Prompt Library</span></span>
-                <span class="tag-item"><span class="icon">📁</span> <span data-zh="项目管理" data-en="Project Management">Project Management</span></span>
-                <span class="tag-item"><span class="icon">🗒️</span> <span data-zh="屏幕贴纸" data-en="Screen Stickers">Screen Stickers</span></span>
+                <span class="tag-item"><span class="icon">📁</span> <span data-zh="项目管理" data-en="Project Mgmt">Project Mgmt</span></span>
+                <span class="tag-item"><span class="icon">🗒️</span> <span data-zh="屏幕贴纸" data-en="Stickers">Stickers</span></span>
                 <span class="tag-item"><span class="icon">🔀</span> <span data-zh="IDE 切换" data-en="IDE Switch">IDE Switch</span></span>
+                <span class="tag-item"><span class="icon">🟣</span> <span data-zh="Vibing 模式" data-en="Vibing Mode">Vibing Mode</span></span>
+                <span class="tag-item"><span class="icon">💭</span> <span data-zh="Think Notes" data-en="Think Notes">Think Notes</span></span>
             </div>
         </div>
     </section>
@@ -641,37 +649,55 @@
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon purple">📚</div>
                     <h3><span data-zh="Prompt 库管理" data-en="Prompt Library Management">Prompt Library Management</span></h3>
-                    <p><span data-zh="按阶段分类管理你的 Prompt：项目前、周期性、项目后、技巧型 Prompt 和技巧技能。支持一键复制，随时调用最佳实践，告别混乱的提示词管理。" data-en="Categorize your prompts by phase: pre-project, periodic, post-project, tips & skills. One-click copy, access best practices anytime, and say goodbye to messy prompt management.">Categorize your prompts by phase: pre-project, periodic, post-project, tips & skills. One-click copy, access best practices anytime, and say goodbye to messy prompt management.</span></p>
+                    <p><span data-zh="按 6 大类别管理你的 Prompt：项目前、周期性、项目后、技巧型 Prompt、技巧技能和工具箱。支持图片粘贴、一键复制、复制即发送，工具箱类别可存储 URL 并自动显示域名。告别混乱的提示词管理。" data-en="Organize your prompts across 6 categories: Before Project, Periodic, After Project, Trick Prompt, Trick Skill, and Toolbox. Supports image paste, one-click copy, copy-on-send, and Toolbox URLs with auto domain display. Say goodbye to messy prompt management.">Organize your prompts across 6 categories: Before Project, Periodic, After Project, Trick Prompt, Trick Skill, and Toolbox. Supports image paste, one-click copy, copy-on-send, and Toolbox URLs with auto domain display. Say goodbye to messy prompt management.</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon blue">📋</div>
                     <h3><span data-zh="项目追踪" data-en="Project Tracking">Project Tracking</span></h3>
-                    <p><span data-zh="为每个 Vibe Coding 项目创建独立面板，追踪进度、管理 Todo、记录关键笔记。" data-en="Create a dedicated panel for each Vibe Coding project to track progress, manage todos, and record key notes.">Create a dedicated panel for each Vibe Coding project to track progress, manage todos, and record key notes.</span></p>
+                    <p><span data-zh="为每个 Vibe Coding 项目创建独立面板。支持颜色标签（6 种预设 + 自定义）、项目目录关联、归档/恢复、Focus 标记、Markdown 导出和拖拽排序。" data-en="Create a dedicated panel for each project. Supports color tags (6 presets + custom), project directory linking, archive/restore, Focus marking, Markdown export, and drag-to-sort.">Create a dedicated panel for each project. Supports color tags (6 presets + custom), project directory linking, archive/restore, Focus marking, Markdown export, and drag-to-sort.</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon green">🗒️</div>
                     <h3><span data-zh="屏幕贴纸" data-en="Screen Stickers">Screen Stickers</span></h3>
-                    <p><span data-zh="在屏幕上放置浮动贴纸，随时记录想法、固定重要提醒。支持置顶、拖拽、自由排列。" data-en="Place floating stickers on your screen to capture ideas and pin important reminders. Supports pinning, dragging, and free arrangement.">Place floating stickers on your screen to capture ideas and pin important reminders. Supports pinning, dragging, and free arrangement.</span></p>
+                    <p><span data-zh="浮动 NSPanel 贴纸：8 种预设 + 自定义颜色，WCAG 智能字体配色。支持置顶、拖拽、缩放、位置记忆，以及批量显示/隐藏/清除。" data-en="Floating NSPanel stickers: 8 presets + custom colors with WCAG-based smart font color. Pin, drag, resize with position persistence, plus batch show/hide/clear.">Floating NSPanel stickers: 8 presets + custom colors with WCAG-based smart font color. Pin, drag, resize with position persistence, plus batch show/hide/clear.</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon amber">🔀</div>
                     <h3><span data-zh="IDE 切换器" data-en="IDE Switcher">IDE Switcher</span></h3>
-                    <p><span data-zh="一键在多个 IDE 之间快速切换——Cursor、Windsurf、VS Code、Xcode 等，告别 ⌘Tab 的痛苦。" data-en="Quickly switch between multiple IDEs with one click — Cursor, Windsurf, VS Code, Xcode and more. No more ⌘Tab pain.">Quickly switch between multiple IDEs with one click — Cursor, Windsurf, VS Code, Xcode and more. No more ⌘Tab pain.</span></p>
+                    <p><span data-zh="浮动面板一键切换——Cursor、Windsurf、VS Code、Xcode 等 13+ 内置 IDE，还可添加自定义 IDE。面板支持边缘吸附和 Peek 模式，告别 ⌘Tab 痛苦。" data-en="Floating panel to switch between 13+ built-in IDEs (Cursor, Windsurf, VS Code, Xcode, etc.) plus custom IDEs. Edge-snap and Peek mode. No more ⌘Tab pain.">Floating panel to switch between 13+ built-in IDEs (Cursor, Windsurf, VS Code, Xcode, etc.) plus custom IDEs. Edge-snap and Peek mode. No more ⌘Tab pain.</span></p>
                 </div>
 
                 <div class="feature-card highlight animate-in">
                     <div class="feature-icon rose">🔥</div>
-                    <h3><span data-zh="WhipBoard 暴走模式" data-en="WhipBoard Rush Mode">WhipBoard Rush Mode</span></h3>
-                    <p><span data-zh="激发编程灵感的看板。把你的待办、想法、灵感全部扔进来，以视觉化的方式快速整理和推进。配合 Prompt 库和项目管理，打造完整的 Vibe Coding 工作流。" data-en="An inspiration board for coding. Toss in your todos, ideas, and inspirations, then visually organize and push forward. Combined with Prompt Library and Project Management for a complete Vibe Coding workflow.">An inspiration board for coding. Toss in your todos, ideas, and inspirations, then visually organize and push forward. Combined with Prompt Library and Project Management for a complete Vibe Coding workflow.</span></p>
+                    <h3><span data-zh="Whip Board 看板" data-en="Whip Board">Whip Board</span></h3>
+                    <p><span data-zh="为 Focus 标记的项目打造的看板视图。FlowLayout 自动换行，卡片宽度/高度可调，拖拽重排，每张卡片可直接输入 Todo。配合 Vibing 模式的发光效果，让你全身心投入编码。" data-en="A Kanban view for Focus-marked projects. FlowLayout auto-wrapping, adjustable card width/height, drag reorder, and per-card Todo input. Combined with Vibing mode glow effects for total immersion.">A Kanban view for Focus-marked projects. FlowLayout auto-wrapping, adjustable card width/height, drag reorder, and per-card Todo input. Combined with Vibing mode glow effects for total immersion.</span></p>
+                </div>
+
+                <div class="feature-card animate-in">
+                    <div class="feature-icon purple" style="background: rgba(168, 85, 247, 0.12);">🟣</div>
+                    <h3><span data-zh="Vibing 模式" data-en="Vibing Mode">Vibing Mode</span></h3>
+                    <p><span data-zh="为每个项目开启 Vibing 状态（⌘⇧P）。紫色动画横幅、侧边栏脉冲圆点、Whip Board 发光特效——让你感受心流编码的沉浸体验。" data-en="Activate Vibing state per project (⌘⇧P). Purple animated banner, sidebar pulse dot, Whip Board glow effects — immerse yourself in the flow of coding.">Activate Vibing state per project (⌘⇧P). Purple animated banner, sidebar pulse dot, Whip Board glow effects — immerse yourself in the flow of coding.</span></p>
+                </div>
+
+                <div class="feature-card animate-in">
+                    <div class="feature-icon cyan" style="background: rgba(96, 165, 250, 0.12);">💭</div>
+                    <h3><span data-zh="Think Notes" data-en="Think Notes">Think Notes</span></h3>
+                    <p><span data-zh="每个项目配备独立的富文本编辑器，自动保存你的思考笔记。随时记录灵感、决策和关键上下文，无需离开工作台。" data-en="Each project has its own rich text editor with auto-save for your thinking notes. Capture ideas, decisions, and key context without leaving your workspace.">Each project has its own rich text editor with auto-save for your thinking notes. Capture ideas, decisions, and key context without leaving your workspace.</span></p>
+                </div>
+
+                <div class="feature-card animate-in">
+                    <div class="feature-icon green" style="background: rgba(34, 197, 94, 0.12);">☁️</div>
+                    <h3><span data-zh="iCloud 同步" data-en="iCloud Sync">iCloud Sync</span></h3>
+                    <p><span data-zh="自动检测 iCloud 可用性，透明地在本地和 iCloud 之间切换。数据迁移无感知，JSON 持久化带防抖优化，多台 Mac 无缝衔接。" data-en="Auto-detects iCloud availability, transparently switching between local and iCloud storage. Seamless data migration, JSON persistence with debounce, syncing across all your Macs.">Auto-detects iCloud availability, transparently switching between local and iCloud storage. Seamless data migration, JSON persistence with debounce, syncing across all your Macs.</span></p>
                 </div>
 
                 <div class="feature-card animate-in">
                     <div class="feature-icon cyan">🌍</div>
-                    <h3><span data-zh="39 种语言" data-en="39 Languages">39 Languages</span></h3>
-                    <p><span data-zh="内置 39 种语言支持，自动跟随系统语言，也可手动切换，面向全球开发者。" data-en="Built-in support for 39 languages, automatically follows system language or can be manually switched. Made for developers worldwide.">Built-in support for 39 languages, automatically follows system language or can be manually switched. Made for developers worldwide.</span></p>
+                    <h3><span data-zh="40 种语言" data-en="40 Languages">40 Languages</span></h3>
+                    <p><span data-zh="内置 40 种语言/地区支持（含跟随系统选项），自动跟随系统语言，也可手动切换。7 页引导流程助你快速上手。面向全球开发者。" data-en="Built-in support for 40 language/region variants (including Follow System option). Auto-follows system language or switch manually. 7-page onboarding to get you started. Made for developers worldwide.">Built-in support for 40 language/region variants (including Follow System option). Auto-follows system language or switch manually. 7-page onboarding to get you started. Made for developers worldwide.</span></p>
                 </div>
             </div>
         </div>
@@ -690,21 +716,21 @@
                     <div class="flow-number">1</div>
                     <div class="flow-icon">📚</div>
                     <h4><span data-zh="构建 Prompt 库" data-en="Build Prompt Library">Build Prompt Library</span></h4>
-                    <p><span data-zh="把你的最佳 Prompt 按类别整理归档，随时一键复制调用" data-en="Organize your best prompts by category, one-click copy anytime">Organize your best prompts by category, one-click copy anytime</span></p>
+                    <p><span data-zh="把你的最佳 Prompt 按 6 大类别整理归档，支持图片粘贴和一键复制调用" data-en="Organize your best prompts across 6 categories with image paste and one-click copy">Organize your best prompts across 6 categories with image paste and one-click copy</span></p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
                     <div class="flow-icon">🚀</div>
                     <h4><span data-zh="创建项目" data-en="Create Project">Create Project</span></h4>
-                    <p><span data-zh="为每个 Vibe Coding 任务创建项目，追踪进度和 Todo" data-en="Create a project for each Vibe Coding task, track progress and todos">Create a project for each Vibe Coding task, track progress and todos</span></p>
+                    <p><span data-zh="为每个 Vibe Coding 任务创建项目，用 Todo、Think Notes 和颜色标签追踪进度" data-en="Create a project for each task, track progress with Todos, Think Notes, and color tags">Create a project for each task, track progress with Todos, Think Notes, and color tags</span></p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-number">3</div>
                     <div class="flow-icon">⚡</div>
-                    <h4><span data-zh="高效推进" data-en="Boost Efficiency">Boost Efficiency</span></h4>
-                    <p><span data-zh="贴纸提醒 + IDE 切换 + WhipBoard，全面提升编码效率" data-en="Sticker reminders + IDE switching + WhipBoard — boost your coding efficiency across the board">Sticker reminders + IDE switching + WhipBoard — boost your coding efficiency across the board</span></p>
+                    <h4><span data-zh="沉浸推进" data-en="Immerse & Ship">Immerse & Ship</span></h4>
+                    <p><span data-zh="开启 Vibing 模式 + Whip Board + IDE 切换 + 屏幕贴纸，全面沉浸，高效交付" data-en="Vibing mode + Whip Board + IDE Switch + Stickers — fully immerse and ship efficiently">Vibing mode + Whip Board + IDE Switch + Stickers — fully immerse and ship efficiently</span></p>
                 </div>
             </div>
         </div>

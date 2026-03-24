@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Worktree Complete Guide — VibeWhip Hub</title>
+    <meta name="description" content="Deep dive into Git Worktree: create multiple working directories in one repo, develop branches in parallel, save 55% disk space.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --surface: #141416;
+            --surface-hover: #1c1c20;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #8b5cf6;
+            --accent-soft: rgba(139, 92, 246, 0.12);
+            --accent-glow: rgba(139, 92, 246, 0.25);
+            --amber: #f59e0b;
+            --amber-soft: rgba(245, 158, 11, 0.12);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.12);
+            --blue: #3b82f6;
+            --blue-soft: rgba(59, 130, 246, 0.12);
+            --cyan: #06b6d4;
+            --cyan-soft: rgba(6, 182, 212, 0.12);
+            --rose: #f43f5e;
+            --rose-soft: rgba(244, 63, 94, 0.12);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .lang-toggle:hover {
+            background: var(--surface-hover);
+            border-color: #3f3f46;
+        }
+
+        .lang-toggle .globe { font-size: 14px; }
+
+        /* Article Layout */
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .article-header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-header .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .article-header .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .article-header h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Markdown-like content styles */
+        .content h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 48px 0 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.01em;
+        }
+
+        .content h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 32px 0 12px;
+            color: var(--text);
+        }
+
+        .content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 24px 0 8px;
+            color: var(--text-secondary);
+        }
+
+        .content p {
+            margin: 12px 0;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .content ul, .content ol {
+            margin: 12px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+
+        .content li {
+            margin: 6px 0;
+            line-height: 1.7;
+        }
+
+        .content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-size: 0.88em;
+            color: var(--amber);
+        }
+
+        .content pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 16px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .content pre .comment { color: var(--text-muted); }
+        .content pre .keyword { color: var(--accent); }
+        .content pre .string { color: var(--green); }
+        .content pre .cmd { color: var(--cyan); }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .content th {
+            background: var(--surface);
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .content td {
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .content .tip {
+            background: var(--accent-soft);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .content .tip strong { color: var(--accent); }
+
+        .content .warning {
+            background: var(--amber-soft);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .content .warning strong { color: var(--amber); }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text); }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .article { padding: 40px 16px 60px; }
+            .content pre { padding: 16px; }
+            .content h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">🚀</div>
+                <span class="logo-text">VibeWhip Hub</span>
+            </a>
+            <a href="../index.html" class="back-link">← <span data-zh="返回首页" data-en="Back to Home">Back to Home</span></a>
+            <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                <span class="globe">🌐</span>
+                <span class="lang-label">中文</span>
+            </button>
+        </div>
+    </header>
+
+    <article class="article">
+        <div class="article-header">
+            <div class="tags">
+                <span class="tag" style="background: var(--amber-soft); color: var(--amber);">Git</span>
+                <span class="tag" style="background: var(--green-soft); color: var(--green);">DevOps</span>
+                <span class="tag" style="background: var(--blue-soft); color: var(--blue);"><span data-zh="效率提升" data-en="Productivity">Productivity</span></span>
+            </div>
+            <h1><span data-zh="Git Worktree 完全指南" data-en="Git Worktree Complete Guide">Git Worktree Complete Guide</span></h1>
+            <div class="article-meta">
+                <span>📅 2026-03-24</span>
+                <span>⏱ <span data-zh="约 10 分钟" data-en="~10 min read">~10 min read</span></span>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>📖 <span data-zh="什么是 Git Worktree？" data-en="What is Git Worktree?">What is Git Worktree?</span></h2>
+            <p><span data-zh="Git Worktree 是 Git 的一个功能，允许你在同一个仓库中创建多个工作目录（工作树），每个工作树可以指向不同的分支或提交。" data-en="Git Worktree is a Git feature that lets you create multiple working directories (worktrees) in the same repository, each pointing to a different branch or commit.">Git Worktree is a Git feature that lets you create multiple working directories (worktrees) in the same repository, each pointing to a different branch or commit.</span></p>
+
+            <h3>🔍 <span data-zh="核心概念" data-en="Core Concepts">Core Concepts</span></h3>
+            <ul>
+                <li><strong><span data-zh="主工作树" data-en="Main Worktree">Main Worktree</span></strong>：<span data-zh="原始的 git 仓库目录" data-en="The original git repository directory">The original git repository directory</span></li>
+                <li><strong><span data-zh="附加工作树" data-en="Linked Worktree">Linked Worktree</span></strong>：<span data-zh="从主工作树派生的额外工作目录" data-en="Additional working directories derived from the main worktree">Additional working directories derived from the main worktree</span></li>
+                <li><strong><span data-zh="共享 .git 目录" data-en="Shared .git Directory">Shared .git Directory</span></strong>：<span data-zh="所有工作树共享同一个 .git 目录" data-en="All worktrees share the same .git directory">All worktrees share the same .git directory</span></li>
+            </ul>
+
+            <h2>🎯 <span data-zh="为什么使用 Worktree？" data-en="Why Use Worktree?">Why Use Worktree?</span></h2>
+
+            <h3>✅ <span data-zh="优势" data-en="Advantages">Advantages</span></h3>
+            <ol>
+                <li><strong><span data-zh="节省磁盘空间" data-en="Save Disk Space">Save Disk Space</span></strong> — <span data-zh="多个分支共享 .git 目录，避免重复存储" data-en="Multiple branches share .git directory, avoiding duplicate storage">Multiple branches share .git directory, avoiding duplicate storage</span></li>
+                <li><strong><span data-zh="并行开发" data-en="Parallel Development">Parallel Development</span></strong> — <span data-zh="同时在不同分支上工作，无需切换" data-en="Work on different branches simultaneously, no switching needed">Work on different branches simultaneously, no switching needed</span></li>
+                <li><strong><span data-zh="避免状态污染" data-en="Avoid State Pollution">Avoid State Pollution</span></strong> — <span data-zh="每个工作树有独立的工作状态" data-en="Each worktree has independent working state">Each worktree has independent working state</span></li>
+                <li><strong><span data-zh="提高效率" data-en="Boost Efficiency">Boost Efficiency</span></strong> — <span data-zh="无需频繁切换分支和重新构建" data-en="No frequent branch switching or rebuilding needed">No frequent branch switching or rebuilding needed</span></li>
+            </ol>
+
+            <h3>📊 <span data-zh="磁盘空间对比" data-en="Disk Space Comparison">Disk Space Comparison</span></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><span data-zh="场景" data-en="Scenario">Scenario</span></th>
+                        <th><span data-zh="传统方式" data-en="Traditional">Traditional</span></th>
+                        <th><span data-zh="Worktree 方式" data-en="Worktree">Worktree</span></th>
+                        <th><span data-zh="节省" data-en="Saved">Saved</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span data-zh="3 个分支" data-en="3 branches">3 branches</span></td><td>300GB</td><td>150GB</td><td>50%</td></tr>
+                    <tr><td><span data-zh="5 个分支" data-en="5 branches">5 branches</span></td><td>500GB</td><td>180GB</td><td>64%</td></tr>
+                </tbody>
+            </table>
+
+            <h2>🛠️ <span data-zh="基本操作" data-en="Basic Operations">Basic Operations</span></h2>
+
+            <h3>1. <span data-zh="创建 Worktree" data-en="Create Worktree">Create Worktree</span></h3>
+            <pre><code><span class="comment"># <span data-zh="为现有分支创建 worktree" data-en="Create worktree for existing branch">Create worktree for existing branch</span></span>
+<span class="cmd">git worktree add</span> &lt;path&gt; &lt;branch-name&gt;
+
+<span class="comment"># <span data-zh="为新分支创建 worktree" data-en="Create worktree for new branch">Create worktree for new branch</span></span>
+<span class="cmd">git worktree add</span> -b &lt;new-branch&gt; &lt;path&gt; &lt;start-point&gt;
+
+<span class="comment"># <span data-zh="为特定提交创建 worktree" data-en="Create worktree for specific commit">Create worktree for specific commit</span></span>
+<span class="cmd">git worktree add</span> &lt;path&gt; &lt;commit-hash&gt;</code></pre>
+
+            <h3>2. <span data-zh="查看 Worktree 列表" data-en="List Worktrees">List Worktrees</span></h3>
+            <pre><code><span class="cmd">git worktree list</span></code></pre>
+
+            <h3>3. <span data-zh="删除 Worktree" data-en="Remove Worktree">Remove Worktree</span></h3>
+            <pre><code><span class="comment"># <span data-zh="安全删除" data-en="Safe removal">Safe removal</span></span>
+<span class="cmd">git worktree remove</span> &lt;path&gt;
+
+<span class="comment"># <span data-zh="强制删除（有未提交修改时）" data-en="Force removal (when uncommitted changes exist)">Force removal (when uncommitted changes exist)</span></span>
+<span class="cmd">git worktree remove</span> --force &lt;path&gt;</code></pre>
+
+            <h3>4. <span data-zh="移动 Worktree" data-en="Move Worktree">Move Worktree</span></h3>
+            <pre><code><span class="cmd">git worktree move</span> &lt;old-path&gt; &lt;new-path&gt;</code></pre>
+
+            <h2>📋 <span data-zh="实际用例" data-en="Practical Examples">Practical Examples</span></h2>
+
+            <h3><span data-zh="场景 1：并行开发多个功能" data-en="Case 1: Parallel Feature Development">Case 1: Parallel Feature Development</span></h3>
+            <pre><code><span class="comment"># <span data-zh="主工作树：开发主干功能" data-en="Main worktree: develop trunk features">Main worktree: develop trunk features</span></span>
+<span class="cmd">cd</span> /project/main
+
+<span class="comment"># <span data-zh="创建 feature1 的 worktree" data-en="Create worktree for feature1">Create worktree for feature1</span></span>
+<span class="cmd">git worktree add</span> ../feature1 feature/login-redesign
+
+<span class="comment"># <span data-zh="创建 feature2 的 worktree" data-en="Create worktree for feature2">Create worktree for feature2</span></span>
+<span class="cmd">git worktree add</span> ../feature2 feature/payment-integration
+
+<span class="comment"># <span data-zh="现在可以同时开发三个功能！" data-en="Now you can work on three features simultaneously!">Now you can work on three features simultaneously!</span></span></code></pre>
+
+            <h3><span data-zh="场景 2：修复生产环境 Bug" data-en="Case 2: Fix Production Bug">Case 2: Fix Production Bug</span></h3>
+            <pre><code><span class="comment"># <span data-zh="主工作树：继续新功能开发" data-en="Main worktree: continue new feature dev">Main worktree: continue new feature dev</span></span>
+<span class="cmd">cd</span> /project/main
+
+<span class="comment"># <span data-zh="为生产分支创建 worktree" data-en="Create worktree for production branch">Create worktree for production branch</span></span>
+<span class="cmd">git worktree add</span> ../hotfix production
+
+<span class="comment"># <span data-zh="在 hotfix 目录修复 bug，不影响主开发" data-en="Fix bug in hotfix directory, no impact on main dev">Fix bug in hotfix directory, no impact on main dev</span></span>
+<span class="cmd">cd</span> ../hotfix</code></pre>
+
+            <h3><span data-zh="场景 3：代码审查和测试" data-en="Case 3: Code Review & Testing">Case 3: Code Review & Testing</span></h3>
+            <pre><code><span class="comment"># <span data-zh="为 PR 分支创建 worktree 进行测试" data-en="Create worktree for PR branch testing">Create worktree for PR branch testing</span></span>
+<span class="cmd">git worktree add</span> ../pr-test pr/feature-new-api
+
+<span class="comment"># <span data-zh="测试完成后删除" data-en="Remove after testing">Remove after testing</span></span>
+<span class="cmd">git worktree remove</span> ../pr-test</code></pre>
+
+            <h2>⚠️ <span data-zh="注意事项" data-en="Important Notes">Important Notes</span></h2>
+
+            <div class="warning">
+                <strong>⚠️ <span data-zh="文件系统限制" data-en="Filesystem Limitations">Filesystem Limitations</span></strong>
+                <ul style="margin-top: 8px;">
+                    <li><span data-zh="Worktree 不能嵌套创建" data-en="Worktrees cannot be nested">Worktrees cannot be nested</span></li>
+                    <li><span data-zh="所有 worktree 必须在同一文件系统上" data-en="All worktrees must be on the same filesystem">All worktrees must be on the same filesystem</span></li>
+                    <li><span data-zh="路径不能是主工作树的子目录" data-en="Path cannot be a subdirectory of the main worktree">Path cannot be a subdirectory of the main worktree</span></li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ <span data-zh="分支管理" data-en="Branch Management">Branch Management</span></strong>
+                <ul style="margin-top: 8px;">
+                    <li><span data-zh="不同 worktree 可以指向同一分支，但要小心冲突" data-en="Different worktrees can point to the same branch, but watch for conflicts">Different worktrees can point to the same branch, but watch for conflicts</span></li>
+                    <li><span data-zh="删除分支前确保没有 worktree 在使用该分支" data-en="Ensure no worktree is using a branch before deleting it">Ensure no worktree is using a branch before deleting it</span></li>
+                </ul>
+            </div>
+
+            <h2>🔧 <span data-zh="高级技巧" data-en="Advanced Tips">Advanced Tips</span></h2>
+
+            <h3>1. <span data-zh="自动化脚本" data-en="Automation Script">Automation Script</span></h3>
+            <pre><code><span class="comment">#!/bin/bash</span>
+<span class="comment"># <span data-zh="创建开发环境脚本" data-en="Create dev environment script">Create dev environment script</span></span>
+create_dev_environment() {
+    <span class="keyword">local</span> repo_path=$1
+    <span class="keyword">local</span> branches=(<span class="string">"${@:2}"</span>)
+
+    <span class="keyword">for</span> branch <span class="keyword">in</span> <span class="string">"${branches[@]}"</span>; <span class="keyword">do</span>
+        <span class="keyword">local</span> worktree_path=<span class="string">"../${branch}-worktree"</span>
+        echo <span class="string">"Creating $branch worktree..."</span>
+        <span class="cmd">git worktree add</span> <span class="string">"$worktree_path"</span> <span class="string">"$branch"</span>
+    <span class="keyword">done</span>
+}</code></pre>
+
+            <h3>2. <span data-zh="IDE 配置建议" data-en="IDE Configuration">IDE Configuration</span></h3>
+            <ul>
+                <li><strong>VSCode</strong>：<span data-zh="为每个 worktree 打开独立窗口" data-en="Open a separate window for each worktree">Open a separate window for each worktree</span></li>
+                <li><strong>IntelliJ</strong>：<span data-zh="每个 worktree 作为独立项目打开" data-en="Open each worktree as an independent project">Open each worktree as an independent project</span></li>
+            </ul>
+
+            <h3>3. CI/CD <span data-zh="集成" data-en="Integration">Integration</span></h3>
+            <pre><code><span class="comment"># GitHub Actions <span data-zh="示例" data-en="example">example</span></span>
+<span class="keyword">jobs</span>:
+  test-worktrees:
+    <span class="keyword">runs-on</span>: ubuntu-latest
+    <span class="keyword">steps</span>:
+      - <span class="keyword">uses</span>: actions/checkout@v3
+        <span class="keyword">with</span>:
+          <span class="keyword">fetch-depth</span>: 0
+      - <span class="keyword">name</span>: Create worktrees for testing
+        <span class="keyword">run</span>: |
+          <span class="cmd">git worktree add</span> ../feature-a feature/login
+          <span class="cmd">git worktree add</span> ../feature-b feature/payment</code></pre>
+
+            <h2>💡 <span data-zh="实战案例：你的项目改造" data-en="Real Case: Project Transformation">Real Case: Project Transformation</span></h2>
+
+            <h3><span data-zh="改造前" data-en="Before">Before</span></h3>
+            <pre><code><span data-zh="桌面" data-en="Desktop">Desktop</span>/
+├── A-trunk/    (128GB)
+├── A-patch/    (97GB)
+└── A-Agent/    (99GB)
+<span data-zh="总占用：324GB" data-en="Total: 324GB">Total: 324GB</span></code></pre>
+
+            <h3><span data-zh="改造后" data-en="After">After</span></h3>
+            <pre><code><span data-zh="桌面" data-en="Desktop">Desktop</span>/
+├── A-trunk/           (128GB) - <span data-zh="主工作树" data-en="Main worktree">Main worktree</span>
+├── A-patch-worktree/  (8.8GB) - worktree
+└── A-Agent-worktree/  (8.8GB) - worktree
+<span data-zh="总占用：145.6GB" data-en="Total: 145.6GB">Total: 145.6GB</span>
+<span data-zh="节省：178GB (55%)" data-en="Saved: 178GB (55%)">Saved: 178GB (55%)</span> 🎉</code></pre>
+
+            <div class="tip">
+                <strong>💡 <span data-zh="小贴士" data-en="Tip">Tip</span></strong>：<span data-zh="对于大型项目（>100GB），Worktree 的磁盘节省效果尤为显著，因为所有分支共享同一个 .git 目录和对象库。" data-en="For large projects (>100GB), Worktree's disk savings are especially significant since all branches share the same .git directory and object store.">For large projects (>100GB), Worktree's disk savings are especially significant since all branches share the same .git directory and object store.</span>
+            </div>
+
+            <h2>📈 <span data-zh="最佳实践" data-en="Best Practices">Best Practices</span></h2>
+
+            <h3>1. <span data-zh="命名规范" data-en="Naming Convention">Naming Convention</span></h3>
+            <pre><code><span class="comment"># ✅ <span data-zh="好的命名" data-en="Good naming">Good naming</span></span>
+../feature-login-redesign
+../hotfix-production-issue
+../release-1.3.0
+
+<span class="comment"># ❌ <span data-zh="避免的命名" data-en="Avoid these">Avoid these</span></span>
+../worktree1
+../temp
+../test</code></pre>
+
+            <h3>2. <span data-zh="推荐目录结构" data-en="Recommended Directory Structure">Recommended Directory Structure</span></h3>
+            <pre><code>project/
+├── main/           <span class="comment"># <span data-zh="主工作树" data-en="Main worktree">Main worktree</span></span>
+├── feature-auth/   <span class="comment"># <span data-zh="功能分支 worktree" data-en="Feature branch worktree">Feature branch worktree</span></span>
+├── hotfix-bug/     <span class="comment"># <span data-zh="热修复 worktree" data-en="Hotfix worktree">Hotfix worktree</span></span>
+└── release-1.2/    <span class="comment"># <span data-zh="发布分支 worktree" data-en="Release branch worktree">Release branch worktree</span></span></code></pre>
+
+            <h3>3. <span data-zh="常用命令速查" data-en="Quick Reference">Quick Reference</span></h3>
+            <pre><code><span class="comment"># <span data-zh="查看帮助" data-en="View help">View help</span></span>
+<span class="cmd">git worktree</span> --help
+
+<span class="comment"># <span data-zh="详细列表" data-en="Verbose list">Verbose list</span></span>
+<span class="cmd">git worktree list</span> --verbose
+
+<span class="comment"># <span data-zh="定期清理不需要的 worktree" data-en="Periodically clean unused worktrees">Periodically clean unused worktrees</span></span>
+<span class="cmd">git worktree list</span> | grep -v <span class="string">"main"</span> | awk <span class="string">'{print $1}'</span> | xargs -I {} <span class="cmd">git worktree remove</span> {}</code></pre>
+
+            <div class="tip">
+                <strong>🎓 <span data-zh="总结" data-en="Summary">Summary</span></strong>：<span data-zh="Git Worktree 是管理多分支开发的强大工具，特别适合大型项目和多任务并行开发场景。通过合理使用，可以显著提高开发效率和节省磁盘空间。" data-en="Git Worktree is a powerful tool for multi-branch development, especially suited for large projects and parallel multitasking. Used wisely, it significantly boosts efficiency and saves disk space.">Git Worktree is a powerful tool for multi-branch development, especially suited for large projects and parallel multitasking. Used wisely, it significantly boosts efficiency and saves disk space.</span>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html"><span data-zh="首页" data-en="Home">Home</span></a>
+                <a href="../index.html#blogs"><span data-zh="博客" data-en="Blogs">Blogs</span></a>
+                <a href="../index.html#apps"><span data-zh="应用" data-en="Apps">Apps</span></a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">Contact</span></a>
+            </div>
+            <p>© 2026 VibeWhip Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function(){
+        var K='declaration_lang';
+        function gL(){return localStorage.getItem(K)||'en';}
+        function sL(l){localStorage.setItem(K,l);}
+        function apply(lang){
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');
+            });
+            document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
+            document.title=lang==='zh'?'Git Worktree 完全指南 — VibeWhip Hub':'Git Worktree Complete Guide — VibeWhip Hub';
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
+        }
+        document.addEventListener('DOMContentLoaded',function(){
+            var lang=gL();if(lang==='zh')apply('zh');
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});
+        });
+    })();
+    </script>
+</body>
+</html>
