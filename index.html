@@ -526,6 +526,312 @@
             cursor: pointer;
         }
 
+        /* Hero CTA */
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .cta-btn.primary {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(255, 107, 53, 0.35);
+        }
+        .cta-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 36px rgba(255, 107, 53, 0.5);
+        }
+        .cta-btn.secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .cta-btn.secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+        }
+
+        /* Section CTA Banner — 每个模块底部的引导条 */
+        .section-cta {
+            margin-top: 28px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(247, 147, 30, 0.08));
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+        .section-cta:hover {
+            border-color: rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.12), rgba(247, 147, 30, 0.12));
+        }
+        .section-cta-text { flex: 1; }
+        .section-cta-text .cta-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .section-cta-text .cta-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .section-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .section-cta-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* 知识星球专区 */
+        .xq-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--bg) 0%, rgba(255, 107, 53, 0.04) 50%, var(--bg) 100%);
+        }
+        .xq-section-inner {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .xq-section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+        .xq-section h2 {
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .xq-section .xq-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+        .xq-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 36px;
+            text-align: left;
+        }
+        .xq-benefit {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+        .xq-benefit:hover {
+            border-color: rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+        .xq-benefit .benefit-icon { font-size: 22px; margin-bottom: 8px; }
+        .xq-benefit .benefit-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .xq-benefit .benefit-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+        .xq-qr-wrap {
+            display: inline-block;
+            background: var(--surface);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.15);
+            transition: all 0.3s;
+        }
+        .xq-qr-wrap:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 16px 56px rgba(255, 107, 53, 0.25);
+            transform: translateY(-3px);
+        }
+        .xq-qr-wrap img { width: 220px; border-radius: 12px; }
+        .xq-scan-tip {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .xq-scan-tip strong { color: #ff6b35; }
+
+        /* 升级版浮窗 */
+        .xq-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .xq-float:hover { transform: scale(1.05); }
+        .xq-float-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.35);
+            position: relative;
+            animation: float-pulse 3s ease-in-out infinite;
+        }
+        @keyframes float-pulse {
+            0%,100% { box-shadow: 0 8px 30px rgba(255, 107, 53, 0.35); }
+            50% { box-shadow: 0 8px 40px rgba(255, 107, 53, 0.55); }
+        }
+        .xq-float-btn img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+        }
+        .xq-float-label {
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 600;
+            color: #ff6b35;
+            white-space: nowrap;
+            background: var(--surface);
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        /* 浮窗呼吸提示点 */
+        .xq-float-dot {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ef4444;
+            border: 2px solid var(--bg);
+            animation: dot-breathe 2s ease-in-out infinite;
+        }
+        @keyframes dot-breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
+
+        /* 升级版弹窗 */
+        .xq-popup {
+            display: none;
+            position: fixed;
+            bottom: 104px;
+            right: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+            z-index: 1000;
+            text-align: center;
+            width: 300px;
+        }
+        .xq-popup.show { display: block; animation: popup-in 0.3s ease-out; }
+        @keyframes popup-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        .xq-popup img {
+            width: 200px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+        }
+        .xq-popup .popup-title {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .xq-popup .popup-benefits {
+            text-align: left;
+            margin-bottom: 12px;
+        }
+        .xq-popup .popup-benefit-item {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .xq-popup .popup-benefit-item .check { color: #ff6b35; font-weight: 700; }
+        .xq-popup p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .xq-popup .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .xq-popup .close-btn:hover { color: var(--text); }
+
+        /* Footer 升级 */
+        .footer-xq {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-xq a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ff6b35;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .footer-xq a:hover { color: #f7931e; }
+
         /* Animations */
         .animate-in {
             opacity: 0;
@@ -538,6 +844,8 @@
         @media (max-width: 768px) {
             .hero { padding: 50px 0 30px; }
             .hero h1 { font-size: 28px; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .cta-btn { width: 100%; max-width: 280px; justify-content: center; }
             .section { padding: 40px 0; }
             .section-header h2 { font-size: 22px; }
             .app-grid { grid-template-columns: repeat(2, 1fr); }
@@ -545,12 +853,19 @@
             .news-card, .paper-card { padding: 20px; }
             .article-card { flex-direction: column; gap: 12px; }
             .article-arrow { display: none; }
+            .section-cta { flex-direction: column; text-align: center; }
+            .section-cta-btn { width: 100%; }
+            .xq-benefits { grid-template-columns: repeat(2, 1fr); }
+            .xq-section { padding: 60px 0; }
         }
         @media (max-width: 480px) {
             .header-inner { padding: 0 16px; }
             .container { padding: 0 16px; }
             .app-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             .app-card { padding: 16px 12px; }
+            .xq-benefits { grid-template-columns: 1fr; }
+            .xq-qr-wrap img { width: 180px; }
+            .xq-popup { right: 12px; bottom: 100px; width: calc(100vw - 24px); }
         }
     </style>
 </head>
@@ -562,10 +877,11 @@
                 <span class="logo-text">VibeWhip <span class="gradient">AI 进击场</span></span>
             </a>
             <nav class="nav-links">
-                <a href="#apps" class="active">应用</a>
+                <a href="#apps">应用</a>
                 <a href="#ai-news">AI快讯</a>
                 <a href="#ai-papers">AI论文</a>
                 <a href="#articles">文章</a>
+                <a href="#xq-zone" style="color: #ff6b35; font-weight: 600;">🌟 星球</a>
             </nav>
             <div class="page-views">
                 👁️ <span id="pageViews">--</span> 次浏览
@@ -588,6 +904,10 @@
                 macOS 精品应用下载 · 每日 AI 快讯 · 前沿论文速递 · 技术深度文章<br>
                 一个独立开发者的 AI 信息阵地
             </p>
+            <div class="hero-cta">
+                <button class="cta-btn primary" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">🌟 加入知识星球</button>
+                <a class="cta-btn secondary" href="#apps">🖥️ 浏览免费应用</a>
+            </div>
         </div>
     </section>
 
@@ -646,6 +966,14 @@
                     <div class="download-count">📊 <span id="dl-ClipToNotion">0</span> 次下载</div>
                     <a href="ClipToNotion/" class="app-detail-link">查看详情 →</a>
                 </div>
+            </div>
+            <!-- 引导条 -->
+            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                <div class="section-cta-text">
+                    <div class="cta-title">🔥 想获取更多独家工具 & 内测资格？</div>
+                    <div class="cta-desc">加入知识星球，第一时间获取新 App 内测、独家效率工具包、开发幕后分享</div>
+                </div>
+                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">加入星球 →</button>
             </div>
         </div>
     </section>
@@ -747,6 +1075,14 @@
                 </div>
 
             </div>
+            <!-- 引导条 -->
+            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                <div class="section-cta-text">
+                    <div class="cta-title">💡 每条快讯都有深度解读版</div>
+                    <div class="cta-desc">星球内提供完整分析、技术拆解、实操建议，帮你把信息差变成竞争力</div>
+                </div>
+                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">查看深度版 →</button>
+            </div>
         </div>
     </section>
 
@@ -817,6 +1153,14 @@
                 </div>
 
             </div>
+            <!-- 引导条 -->
+            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                <div class="section-cta-text">
+                    <div class="cta-title">📖 论文精读 & 代码复现笔记</div>
+                    <div class="cta-desc">星球内提供逐段精读、核心代码复现、落地实践指南，让你真正读懂前沿论文</div>
+                </div>
+                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">获取精读 →</button>
+            </div>
         </div>
     </section>
 
@@ -853,6 +1197,66 @@
                     </div>
                 </div>
             </div>
+            <!-- 引导条 -->
+            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                <div class="section-cta-text">
+                    <div class="cta-title">✍️ 更多独家深度文章</div>
+                    <div class="cta-desc">星球内持续更新 AI 实战、独立开发、效率方法论等独家内容</div>
+                </div>
+                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">解锁全部 →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ★★★ 知识星球专区 — 核心转化区 ★★★ -->
+    <section class="xq-section" id="xq-zone">
+        <div class="container">
+            <div class="xq-section-inner animate-in">
+                <div class="xq-section-badge">
+                    🌟 核心社区
+                </div>
+                <h2>加入 <span class="gradient">VibeWhip 知识星球</span></h2>
+                <p class="xq-subtitle">
+                    这里不只是信息聚合，而是一个<strong style="color:var(--text);">可以互动的 AI 前哨站</strong>。<br>
+                    每天精选内容只是冰山一角，星球内有更多你在别处找不到的东西。
+                </p>
+                <div class="xq-benefits">
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-title">AI 快讯深度版</div>
+                        <div class="benefit-desc">不只是快讯，还有完整技术拆解和实操建议</div>
+                    </div>
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">📄</div>
+                        <div class="benefit-title">论文逐段精读</div>
+                        <div class="benefit-desc">核心论文精读笔记 + 代码复现 + 落地指南</div>
+                    </div>
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">🖥️</div>
+                        <div class="benefit-title">App 内测资格</div>
+                        <div class="benefit-desc">第一时间获取新 App 内测版、Bug 反馈直通车</div>
+                    </div>
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">🧰</div>
+                        <div class="benefit-title">独家工具包</div>
+                        <div class="benefit-desc">Prompt 模板、效率工作流、开发资源合集</div>
+                    </div>
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">💬</div>
+                        <div class="benefit-title">1v1 提问</div>
+                        <div class="benefit-desc">直接向作者提问，AI 开发、独立开发经验交流</div>
+                    </div>
+                    <div class="xq-benefit">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-title">开发幕后</div>
+                        <div class="benefit-desc">App 设计决策、踩坑记录、商业化复盘</div>
+                    </div>
+                </div>
+                <div class="xq-qr-wrap">
+                    <img src="assets/zhishixingqiu.jpg" alt="VibeWhip 知识星球二维码">
+                </div>
+                <p class="xq-scan-tip">📱 <strong>微信扫码</strong>即可加入 · 限时早鸟价</p>
+            </div>
         </div>
     </section>
 
@@ -864,23 +1268,34 @@
                 <a href="#ai-news">AI快讯</a>
                 <a href="#ai-papers">AI论文</a>
                 <a href="#articles">文章</a>
+                <a href="#xq-zone" style="color: #ff6b35;">🌟 知识星球</a>
             </div>
-            <p>© 2026 VibeWhip AI 进击场. All rights reserved.</p>
+            <div class="footer-xq">
+                <a href="#xq-zone">🌟 加入知识星球，获取独家 AI 深度内容 →</a>
+            </div>
+            <p style="margin-top: 12px;">© 2026 VibeWhip AI 进击场. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- 知识星球浮窗 -->
+    <!-- 知识星球浮窗（升级版） -->
     <div class="xq-float" id="xqFloat" onclick="toggleXQPopup()">
         <div class="xq-float-btn">
             <img src="assets/zhishixingqiu.jpg" alt="知识星球">
+            <span class="xq-float-dot"></span>
         </div>
         <span class="xq-float-label">加入星球</span>
     </div>
     <div class="xq-popup" id="xqPopup">
         <button class="close-btn" onclick="toggleXQPopup()">✕</button>
         <img src="assets/zhishixingqiu.jpg" alt="知识星球二维码">
-        <p><strong>加入 VibeWhip 知识星球</strong></p>
-        <p style="font-size: 12px; color: var(--text-muted);">获取更多独家内容、工具推荐和技术交流</p>
+        <div class="popup-title">加入 VibeWhip 知识星球</div>
+        <div class="popup-benefits">
+            <div class="popup-benefit-item"><span class="check">✓</span> AI 快讯深度版 + 实操建议</div>
+            <div class="popup-benefit-item"><span class="check">✓</span> 论文精读 + 代码复现笔记</div>
+            <div class="popup-benefit-item"><span class="check">✓</span> 新 App 内测资格 + 独家工具包</div>
+            <div class="popup-benefit-item"><span class="check">✓</span> 1v1 提问 · 直接交流</div>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted);">📱 微信扫码即可加入</p>
     </div>
 
     <script>
@@ -920,6 +1335,8 @@
     function toggleXQPopup() {
         var popup = document.getElementById('xqPopup');
         popup.classList.toggle('show');
+        // 标记已交互过，不再自动弹
+        sessionStorage.setItem('xq_interacted', '1');
     }
 
     // 点击外部关闭
@@ -930,6 +1347,20 @@
             popup.classList.remove('show');
         }
     });
+
+    // 首次访问 8 秒后自动弹出一次（每次会话仅一次）
+    (function(){
+        if (!sessionStorage.getItem('xq_interacted')) {
+            setTimeout(function(){
+                if (!sessionStorage.getItem('xq_interacted')) {
+                    var popup = document.getElementById('xqPopup');
+                    if (popup && !popup.classList.contains('show')) {
+                        popup.classList.add('show');
+                    }
+                }
+            }, 8000);
+        }
+    })();
 
     // ===== 滚动动画 =====
     (function(){
