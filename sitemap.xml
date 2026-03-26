@@ -3,116 +3,116 @@
   <!-- Homepage -->
   <url>
     <loc>https://vibewhip.com/</loc>
-    <lastmod>2025-03-24</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Blogs -->
+  <!-- VibeWhip App Pages -->
   <url>
-    <loc>https://vibewhip.com/blogs/git-worktree-tutorial.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <loc>https://vibewhip.com/VibeWhip/</loc>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- VibeWhip -->
-  <url>
-    <loc>https://vibewhip.com/VibeWhip/</loc>
-    <lastmod>2025-03-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
   <url>
     <loc>https://vibewhip.com/VibeWhip/privacy.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/VibeWhip/support.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- ClipVault -->
+  <!-- ClipVault App Pages -->
   <url>
     <loc>https://vibewhip.com/ClipVault/</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/ClipVault/privacy.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/ClipVault/support.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- DropShelf -->
+  <!-- DropShelf App Pages -->
   <url>
     <loc>https://vibewhip.com/DropShelf/</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/DropShelf/privacy.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/DropShelf/support.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- PicFlow -->
+  <!-- PicFlow App Pages -->
   <url>
     <loc>https://vibewhip.com/PicFlow/</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/PicFlow/privacy.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/PicFlow/support.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- ClipToNotion -->
+  <!-- ClipToNotion App Pages -->
   <url>
     <loc>https://vibewhip.com/ClipToNotion/</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/ClipToNotion/privacy.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://vibewhip.com/ClipToNotion/support.html</loc>
-    <lastmod>2025-03-24</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+
+  <!-- Blog / Articles -->
+  <url>
+    <loc>https://vibewhip.com/blogs/git-worktree-tutorial.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
