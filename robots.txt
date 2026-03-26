@@ -1,3 +1,6 @@
+# Sitemap
+Sitemap: https://vibewhip.com/sitemap.xml
+
 # === 允许主流搜索引擎 ===
 User-agent: Googlebot
 Allow: /
