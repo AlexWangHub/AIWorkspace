@@ -69,7 +69,7 @@ Logo 源文件：`/Users/blibli/Desktop/AIWorkspace/Workflow/main_logo.png`
 
 ## 注意事项
 
-- 浏览量和下载量目前用 localStorage 本地统计
+- 页面浏览量使用不蒜子（busuanzi）全局统计，下载量仍用 localStorage 本地统计
 - 所有内容必须真实有据，不编造新闻和论文
 - 每条新闻/论文约200字中文
 - arXiv论文链接必须真实有效

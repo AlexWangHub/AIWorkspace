@@ -1298,20 +1298,11 @@
         <p style="font-size: 12px; color: var(--text-muted);">📱 微信扫码即可加入</p>
     </div>
 
-    <script>
-    // ===== 浏览量统计 (使用免费的 CountAPI 替代方案) =====
-    (function(){
-        var KEY = 'vibewhip_pv';
-        var count = parseInt(localStorage.getItem(KEY) || '0', 10);
-        // 每次访问 +1
-        count++;
-        localStorage.setItem(KEY, count);
-        // 显示（基础版用 localStorage，生产环境可接 API）
-        var el = document.getElementById('pageViews');
-        if(el) el.textContent = count.toLocaleString();
-    })();
+    <!-- 不蒜子统计 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    // ===== 下载量统计 =====
+    <script>
+    // ===== 下载量统计（localStorage，每个用户独立计数） =====
     function trackDownload(appName) {
         var key = 'vibewhip_dl_' + appName;
         var count = parseInt(localStorage.getItem(key) || '0', 10);
