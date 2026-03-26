@@ -814,6 +814,51 @@
         }
         .xq-popup .close-btn:hover { color: var(--text); }
 
+        /* 图片放大 Lightbox */
+        .img-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            animation: lightbox-in 0.25s ease-out;
+        }
+        .img-lightbox.show { display: flex; }
+        @keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
+        .img-lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+            animation: lightbox-zoom 0.3s ease-out;
+        }
+        @keyframes lightbox-zoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .img-lightbox .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 28px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .img-lightbox .lightbox-close:hover { background: rgba(255, 255, 255, 0.3); }
+        .img-zoomable { cursor: zoom-in; transition: transform 0.2s; }
+        .img-zoomable:hover { transform: scale(1.03); }
+
         /* Footer 升级 */
         .footer-xq {
             margin-top: 16px;
@@ -1253,7 +1298,7 @@
                     </div>
                 </div>
                 <div class="xq-qr-wrap">
-                    <img src="assets/zhishixingqiu.jpg" alt="VibeWhip 知识星球二维码">
+                    <img src="assets/zhishixingqiu.jpg" alt="VibeWhip 知识星球二维码" class="img-zoomable" onclick="openLightbox(this.src)">
                 </div>
                 <p class="xq-scan-tip">📱 <strong>微信扫码</strong>即可加入 · 限时早鸟价</p>
             </div>
@@ -1287,7 +1332,7 @@
     </div>
     <div class="xq-popup" id="xqPopup">
         <button class="close-btn" onclick="toggleXQPopup()">✕</button>
-        <img src="assets/zhishixingqiu.jpg" alt="知识星球二维码">
+        <img src="assets/zhishixingqiu.jpg" alt="知识星球二维码" class="img-zoomable" onclick="event.stopPropagation(); openLightbox(this.src)">
         <div class="popup-title">加入 VibeWhip 知识星球</div>
         <div class="popup-benefits">
             <div class="popup-benefit-item"><span class="check">✓</span> AI 快讯深度版 + 实操建议</div>
@@ -1367,6 +1412,29 @@
             });
         });
     })();
+    </script>
+
+    <!-- 图片放大 Lightbox -->
+    <div class="img-lightbox" id="imgLightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <img id="lightboxImg" src="" alt="放大预览">
+    </div>
+    <script>
+    function openLightbox(src) {
+        var lb = document.getElementById('imgLightbox');
+        var img = document.getElementById('lightboxImg');
+        img.src = src;
+        lb.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        var lb = document.getElementById('imgLightbox');
+        lb.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
     </script>
 </body>
 </html>
