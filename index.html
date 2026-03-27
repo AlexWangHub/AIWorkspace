@@ -162,6 +162,19 @@
         }
         .lang-toggle:hover { color: var(--text-secondary); border-color: var(--border-hover); }
 
+        .page-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+        }
+
         /* ===== Hero ===== */
         .hero {
             padding: 100px 0 80px;
@@ -410,6 +423,14 @@
 
         .detail-link:hover { color: var(--accent); }
 
+        .download-count {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+
         /* ===== Blog Section ===== */
         .blog-card {
             background: var(--surface);
@@ -521,6 +542,7 @@
             .section { padding: 40px 0; }
             .app-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+            .page-views { display: none; }
             .blog-card { flex-direction: column; gap: 12px; }
             .blog-arrow { display: none; }
             .terminal-line { font-size: 12px; padding: 10px 16px; }
@@ -540,6 +562,9 @@
                 <span class="logo-text">VibeWhip</span>
             </a>
             <div class="header-right">
+                <div class="page-views">
+                    👁️ <span id="busuanzi_value_site_pv">--</span> <span data-zh="次浏览" data-en="views">次浏览</span>
+                </div>
                 <nav class="nav-links">
                     <a href="#apps"><span data-zh="应用" data-en="Apps">应用</span></a>
                 </nav>
@@ -592,9 +617,10 @@
                     </div>
                     <p class="app-desc" data-zh="为 Vibe Coding 工作流量身打造的一站式工作台。Prompt 库管理（6 大类别）、项目追踪面板、屏幕贴纸、IDE 一键切换（13+ IDE）、Whip Board 看板、Vibing 沉浸模式、Think Notes 思考笔记，配合 iCloud 同步，支持 40 种语言。" data-en="All-in-one workstation built for Vibe Coding. Prompt Library (6 categories), Project Tracking, Screen Stickers, IDE Switcher (13+ IDEs), Whip Board, Vibing Mode, Think Notes — with iCloud sync and 40 languages.">为 Vibe Coding 工作流量身打造的一站式工作台。Prompt 库管理（6 大类别）、项目追踪面板、屏幕贴纸、IDE 一键切换（13+ IDE）、Whip Board 看板、Vibing 沉浸模式、Think Notes 思考笔记，配合 iCloud 同步，支持 40 种语言。</p>
                     <div class="app-card-footer">
-                        <a href="downloads/VibeWhip.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="downloads/VibeWhip.zip" class="download-btn" onclick="trackDownload('VibeWhip')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="VibeWhip/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
+                    <div class="download-count">📊 <span id="dl-VibeWhip">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- ClipVault -->
@@ -608,9 +634,10 @@
                     </div>
                     <p class="app-desc" data-zh="赛博朋克风格的智能剪贴板管理器。自动捕获文本、链接、图片、颜色代码等所有复制内容，内置区域截图与屏幕录制，支持多维搜索与网格/列表双布局，三个全局快捷键一键呼出。" data-en="Cyberpunk-style smart clipboard manager. Auto-capture text, links, images, color codes. Built-in area screenshots & screen recording, multi-dimensional search, grid/list dual-layout, 3 global hotkeys.">赛博朋克风格的智能剪贴板管理器。自动捕获文本、链接、图片、颜色代码等所有复制内容，内置区域截图与屏幕录制，支持多维搜索与网格/列表双布局，三个全局快捷键一键呼出。</p>
                     <div class="app-card-footer">
-                        <a href="downloads/ClipVault.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="downloads/ClipVault.zip" class="download-btn" onclick="trackDownload('ClipVault')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="ClipVault/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
+                    <div class="download-count">📊 <span id="dl-ClipVault">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- DropShelf -->
@@ -624,9 +651,10 @@
                     </div>
                     <p class="app-desc" data-zh="精巧的 macOS 文件搁置架。拖拽时自动弹出浮动面板暂存文件，支持多架管理、持久化存储、ZIP 压缩、批量重命名、图片格式转换（PNG/JPEG/HEIC/WebP/TIFF）、PDF 合并、Quick Look 预览，四种触发方式随时唤起。" data-en="Sleek macOS file shelf. Auto-popup floating panel when dragging, multi-shelf management, persistent storage, ZIP compression, batch rename, image format conversion, PDF merge, Quick Look preview, 4 trigger methods.">精巧的 macOS 文件搁置架。拖拽时自动弹出浮动面板暂存文件，支持多架管理、持久化存储、ZIP 压缩、批量重命名、图片格式转换（PNG/JPEG/HEIC/WebP/TIFF）、PDF 合并、Quick Look 预览，四种触发方式随时唤起。</p>
                     <div class="app-card-footer">
-                        <a href="downloads/DropShelf.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="downloads/DropShelf.zip" class="download-btn" onclick="trackDownload('DropShelf')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="DropShelf/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
+                    <div class="download-count">📊 <span id="dl-DropShelf">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- PicFlow -->
@@ -640,9 +668,10 @@
                     </div>
                     <p class="app-desc" data-zh="精致的菜单栏图床应用。截图自动检测并上传，支持拖拽上传、剪贴板监听、智能压缩。云存储支持 GitHub、阿里云 OSS、腾讯云 COS 三大平台自由切换，上传完成自动复制链接，完整的上传历史记录。" data-en="Refined menu bar image hosting app. Auto-detect screenshots, drag-to-upload, clipboard monitor, smart compression. Supports GitHub, Alibaba Cloud OSS, Tencent Cloud COS. Auto-copy link after upload, full history.">精致的菜单栏图床应用。截图自动检测并上传，支持拖拽上传、剪贴板监听、智能压缩。云存储支持 GitHub、阿里云 OSS、腾讯云 COS 三大平台自由切换，上传完成自动复制链接，完整的上传历史记录。</p>
                     <div class="app-card-footer">
-                        <a href="downloads/PicFlow.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="downloads/PicFlow.zip" class="download-btn" onclick="trackDownload('PicFlow')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="PicFlow/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
+                    <div class="download-count">📊 <span id="dl-PicFlow">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- ClipToNotion -->
@@ -656,9 +685,10 @@
                     </div>
                     <p class="app-desc" data-zh="极简的菜单栏工具。复制任意文字，按下全局快捷键，内容瞬间追加到你的 Notion 页面顶部。支持剪贴板面板预览、上传记录按日期分组查看、开机自启。通过 Notion 官方 API 直连，不经过任何第三方服务器。" data-en="Minimalist menu bar tool. Copy any text, press the global hotkey, content instantly appends to your Notion page. Clipboard panel preview, upload history grouped by date, launch at login. Direct Notion API connection, no third-party servers.">极简的菜单栏工具。复制任意文字，按下全局快捷键，内容瞬间追加到你的 Notion 页面顶部。支持剪贴板面板预览、上传记录按日期分组查看、开机自启。通过 Notion 官方 API 直连，不经过任何第三方服务器。</p>
                     <div class="app-card-footer">
-                        <a href="downloads/ClipToNotion.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="downloads/ClipToNotion.zip" class="download-btn" onclick="trackDownload('ClipToNotion')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="ClipToNotion/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
+                    <div class="download-count">📊 <span id="dl-ClipToNotion">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
             </div>
         </div>
@@ -679,6 +709,26 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <script>
+    // ===== 下载量统计（localStorage） =====
+    function trackDownload(appName) {
+        var key = 'vibewhip_dl_' + appName;
+        var count = parseInt(localStorage.getItem(key) || '0', 10);
+        count++;
+        localStorage.setItem(key, count);
+        updateDownloadCounts();
+    }
+
+    function updateDownloadCounts() {
+        var apps = ['VibeWhip', 'ClipVault', 'DropShelf', 'PicFlow', 'ClipToNotion'];
+        apps.forEach(function(name) {
+            var key = 'vibewhip_dl_' + name;
+            var count = parseInt(localStorage.getItem(key) || '0', 10);
+            var el = document.getElementById('dl-' + name);
+            if(el) el.textContent = count;
+        });
+    }
+    document.addEventListener('DOMContentLoaded', updateDownloadCounts);
+
     // ===== Language Toggle =====
     (function(){
         var K='declaration_lang';
