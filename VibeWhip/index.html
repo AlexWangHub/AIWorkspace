@@ -1,614 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeWhip — macOS Developer Productivity Tool</title>
-    <meta name="description" content="VibeWhip is a macOS project management tool built for Vibe Coding, combining Prompt Library, Project Management, Screen Stickers, IDE Switcher, Whip Board, Vibing Mode, Think Notes, and iCloud Sync in one app. Supports 40 languages.">
-    <meta name="keywords" content="VibeWhip, Vibe Coding, macOS developer tool, project management, prompt library, IDE switcher, productivity, whip board, think notes, iCloud sync">
+    <title>VibeWhip — Vibe Coding 项目管理利器</title>
+    <meta name="description" content="VibeWhip 是一款为 Vibe Coding 打造的 macOS 项目管理工具，集 Prompt 库、项目追踪、屏幕贴纸、IDE 切换、Whip Board、Vibing 模式、Think Notes 和 iCloud 同步于一体，支持 40 种语言。">
+    <meta name="keywords" content="VibeWhip, Vibe Coding, macOS, 项目管理, prompt library, IDE switcher, 独立开发">
     <meta name="author" content="VibeWhip">
     <link rel="canonical" href="https://vibewhip.com/VibeWhip/">
-    <!-- Open Graph -->
     <meta property="og:type" content="product">
     <meta property="og:url" content="https://vibewhip.com/VibeWhip/">
-    <meta property="og:title" content="VibeWhip — macOS Developer Productivity Tool">
-    <meta property="og:description" content="Project management tool for Vibe Coding: Prompt Library, IDE Switcher, Whip Board, Think Notes & more. 40+ languages supported.">
+    <meta property="og:title" content="VibeWhip — Vibe Coding 项目管理利器">
+    <meta property="og:description" content="一站式 Vibe Coding 工作台：Prompt 库、项目追踪、IDE 切换、Vibing 模式等。">
     <meta property="og:site_name" content="VibeWhip">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="VibeWhip — macOS Developer Productivity Tool">
-    <meta name="twitter:description" content="Project management tool for Vibe Coding: Prompt Library, IDE Switcher, Whip Board, Think Notes & more.">
-    <!-- Structured Data -->
+    <meta name="twitter:title" content="VibeWhip — Vibe Coding 项目管理利器">
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "VibeWhip",
-      "url": "https://vibewhip.com/VibeWhip/",
-      "description": "A macOS project management tool built for Vibe Coding with Prompt Library, Project Management, IDE Switcher, Whip Board, and iCloud Sync.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "author": { "@type": "Organization", "name": "VibeWhip", "url": "https://vibewhip.com/" }
-    }
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"VibeWhip","url":"https://vibewhip.com/VibeWhip/","description":"A macOS project management tool built for Vibe Coding.","applicationCategory":"DeveloperApplication","operatingSystem":"macOS","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"VibeWhip","url":"https://vibewhip.com/"}}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0b;
-            --surface: #141416;
-            --surface-hover: #1c1c20;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent: #8b5cf6;
-            --accent-soft: rgba(139, 92, 246, 0.12);
-            --accent-glow: rgba(139, 92, 246, 0.25);
-            --blue: #06b6d4;
-            --green: #22c55e;
-            --amber: #f59e0b;
-            --rose: #f43f5e;
-            --radius: 12px;
+            --bg: #0a0a0b; --surface: #111113; --surface-hover: #19191d;
+            --border: #222226; --border-hover: #333338;
+            --text: #fafafa; --text-secondary: #a1a1aa; --text-muted: #63636e;
+            --accent: #8b5cf6; --accent-soft: rgba(139,92,246,0.10); --accent-glow: rgba(139,92,246,0.20);
+            --cyan: #06b6d4; --green: #22c55e; --amber: #f59e0b; --rose: #f43f5e; --blue: #3b82f6;
+            --radius: 16px;
+            --mono: 'JetBrains Mono', monospace;
         }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter','Noto Sans SC',-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .header {
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .container-narrow {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-        }
-
-        .nav-links a.active {
-            color: var(--text);
-            background: var(--surface);
-        }
+        .header { border-bottom:1px solid var(--border); padding:14px 0; position:sticky; top:0; background:rgba(10,10,11,0.85); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); z-index:100; }
+        .container { max-width:960px; margin:0 auto; padding:0 24px; }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; max-width:960px; margin:0 auto; padding:0 24px; }
+        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
+        .logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#06b6d4,#8b5cf6); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .logo-text { font-family:var(--mono); font-weight:700; font-size:16px; letter-spacing:-0.02em; }
+        .nav-links { display:flex; gap:6px; }
+        .nav-links a { color:var(--text-muted); text-decoration:none; font-size:13px; padding:6px 14px; border-radius:8px; transition:all 0.2s; font-weight:500; }
+        .nav-links a:hover { color:var(--text-secondary); background:var(--surface); }
+        .nav-links a.active { color:var(--text); background:var(--surface); }
+        .lang-toggle { display:inline-flex; align-items:center; gap:4px; padding:5px 12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; font-size:12px; color:var(--text-muted); cursor:pointer; transition:all 0.2s; font-family:var(--mono); }
+        .lang-toggle:hover { color:var(--text-secondary); border-color:var(--border-hover); }
+        .header-right { display:flex; align-items:center; gap:14px; }
 
         /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            position: relative;
-        }
+        .hero { padding:100px 0 80px; text-align:center; position:relative; }
+        .hero::before { content:''; position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:700px; height:450px; background:radial-gradient(ellipse,rgba(139,92,246,0.08) 0%,rgba(6,182,212,0.04) 40%,transparent 70%); pointer-events:none; }
+        .hero-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 16px; background:var(--surface); border:1px solid var(--border); border-radius:100px; font-size:13px; color:var(--text-muted); margin-bottom:32px; font-family:var(--mono); }
+        .hero-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+        .hero h1 { font-size:clamp(36px,5vw,56px); font-weight:900; letter-spacing:-0.04em; line-height:1.15; margin-bottom:20px; position:relative; }
+        .hero h1 .gradient { background:linear-gradient(135deg,#06b6d4,#8b5cf6,#f43f5e); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero .subtitle { font-size:17px; color:var(--text-secondary); max-width:560px; margin:0 auto 40px; font-weight:300; line-height:1.8; }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, rgba(6,182,212,0.06) 40%, transparent 70%);
-            pointer-events: none;
-        }
+        .hero-cta { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; background:linear-gradient(135deg,#8b5cf6,#6366f1); color:#fff; border:none; border-radius:14px; font-size:16px; font-weight:600; text-decoration:none; transition:all 0.3s; box-shadow:0 4px 24px rgba(139,92,246,0.3); cursor:pointer; font-family:inherit; }
+        .hero-cta:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(139,92,246,0.4); }
+        .hero-cta svg { width:18px; height:18px; }
+        .hero-meta { margin-top:20px; font-size:13px; color:var(--text-muted); font-family:var(--mono); }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .hero-badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, #06b6d4, #8b5cf6, #f43f5e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 19px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4);
-        }
-
-        .hero-cta svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .hero-meta {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Tagline animation */
-        .tagline-demo {
-            margin: 60px auto 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            position: relative;
-            flex-wrap: wrap;
-        }
-
-        .tag-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            opacity: 0;
-            animation: tagFadeIn 0.5s ease forwards;
-        }
-
-        .tag-item:nth-child(1) { animation-delay: 0.1s; }
-        .tag-item:nth-child(2) { animation-delay: 0.25s; }
-        .tag-item:nth-child(3) { animation-delay: 0.4s; }
-        .tag-item:nth-child(4) { animation-delay: 0.55s; }
-        .tag-item:nth-child(5) { animation-delay: 0.7s; }
-        .tag-item:nth-child(6) { animation-delay: 0.85s; }
-
-        .tag-item .icon { font-size: 18px; }
-
-        @keyframes tagFadeIn {
-            to { opacity: 1; }
-        }
+        .tagline-demo { margin:56px auto 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
+        .tag-item { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:13px; font-weight:500; color:var(--text-secondary); opacity:0; animation:tagIn 0.5s ease forwards; }
+        .tag-item:nth-child(1){animation-delay:.1s} .tag-item:nth-child(2){animation-delay:.2s} .tag-item:nth-child(3){animation-delay:.3s} .tag-item:nth-child(4){animation-delay:.4s} .tag-item:nth-child(5){animation-delay:.5s} .tag-item:nth-child(6){animation-delay:.6s}
+        @keyframes tagIn { to{opacity:1;} }
+        .tag-item .icon { font-size:16px; }
 
         /* Features */
-        .features {
-            padding: 80px 0;
-        }
+        .features { padding:80px 0; }
+        .features-header { text-align:center; margin-bottom:56px; }
+        .features-header h2 { font-size:32px; font-weight:800; letter-spacing:-0.03em; margin-bottom:12px; }
+        .features-header p { font-size:15px; color:var(--text-secondary); }
 
-        .features-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .features-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .features-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 28px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #3f3f46;
-            transform: translateY(-3px);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 18px;
-        }
-
-        .feature-icon.purple { background: rgba(139, 92, 246, 0.12); }
-        .feature-icon.blue { background: rgba(6, 182, 212, 0.12); }
-        .feature-icon.green { background: rgba(34, 197, 94, 0.12); }
-        .feature-icon.amber { background: rgba(245, 158, 11, 0.12); }
-        .feature-icon.rose { background: rgba(244, 63, 94, 0.12); }
-        .feature-icon.cyan { background: rgba(59, 130, 246, 0.12); }
-
-        .feature-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .feature-card.highlight {
-            grid-column: span 2;
-            background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(6,182,212,0.06));
-            border-color: rgba(139, 92, 246, 0.2);
-        }
-
-        /* How it works */
-        .how-it-works {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .how-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .how-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .how-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .flow {
-            display: flex;
-            align-items: stretch;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .flow-step {
-            flex: 1;
-            max-width: 280px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 17px;
-            font-weight: 800;
-            margin: 0 auto 16px;
-        }
-
-        .flow-step .flow-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .flow-step h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .flow-step p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .flow-arrow {
-            display: flex;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
+        .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+        .feature-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:30px 26px; transition:all 0.3s; }
+        .feature-card:hover { border-color:var(--border-hover); transform:translateY(-3px); }
+        .feature-icon { width:46px; height:46px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px; }
+        .feature-card h3 { font-size:15px; font-weight:700; margin-bottom:8px; letter-spacing:-0.01em; }
+        .feature-card p { font-size:13px; color:var(--text-secondary); line-height:1.7; }
+        .feature-card.highlight { grid-column:span 2; background:linear-gradient(135deg,rgba(139,92,246,0.04),rgba(6,182,212,0.04)); border-color:rgba(139,92,246,0.15); }
 
         /* Privacy */
-        .privacy-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .privacy-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 48px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .privacy-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--green), transparent);
-        }
-
-        .privacy-box .shield {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .privacy-box h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .privacy-box p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .privacy-tags {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
-        .privacy-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.15);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--green);
-            font-weight: 500;
-        }
+        .privacy-section { padding:80px 0; border-top:1px solid var(--border); }
+        .privacy-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:48px; text-align:center; position:relative; overflow:hidden; }
+        .privacy-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--green),transparent); }
+        .privacy-box .shield { font-size:44px; margin-bottom:18px; }
+        .privacy-box h3 { font-size:22px; font-weight:700; margin-bottom:12px; }
+        .privacy-box p { font-size:14px; color:var(--text-secondary); max-width:500px; margin:0 auto; line-height:1.8; }
+        .privacy-tags { display:flex; gap:10px; justify-content:center; margin-top:24px; flex-wrap:wrap; }
+        .privacy-tag { display:flex; align-items:center; gap:6px; padding:7px 15px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.12); border-radius:100px; font-size:12px; color:var(--green); font-weight:500; }
 
         /* Footer */
-        .footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-        }
+        .footer { border-top:1px solid var(--border); padding:36px 0; text-align:center; }
+        .footer p { font-size:12px; color:var(--text-muted); font-family:var(--mono); }
+        .footer a { color:var(--text-secondary); text-decoration:none; }
+        .footer a:hover { color:var(--text); }
+        .footer-links { display:flex; gap:24px; justify-content:center; margin-bottom:14px; }
+        .footer-links a { font-size:13px; color:var(--text-muted); }
 
-        .footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
+        .animate-in { opacity:0; transform:translateY(20px); animation:slideUp 0.6s ease forwards; }
+        .animate-in:nth-child(1){animation-delay:.05s} .animate-in:nth-child(2){animation-delay:.1s} .animate-in:nth-child(3){animation-delay:.15s} .animate-in:nth-child(4){animation-delay:.2s} .animate-in:nth-child(5){animation-delay:.25s} .animate-in:nth-child(6){animation-delay:.3s} .animate-in:nth-child(7){animation-delay:.35s} .animate-in:nth-child(8){animation-delay:.4s} .animate-in:nth-child(9){animation-delay:.45s}
+        @keyframes slideUp { to{opacity:1;transform:translateY(0);} }
 
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .hero { padding: 70px 0 50px; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .feature-card.highlight { grid-column: span 1; }
-            .flow { flex-direction: column; align-items: center; }
-            .flow-arrow { transform: rotate(90deg); }
-            .features-header h2, .how-header h2 { font-size: 28px; }
-            .privacy-box { padding: 32px 24px; }
-            .tagline-demo { flex-wrap: wrap; }
-        }
-
-        /* Entrance animations */
-        .animate-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        .animate-in:nth-child(1) { animation-delay: 0.05s; }
-        .animate-in:nth-child(2) { animation-delay: 0.1s; }
-        .animate-in:nth-child(3) { animation-delay: 0.15s; }
-        .animate-in:nth-child(4) { animation-delay: 0.2s; }
-        .animate-in:nth-child(5) { animation-delay: 0.25s; }
-        .animate-in:nth-child(6) { animation-delay: 0.3s; }
-        .animate-in:nth-child(7) { animation-delay: 0.35s; }
-        .animate-in:nth-child(8) { animation-delay: 0.4s; }
-        .animate-in:nth-child(9) { animation-delay: 0.45s; }
-
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            white-space: nowrap;
-        }
-
-        .lang-toggle:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-            border-color: #3f3f46;
-        }
-
-        .lang-toggle .globe {
-            font-size: 14px;
+        @media (max-width:768px) {
+            .hero h1{font-size:32px;} .hero{padding:70px 0 50px;} .feature-grid{grid-template-columns:1fr;} .feature-card.highlight{grid-column:span 1;} .features-header h2{font-size:26px;} .privacy-box{padding:32px 20px;} .tagline-demo{flex-wrap:wrap;} .nav-links{display:none;}
         }
     </style>
 </head>
@@ -619,164 +118,107 @@
                 <div class="logo-icon">⚡</div>
                 <span class="logo-text">VibeWhip</span>
             </a>
-            <nav class="nav-links">
-                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-            </nav>
-                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
-                    <span class="globe">🌐</span>
-                    <span class="lang-label">中文</span>
-                </button>
+            <div class="header-right">
+                <nav class="nav-links">
+                    <a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a>
+                    <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                    <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
+                </nav>
+                <button id="langToggle" class="lang-toggle"><span>🌐</span><span class="lang-label">EN</span></button>
+            </div>
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                <span data-zh="macOS 开发者工具" data-en="macOS Developer Tool">macOS Developer Tool</span>
-            </div>
-            <h1>
-                Vibe Coding<br>
-                <span class="gradient"><span data-zh="项目管理利器" data-en="Project Management Powerhouse">Project Management Powerhouse</span></span>
-            </h1>
-            <p class="subtitle">
-                <span data-zh="一站式 Vibe Coding 工作台。" data-en="All-in-one Vibe Coding workstation.">All-in-one Vibe Coding workstation.</span><br>
-                <span data-zh="管理 Prompt、追踪项目、屏幕贴纸、IDE 切换、Vibing 模式、Think Notes，配合 iCloud 同步，让你的 AI 编程体验全面升级。" data-en="Manage prompts, track projects, use stickers, switch IDEs, enter Vibing mode, capture Think Notes — all with iCloud sync for a supercharged AI coding experience.">Manage prompts, track projects, use stickers, switch IDEs, enter Vibing mode, capture Think Notes — all with iCloud sync for a supercharged AI coding experience.</span>
-            </p>
+            <div class="hero-badge"><span class="dot"></span><span data-zh="macOS 开发者工具" data-en="macOS Developer Tool">macOS 开发者工具</span></div>
+            <h1>Vibe Coding<br><span class="gradient" data-zh="项目管理利器" data-en="Project Management Powerhouse">项目管理利器</span></h1>
+            <p class="subtitle" data-zh="一站式 Vibe Coding 工作台。管理 Prompt、追踪项目、屏幕贴纸、IDE 一键切换、Vibing 沉浸模式、Think Notes，配合 iCloud 无缝同步，让你的 AI 编程体验全面升级。" data-en="All-in-one Vibe Coding workstation. Manage prompts, track projects, screen stickers, IDE switching, Vibing mode, Think Notes — with iCloud sync for a supercharged AI coding experience.">一站式 Vibe Coding 工作台。管理 Prompt、追踪项目、屏幕贴纸、IDE 一键切换、Vibing 沉浸模式、Think Notes，配合 iCloud 无缝同步，让你的 AI 编程体验全面升级。</p>
 
-            <a href="https://apps.apple.com/app/vibewhip" class="hero-cta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                <span data-zh="在 Mac App Store 下载" data-en="Download on Mac App Store">Download on Mac App Store</span>
+            <a href="../downloads/VibeWhip.zip" class="hero-cta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-zh="下载 VibeWhip" data-en="Download VibeWhip">下载 VibeWhip</span>
             </a>
-            <p class="hero-meta"><span data-zh="免费下载 · macOS 14.0+ · Apple Silicon & Intel" data-en="Free · macOS 14.0+ · Apple Silicon & Intel">Free · macOS 14.0+ · Apple Silicon & Intel</span></p>
+            <p class="hero-meta" data-zh="免费 · macOS 14.0+ · Apple Silicon & Intel · 已公证签名" data-en="Free · macOS 14.0+ · Apple Silicon & Intel · Notarized">免费 · macOS 14.0+ · Apple Silicon & Intel · 已公证签名</p>
 
             <div class="tagline-demo">
-                <span class="tag-item"><span class="icon">📝</span> <span data-zh="Prompt 库" data-en="Prompt Library">Prompt Library</span></span>
-                <span class="tag-item"><span class="icon">📁</span> <span data-zh="项目管理" data-en="Project Mgmt">Project Mgmt</span></span>
-                <span class="tag-item"><span class="icon">🗒️</span> <span data-zh="屏幕贴纸" data-en="Stickers">Stickers</span></span>
-                <span class="tag-item"><span class="icon">🔀</span> <span data-zh="IDE 切换" data-en="IDE Switch">IDE Switch</span></span>
-                <span class="tag-item"><span class="icon">🟣</span> <span data-zh="Vibing 模式" data-en="Vibing Mode">Vibing Mode</span></span>
-                <span class="tag-item"><span class="icon">💭</span> <span data-zh="Think Notes" data-en="Think Notes">Think Notes</span></span>
+                <span class="tag-item"><span class="icon">📝</span> <span data-zh="Prompt 库" data-en="Prompt Library">Prompt 库</span></span>
+                <span class="tag-item"><span class="icon">📁</span> <span data-zh="项目管理" data-en="Project Mgmt">项目管理</span></span>
+                <span class="tag-item"><span class="icon">🗒️</span> <span data-zh="屏幕贴纸" data-en="Stickers">屏幕贴纸</span></span>
+                <span class="tag-item"><span class="icon">🔀</span> <span data-zh="IDE 切换" data-en="IDE Switch">IDE 切换</span></span>
+                <span class="tag-item"><span class="icon">🟣</span> <span data-zh="Vibing 模式" data-en="Vibing Mode">Vibing 模式</span></span>
+                <span class="tag-item"><span class="icon">💭</span> Think Notes</span>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2><span data-zh="为 Vibe Coder 而生" data-en="Built for Vibe Coders">Built for Vibe Coders</span></h2>
-                <p><span data-zh="一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控" data-en="Manage your AI coding workflow end-to-end, from prompts to delivery">Manage your AI coding workflow end-to-end, from prompts to delivery</span></p>
+                <h2 data-zh="为 Vibe Coder 而生" data-en="Built for Vibe Coders">为 Vibe Coder 而生</h2>
+                <p data-zh="一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控" data-en="Manage your AI coding workflow end-to-end, from prompts to delivery">一站式管理你的 AI 编程工作流，从 Prompt 到交付全程掌控</p>
             </div>
-
             <div class="feature-grid">
                 <div class="feature-card highlight animate-in">
-                    <div class="feature-icon purple">📚</div>
-                    <h3><span data-zh="Prompt 库管理" data-en="Prompt Library Management">Prompt Library Management</span></h3>
-                    <p><span data-zh="按 6 大类别管理你的 Prompt：项目前、周期性、项目后、技巧型 Prompt、技巧技能和工具箱。支持图片粘贴、一键复制、复制即发送，工具箱类别可存储 URL 并自动显示域名。告别混乱的提示词管理。" data-en="Organize your prompts across 6 categories: Before Project, Periodic, After Project, Trick Prompt, Trick Skill, and Toolbox. Supports image paste, one-click copy, copy-on-send, and Toolbox URLs with auto domain display. Say goodbye to messy prompt management.">Organize your prompts across 6 categories: Before Project, Periodic, After Project, Trick Prompt, Trick Skill, and Toolbox. Supports image paste, one-click copy, copy-on-send, and Toolbox URLs with auto domain display. Say goodbye to messy prompt management.</span></p>
+                    <div class="feature-icon" style="background:var(--accent-soft);">📚</div>
+                    <h3 data-zh="Prompt 库管理" data-en="Prompt Library">Prompt 库管理</h3>
+                    <p data-zh="按 6 大类别（项目前、周期性、项目后、技巧型 Prompt、技巧技能、工具箱）管理你的 Prompt。支持图片粘贴、一键复制、复制即发送，工具箱类别可存储 URL 并自动显示域名。告别混乱的提示词管理。" data-en="Organize prompts across 6 categories: Before Project, Periodic, After Project, Trick Prompt, Trick Skill, and Toolbox. Supports image paste, one-click copy, copy-on-send, and Toolbox URLs with auto domain display.">按 6 大类别（项目前、周期性、项目后、技巧型 Prompt、技巧技能、工具箱）管理你的 Prompt。支持图片粘贴、一键复制、复制即发送，工具箱类别可存储 URL 并自动显示域名。告别混乱的提示词管理。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon blue">📋</div>
-                    <h3><span data-zh="项目追踪" data-en="Project Tracking">Project Tracking</span></h3>
-                    <p><span data-zh="为每个 Vibe Coding 项目创建独立面板。支持颜色标签（6 种预设 + 自定义）、项目目录关联、归档/恢复、Focus 标记、Markdown 导出和拖拽排序。" data-en="Create a dedicated panel for each project. Supports color tags (6 presets + custom), project directory linking, archive/restore, Focus marking, Markdown export, and drag-to-sort.">Create a dedicated panel for each project. Supports color tags (6 presets + custom), project directory linking, archive/restore, Focus marking, Markdown export, and drag-to-sort.</span></p>
+                    <div class="feature-icon" style="background:rgba(6,182,212,0.10);">📋</div>
+                    <h3 data-zh="项目追踪" data-en="Project Tracking">项目追踪</h3>
+                    <p data-zh="为每个 Vibe Coding 项目创建独立面板。颜色标签（6 种预设 + 自定义）、项目目录关联、归档/恢复、Focus 标记、Markdown 导出、拖拽排序。" data-en="Dedicated panel per project. Color tags (6 presets + custom), directory linking, archive/restore, Focus marking, Markdown export, drag-to-sort.">为每个 Vibe Coding 项目创建独立面板。颜色标签（6 种预设 + 自定义）、项目目录关联、归档/恢复、Focus 标记、Markdown 导出、拖拽排序。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon green">🗒️</div>
-                    <h3><span data-zh="屏幕贴纸" data-en="Screen Stickers">Screen Stickers</span></h3>
-                    <p><span data-zh="浮动 NSPanel 贴纸：8 种预设 + 自定义颜色，WCAG 智能字体配色。支持置顶、拖拽、缩放、位置记忆，以及批量显示/隐藏/清除。" data-en="Floating NSPanel stickers: 8 presets + custom colors with WCAG-based smart font color. Pin, drag, resize with position persistence, plus batch show/hide/clear.">Floating NSPanel stickers: 8 presets + custom colors with WCAG-based smart font color. Pin, drag, resize with position persistence, plus batch show/hide/clear.</span></p>
+                    <div class="feature-icon" style="background:rgba(34,197,94,0.10);">🗒️</div>
+                    <h3 data-zh="屏幕贴纸" data-en="Screen Stickers">屏幕贴纸</h3>
+                    <p data-zh="浮动 NSPanel 贴纸：8 种预设 + 自定义颜色，WCAG 智能字体配色。支持置顶、拖拽、缩放、位置记忆，批量显示/隐藏/清除。" data-en="Floating NSPanel stickers: 8 presets + custom colors with WCAG-based smart font color. Pin, drag, resize with position persistence, batch operations.">浮动 NSPanel 贴纸：8 种预设 + 自定义颜色，WCAG 智能字体配色。支持置顶、拖拽、缩放、位置记忆，批量显示/隐藏/清除。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon amber">🔀</div>
-                    <h3><span data-zh="IDE 切换器" data-en="IDE Switcher">IDE Switcher</span></h3>
-                    <p><span data-zh="浮动面板一键切换——Cursor、Windsurf、VS Code、Xcode 等 13+ 内置 IDE，还可添加自定义 IDE。面板支持边缘吸附和 Peek 模式，告别 ⌘Tab 痛苦。" data-en="Floating panel to switch between 13+ built-in IDEs (Cursor, Windsurf, VS Code, Xcode, etc.) plus custom IDEs. Edge-snap and Peek mode. No more ⌘Tab pain.">Floating panel to switch between 13+ built-in IDEs (Cursor, Windsurf, VS Code, Xcode, etc.) plus custom IDEs. Edge-snap and Peek mode. No more ⌘Tab pain.</span></p>
+                    <div class="feature-icon" style="background:rgba(245,158,11,0.10);">🔀</div>
+                    <h3 data-zh="IDE 切换器" data-en="IDE Switcher">IDE 切换器</h3>
+                    <p data-zh="浮动面板一键切换 Cursor、Windsurf、VS Code、Xcode 等 13+ 内置 IDE，还可添加自定义 IDE。面板支持边缘吸附和 Peek 模式。" data-en="Floating panel to switch between 13+ built-in IDEs (Cursor, Windsurf, VS Code, Xcode, etc.) plus custom IDEs. Edge-snap and Peek mode.">浮动面板一键切换 Cursor、Windsurf、VS Code、Xcode 等 13+ 内置 IDE，还可添加自定义 IDE。面板支持边缘吸附和 Peek 模式。</p>
                 </div>
-
                 <div class="feature-card highlight animate-in">
-                    <div class="feature-icon rose">🔥</div>
-                    <h3><span data-zh="Whip Board 看板" data-en="Whip Board">Whip Board</span></h3>
-                    <p><span data-zh="为 Focus 标记的项目打造的看板视图。FlowLayout 自动换行，卡片宽度/高度可调，拖拽重排，每张卡片可直接输入 Todo。配合 Vibing 模式的发光效果，让你全身心投入编码。" data-en="A Kanban view for Focus-marked projects. FlowLayout auto-wrapping, adjustable card width/height, drag reorder, and per-card Todo input. Combined with Vibing mode glow effects for total immersion.">A Kanban view for Focus-marked projects. FlowLayout auto-wrapping, adjustable card width/height, drag reorder, and per-card Todo input. Combined with Vibing mode glow effects for total immersion.</span></p>
+                    <div class="feature-icon" style="background:rgba(244,63,94,0.10);">🔥</div>
+                    <h3 data-zh="Whip Board 看板" data-en="Whip Board">Whip Board 看板</h3>
+                    <p data-zh="为 Focus 标记的项目打造的看板视图。FlowLayout 自动换行，卡片宽度/高度可调，拖拽重排，每张卡片可直接输入 Todo。配合 Vibing 模式的发光效果，让你全身心投入编码。" data-en="Kanban view for Focus-marked projects. FlowLayout auto-wrapping, adjustable card size, drag reorder, per-card Todo. Combined with Vibing mode glow effects for total immersion.">为 Focus 标记的项目打造的看板视图。FlowLayout 自动换行，卡片宽度/高度可调，拖拽重排，每张卡片可直接输入 Todo。配合 Vibing 模式的发光效果，让你全身心投入编码。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon purple" style="background: rgba(168, 85, 247, 0.12);">🟣</div>
-                    <h3><span data-zh="Vibing 模式" data-en="Vibing Mode">Vibing Mode</span></h3>
-                    <p><span data-zh="为每个项目开启 Vibing 状态（⌘⇧P）。紫色动画横幅、侧边栏脉冲圆点、Whip Board 发光特效——让你感受心流编码的沉浸体验。" data-en="Activate Vibing state per project (⌘⇧P). Purple animated banner, sidebar pulse dot, Whip Board glow effects — immerse yourself in the flow of coding.">Activate Vibing state per project (⌘⇧P). Purple animated banner, sidebar pulse dot, Whip Board glow effects — immerse yourself in the flow of coding.</span></p>
+                    <div class="feature-icon" style="background:rgba(168,85,247,0.10);">🟣</div>
+                    <h3 data-zh="Vibing 模式" data-en="Vibing Mode">Vibing 模式</h3>
+                    <p data-zh="为每个项目开启 Vibing 状态（⌘⇧P）。紫色动画横幅、侧边栏脉冲圆点、Whip Board 发光特效——沉浸心流编码。" data-en="Activate Vibing state per project (⌘⇧P). Purple animated banner, sidebar pulse dot, Whip Board glow — immerse in coding flow.">为每个项目开启 Vibing 状态（⌘⇧P）。紫色动画横幅、侧边栏脉冲圆点、Whip Board 发光特效——沉浸心流编码。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon cyan" style="background: rgba(96, 165, 250, 0.12);">💭</div>
-                    <h3><span data-zh="Think Notes" data-en="Think Notes">Think Notes</span></h3>
-                    <p><span data-zh="每个项目配备独立的富文本编辑器，自动保存你的思考笔记。随时记录灵感、决策和关键上下文，无需离开工作台。" data-en="Each project has its own rich text editor with auto-save for your thinking notes. Capture ideas, decisions, and key context without leaving your workspace.">Each project has its own rich text editor with auto-save for your thinking notes. Capture ideas, decisions, and key context without leaving your workspace.</span></p>
+                    <div class="feature-icon" style="background:rgba(59,130,246,0.10);">💭</div>
+                    <h3>Think Notes</h3>
+                    <p data-zh="每个项目配备独立的富文本编辑器，自动保存思考笔记。随时记录灵感、决策和关键上下文，无需离开工作台。" data-en="Each project has its own rich text editor with auto-save. Capture ideas, decisions, and key context without leaving your workspace.">每个项目配备独立的富文本编辑器，自动保存思考笔记。随时记录灵感、决策和关键上下文，无需离开工作台。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon green" style="background: rgba(34, 197, 94, 0.12);">☁️</div>
-                    <h3><span data-zh="iCloud 同步" data-en="iCloud Sync">iCloud Sync</span></h3>
-                    <p><span data-zh="自动检测 iCloud 可用性，透明地在本地和 iCloud 之间切换。数据迁移无感知，JSON 持久化带防抖优化，多台 Mac 无缝衔接。" data-en="Auto-detects iCloud availability, transparently switching between local and iCloud storage. Seamless data migration, JSON persistence with debounce, syncing across all your Macs.">Auto-detects iCloud availability, transparently switching between local and iCloud storage. Seamless data migration, JSON persistence with debounce, syncing across all your Macs.</span></p>
+                    <div class="feature-icon" style="background:rgba(34,197,94,0.10);">☁️</div>
+                    <h3 data-zh="iCloud 同步" data-en="iCloud Sync">iCloud 同步</h3>
+                    <p data-zh="自动检测 iCloud 可用性，透明切换本地/iCloud。JSON 持久化带防抖优化，多台 Mac 无缝衔接。" data-en="Auto-detects iCloud availability, transparent switching. JSON persistence with debounce, seamless multi-Mac sync.">自动检测 iCloud 可用性，透明切换本地/iCloud。JSON 持久化带防抖优化，多台 Mac 无缝衔接。</p>
                 </div>
-
                 <div class="feature-card animate-in">
-                    <div class="feature-icon cyan">🌍</div>
-                    <h3><span data-zh="40 种语言" data-en="40 Languages">40 Languages</span></h3>
-                    <p><span data-zh="内置 40 种语言/地区支持（含跟随系统选项），自动跟随系统语言，也可手动切换。7 页引导流程助你快速上手。面向全球开发者。" data-en="Built-in support for 40 language/region variants (including Follow System option). Auto-follows system language or switch manually. 7-page onboarding to get you started. Made for developers worldwide.">Built-in support for 40 language/region variants (including Follow System option). Auto-follows system language or switch manually. 7-page onboarding to get you started. Made for developers worldwide.</span></p>
+                    <div class="feature-icon" style="background:rgba(6,182,212,0.10);">🌍</div>
+                    <h3 data-zh="40 种语言" data-en="40 Languages">40 种语言</h3>
+                    <p data-zh="内置 40 种语言/地区支持（含跟随系统选项），自动跟随系统语言或手动切换。7 页引导流程助你快速上手。" data-en="40 language/region variants with Follow System option. 7-page onboarding to get started.">内置 40 种语言/地区支持（含跟随系统选项），自动跟随系统语言或手动切换。7 页引导流程助你快速上手。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How it works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="how-header">
-                <h2><span data-zh="三步开启高效 Vibe Coding" data-en="Three Steps to Efficient Vibe Coding">Three Steps to Efficient Vibe Coding</span></h2>
-                <p><span data-zh="无需配置，打开即用" data-en="No config needed, open and use">No config needed, open and use</span></p>
-            </div>
-
-            <div class="flow">
-                <div class="flow-step">
-                    <div class="flow-number">1</div>
-                    <div class="flow-icon">📚</div>
-                    <h4><span data-zh="构建 Prompt 库" data-en="Build Prompt Library">Build Prompt Library</span></h4>
-                    <p><span data-zh="把你的最佳 Prompt 按 6 大类别整理归档，支持图片粘贴和一键复制调用" data-en="Organize your best prompts across 6 categories with image paste and one-click copy">Organize your best prompts across 6 categories with image paste and one-click copy</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">2</div>
-                    <div class="flow-icon">🚀</div>
-                    <h4><span data-zh="创建项目" data-en="Create Project">Create Project</span></h4>
-                    <p><span data-zh="为每个 Vibe Coding 任务创建项目，用 Todo、Think Notes 和颜色标签追踪进度" data-en="Create a project for each task, track progress with Todos, Think Notes, and color tags">Create a project for each task, track progress with Todos, Think Notes, and color tags</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">3</div>
-                    <div class="flow-icon">⚡</div>
-                    <h4><span data-zh="沉浸推进" data-en="Immerse & Ship">Immerse & Ship</span></h4>
-                    <p><span data-zh="开启 Vibing 模式 + Whip Board + IDE 切换 + 屏幕贴纸，全面沉浸，高效交付" data-en="Vibing mode + Whip Board + IDE Switch + Stickers — fully immerse and ship efficiently">Vibing mode + Whip Board + IDE Switch + Stickers — fully immerse and ship efficiently</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Privacy -->
     <section class="privacy-section">
-        <div class="container-narrow">
+        <div class="container" style="max-width:780px;">
             <div class="privacy-box">
                 <div class="shield">🛡️</div>
-                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">Privacy First, Trustworthy</span></h3>
-                <p>
-                    <span data-zh="VibeWhip 所有数据完全存储在你的本地设备上，支持 iCloud 同步到你自己的 Apple 账户。我们不收集任何个人信息，不使用任何第三方追踪服务。" data-en="All VibeWhip data is stored entirely on your local device, with iCloud sync to your own Apple account. We do not collect any personal information or use any third-party tracking services.">All VibeWhip data is stored entirely on your local device, with iCloud sync to your own Apple account. We do not collect any personal information or use any third-party tracking services.</span>
-                </p>
+                <h3 data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">隐私安全，值得信赖</h3>
+                <p data-zh="所有数据完全存储在你的本地设备上，支持 iCloud 同步到你自己的 Apple 账户。不收集任何个人信息，不使用任何第三方追踪服务。" data-en="All data stored entirely on your device, with iCloud sync to your own Apple account. No personal data collection, no third-party tracking.">所有数据完全存储在你的本地设备上，支持 iCloud 同步到你自己的 Apple 账户。不收集任何个人信息，不使用任何第三方追踪服务。</p>
                 <div class="privacy-tags">
-                    <span class="privacy-tag"><span data-zh="✓ 数据本地存储" data-en="✓ Local Data Storage">✓ Local Data Storage</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ iCloud 同步" data-en="✓ iCloud Sync">✓ iCloud Sync</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ No Data Collection</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 无第三方追踪" data-en="✓ No Third-Party Tracking">✓ No Third-Party Tracking</span></span>
+                    <span class="privacy-tag" data-zh="✓ 数据本地存储" data-en="✓ Local Storage">✓ 数据本地存储</span>
+                    <span class="privacy-tag" data-zh="✓ iCloud 同步" data-en="✓ iCloud Sync">✓ iCloud 同步</span>
+                    <span class="privacy-tag" data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ 无数据收集</span>
+                    <span class="privacy-tag" data-zh="✓ 无第三方追踪" data-en="✓ No Tracking">✓ 无第三方追踪</span>
                 </div>
             </div>
         </div>
@@ -785,10 +227,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <a href="index.html"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">Contact</span></a>
+                <a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a>
+                <a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a>
+                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a>
             </div>
             <p>© 2026 VibeWhip. All rights reserved.</p>
         </div>
@@ -797,17 +239,17 @@
     <script>
     (function(){
         var K='declaration_lang';
-        function gL(){return localStorage.getItem(K)||'en';}
+        function gL(){return localStorage.getItem(K)||'zh';}
         function sL(l){localStorage.setItem(K,l);}
         function apply(lang){
             document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});
             document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
-            document.title=lang==='zh'?'VibeWhip — macOS 开发者效率工具':'VibeWhip — macOS Developer Productivity Tool';
+            document.title=lang==='zh'?'VibeWhip — Vibe Coding 项目管理利器':'VibeWhip — Vibe Coding Project Manager';
             var btn=document.getElementById('langToggle');
             if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
         }
         document.addEventListener('DOMContentLoaded',function(){
-            var lang=gL();if(lang==='zh')apply('zh');
+            var lang=gL();apply(lang);
             var btn=document.getElementById('langToggle');
             if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});
         });

@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeWhip AI 进击场</title>
-    <meta name="description" content="VibeWhip AI 进击场 — macOS 精品应用下载、每日AI快讯Top5、AI论文速递、技术深度文章。由独立开发者 VibeWhip 驱动。">
-    <meta name="keywords" content="VibeWhip, AI进击场, macOS应用, AI快讯, AI论文, 独立开发者, ClipVault, DropShelf, PicFlow, ClipToNotion, 人工智能">
+    <title>VibeWhip</title>
+    <meta name="description" content="Just a coder, but not just a coder. 独立开发者 VibeWhip 的个人站点 — macOS 精品工具集。">
+    <meta name="keywords" content="VibeWhip, macOS, 独立开发者, indie developer, ClipVault, DropShelf, PicFlow, ClipToNotion, Swift, macOS apps">
     <meta name="author" content="VibeWhip">
     <link rel="canonical" href="https://vibewhip.com/">
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vibewhip.com/">
-    <meta property="og:title" content="VibeWhip AI 进击场">
-    <meta property="og:description" content="macOS 精品应用下载、每日AI快讯Top5、AI论文速递、技术深度文章。">
+    <meta property="og:title" content="VibeWhip">
+    <meta property="og:description" content="Just a coder, but not just a coder. macOS 精品工具集。">
     <meta property="og:site_name" content="VibeWhip">
     <meta property="og:locale" content="zh_CN">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="VibeWhip AI 进击场">
-    <meta name="twitter:description" content="macOS 精品应用下载、每日AI快讯Top5、AI论文速递、技术深度文章。">
+    <meta name="twitter:title" content="VibeWhip">
+    <meta name="twitter:description" content="Just a coder, but not just a coder. macOS 精品工具集。">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "VibeWhip AI 进击场",
+      "name": "VibeWhip",
       "url": "https://vibewhip.com/",
-      "description": "macOS 精品应用下载、每日AI快讯Top5、AI论文速递、技术深度文章。",
+      "description": "Just a coder, but not just a coder. macOS indie developer.",
       "author": {
-        "@type": "Organization",
+        "@type": "Person",
         "name": "VibeWhip",
         "url": "https://vibewhip.com/"
       }
@@ -36,39 +36,40 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0b;
-            --surface: #141416;
-            --surface-hover: #1c1c20;
-            --border: #27272a;
+            --bg: #09090b;
+            --surface: #111113;
+            --surface-hover: #19191d;
+            --border: #222226;
+            --border-hover: #333338;
             --text: #fafafa;
             --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --text-muted: #63636e;
             --accent: #8b5cf6;
-            --accent-soft: rgba(139, 92, 246, 0.12);
-            --accent-glow: rgba(139, 92, 246, 0.25);
-            --blue: #3b82f6;
-            --blue-soft: rgba(59, 130, 246, 0.12);
+            --accent-soft: rgba(139, 92, 246, 0.10);
+            --accent-glow: rgba(139, 92, 246, 0.20);
             --cyan: #06b6d4;
-            --cyan-soft: rgba(6, 182, 212, 0.12);
-            --green: #22c55e;
-            --green-soft: rgba(34, 197, 94, 0.12);
+            --cyan-soft: rgba(6, 182, 212, 0.10);
+            --green: #10b981;
+            --green-soft: rgba(16, 185, 129, 0.10);
             --amber: #f59e0b;
-            --amber-soft: rgba(245, 158, 11, 0.12);
+            --amber-soft: rgba(245, 158, 11, 0.10);
             --rose: #f43f5e;
-            --rose-soft: rgba(244, 63, 94, 0.12);
-            --indigo: #5B6EF5;
-            --indigo-soft: rgba(91, 110, 245, 0.12);
-            --purple-soft: rgba(99, 102, 241, 0.12);
-            --radius: 12px;
+            --rose-soft: rgba(244, 63, 94, 0.10);
+            --blue: #3b82f6;
+            --blue-soft: rgba(59, 130, 246, 0.10);
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, 0.10);
+            --radius: 14px;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
@@ -76,34 +77,35 @@
             overflow-x: hidden;
         }
 
+        /* Subtle noise texture */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1000;
         }
 
-        /* Header */
+        /* ===== Header ===== */
         .header {
             border-bottom: 1px solid var(--border);
-            padding: 16px 0;
+            padding: 14px 0;
             position: sticky;
             top: 0;
-            background: rgba(10, 10, 11, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             z-index: 100;
         }
 
-        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1080px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -116,17 +118,22 @@
             color: var(--text);
         }
 
-        .logo-img { width: 38px; height: 38px; border-radius: 10px; }
+        .logo-img { width: 34px; height: 34px; border-radius: 9px; }
 
-        .logo-text { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
-        .logo-text .gradient {
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo-text {
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.02em;
         }
 
-        .nav-links { display: flex; gap: 6px; }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-links { display: flex; gap: 4px; }
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
@@ -134,259 +141,206 @@
             padding: 6px 14px;
             border-radius: 8px;
             transition: all 0.2s;
+            font-weight: 500;
         }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text);
-            background: var(--surface);
-        }
+        .nav-links a:hover { color: var(--text-secondary); background: var(--surface); }
 
-        .page-views {
-            display: flex;
+        .lang-toggle {
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: var(--text-muted);
-            font-size: 12px;
+            gap: 4px;
+            padding: 5px 12px;
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 4px 12px;
             border-radius: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--mono);
+            white-space: nowrap;
+        }
+        .lang-toggle:hover { color: var(--text-secondary); border-color: var(--border-hover); }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
         }
 
-        /* Hero */
-        .hero { padding: 80px 0 60px; text-align: center; }
-        .hero-badge {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(139,92,246,0.07) 0%, rgba(6,182,212,0.04) 40%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--accent-soft);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            padding: 6px 16px;
-            border-radius: 100px;
+            font-family: var(--mono);
             font-size: 13px;
-            color: var(--accent);
-            margin-bottom: 24px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            position: relative;
         }
-        .hero-badge .dot {
-            width: 6px; height: 6px; border-radius: 50%;
+
+        .hero-tag .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 16px;
             background: var(--accent);
-            animation: pulse-dot 2s ease-in-out infinite;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
         }
-        @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
         .hero h1 {
-            font-size: clamp(32px, 5vw, 52px);
+            font-size: clamp(36px, 6vw, 60px);
             font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            position: relative;
         }
+
         .gradient {
             background: linear-gradient(135deg, #8b5cf6, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         .hero .subtitle {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--text-secondary);
-            max-width: 640px;
+            max-width: 520px;
             margin: 0 auto;
+            font-weight: 400;
             line-height: 1.8;
         }
 
-        /* Section */
-        .section { padding: 60px 0; }
-        .section-header { margin-bottom: 32px; }
-        .section-header h2 {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
+        .hero .subtitle code {
+            font-family: var(--mono);
+            font-size: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: var(--accent);
         }
-        .section-header p { color: var(--text-secondary); font-size: 14px; }
+
+        /* Terminal-style tagline */
+        .terminal-line {
+            margin-top: 48px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--text-muted);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 10px;
+        }
+
+        .terminal-line .prompt { color: var(--green); font-weight: 700; }
+        .terminal-line .cmd { color: var(--text-secondary); }
+
+        /* ===== Apps Section ===== */
+        .section { padding: 64px 0; }
         .section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-        /* App Download Grid */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+
+        .section-label .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        /* App Grid */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
+
         .app-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px 20px;
-            text-align: center;
+            padding: 28px 24px;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--card-accent, var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
         .app-card:hover {
-            background: var(--surface-hover);
+            border-color: var(--border-hover);
             transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
         }
-        .app-icon { font-size: 40px; margin-bottom: 12px; }
-        .app-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-        .app-card .app-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
+
+        .app-card:hover::before { opacity: 1; }
+
+        .app-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 14px;
-            line-height: 1.5;
         }
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-        .download-btn.primary {
-            background: var(--accent);
-            color: #fff;
-        }
-        .download-btn.primary:hover {
-            background: #7c3aed;
-            box-shadow: 0 4px 20px var(--accent-glow);
-        }
-        .download-count {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-        .app-detail-link {
-            font-size: 11px;
-            color: var(--accent);
-            text-decoration: none;
-            margin-top: 6px;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-        .app-detail-link:hover { opacity: 1; }
 
-        /* News / Paper Cards */
-        .news-list { display: flex; flex-direction: column; gap: 16px; }
-        .news-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 28px;
-            transition: all 0.3s ease;
-        }
-        .news-card:hover {
-            background: var(--surface-hover);
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-        .news-card .news-topic {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-        .news-card .news-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .news-card .news-meta .score {
-            color: var(--amber);
-            font-weight: 600;
-        }
-        .news-card .news-meta .author {
-            color: var(--cyan);
-        }
-        .news-card .news-body { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-        .news-card .news-body strong { color: var(--text); font-weight: 600; }
-        .news-card .news-body .field-label {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .news-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--blue);
-            text-decoration: none;
-            font-size: 13px;
-            margin-top: 10px;
-            transition: color 0.2s;
-        }
-        .news-link:hover { color: #60a5fa; }
-
-        /* Paper Cards */
-        .paper-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 28px;
-            transition: all 0.3s ease;
-        }
-        .paper-card:hover {
-            background: var(--surface-hover);
-            border-color: rgba(6, 182, 212, 0.3);
-        }
-        .paper-card .paper-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        .paper-card .paper-body {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        .paper-card .paper-body .field-label {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .paper-card .paper-body strong { color: var(--text); font-weight: 600; }
-        .paper-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--cyan);
-            text-decoration: none;
-            font-size: 13px;
-            margin-top: 10px;
-            transition: color 0.2s;
-        }
-        .paper-link:hover { color: #22d3ee; }
-
-        /* Article cards */
-        .article-grid { display: flex; flex-direction: column; gap: 16px; }
-        .article-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 28px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s ease;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        .article-card:hover {
-            background: var(--surface-hover);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .article-icon {
-            width: 48px; height: 48px;
+        .app-icon {
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -394,9 +348,101 @@
             font-size: 22px;
             flex-shrink: 0;
         }
-        .article-content { flex: 1; min-width: 0; }
-        .article-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-        .article-content p {
+
+        .app-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .app-card .app-tagline {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .app-card .app-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        .app-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--surface-hover);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .detail-link {
+            font-size: 12px;
+            font-family: var(--mono);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .detail-link:hover { color: var(--accent); }
+
+        /* ===== Blog Section ===== */
+        .blog-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .blog-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .blog-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .blog-content { flex: 1; min-width: 0; }
+        .blog-content h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+        .blog-content p {
             font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.6;
@@ -405,479 +451,62 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .article-meta {
+
+        .blog-meta {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             margin-top: 8px;
             font-size: 11px;
             color: var(--text-muted);
         }
-        .article-tag {
-            display: inline-flex;
+
+        .blog-tag {
+            font-family: var(--mono);
             padding: 2px 8px;
             border-radius: 6px;
             font-size: 11px;
             font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
         }
-        .article-arrow {
+
+        .blog-arrow {
             color: var(--text-muted);
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s;
             flex-shrink: 0;
         }
-        .article-card:hover .article-arrow {
-            color: var(--accent);
-            transform: translateX(4px);
-        }
 
-        /* Footer */
+        .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(3px); }
+
+        /* ===== Footer ===== */
         .footer {
             border-top: 1px solid var(--border);
-            padding: 32px 0;
+            padding: 36px 0;
             text-align: center;
         }
+
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 24px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
+
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 13px;
             transition: color 0.2s;
         }
-        .footer-links a:hover { color: var(--text); }
-        .footer p { color: var(--text-muted); font-size: 12px; }
 
-        /* 知识星球浮窗 */
-        .xq-float {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 999;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .xq-float:hover { transform: scale(1.05); }
-        .xq-float-btn {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
-            position: relative;
-        }
-        .xq-float-btn img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-        }
-        .xq-float-label {
-            position: absolute;
-            bottom: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 10px;
+        .footer-links a:hover { color: var(--text-secondary); }
+
+        .footer p {
             color: var(--text-muted);
-            white-space: nowrap;
-            background: var(--surface);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-        }
-        .xq-popup {
-            display: none;
-            position: fixed;
-            bottom: 100px;
-            right: 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            z-index: 1000;
-            text-align: center;
-        }
-        .xq-popup.show { display: block; }
-        .xq-popup img {
-            width: 200px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
-        .xq-popup p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-        .xq-popup .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        /* Hero CTA */
-        .hero-cta {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 32px;
-            flex-wrap: wrap;
-        }
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-        .cta-btn.primary {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: #fff;
-            box-shadow: 0 6px 24px rgba(255, 107, 53, 0.35);
-        }
-        .cta-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 36px rgba(255, 107, 53, 0.5);
-        }
-        .cta-btn.secondary {
-            background: var(--surface);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        .cta-btn.secondary:hover {
-            background: var(--surface-hover);
-            border-color: var(--accent);
-        }
-
-        /* Section CTA Banner — 每个模块底部的引导条 */
-        .section-cta {
-            margin-top: 28px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(247, 147, 30, 0.08));
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: var(--radius);
-            padding: 20px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            transition: all 0.3s;
-        }
-        .section-cta:hover {
-            border-color: rgba(255, 107, 53, 0.4);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.12), rgba(247, 147, 30, 0.12));
-        }
-        .section-cta-text { flex: 1; }
-        .section-cta-text .cta-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-        .section-cta-text .cta-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        .section-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-            font-family: inherit;
-        }
-        .section-cta-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* 知识星球专区 */
-        .xq-section {
-            padding: 80px 0;
-            background: linear-gradient(180deg, var(--bg) 0%, rgba(255, 107, 53, 0.04) 50%, var(--bg) 100%);
-        }
-        .xq-section-inner {
-            text-align: center;
-            max-width: 640px;
-            margin: 0 auto;
-        }
-        .xq-section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 13px;
-            color: #ff6b35;
-            margin-bottom: 20px;
-        }
-        .xq-section h2 {
-            font-size: clamp(26px, 4vw, 36px);
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-            line-height: 1.3;
-        }
-        .xq-section .xq-subtitle {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 32px;
-        }
-        .xq-benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-bottom: 36px;
-            text-align: left;
-        }
-        .xq-benefit {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
-            transition: all 0.3s;
-        }
-        .xq-benefit:hover {
-            border-color: rgba(255, 107, 53, 0.3);
-            transform: translateY(-2px);
-        }
-        .xq-benefit .benefit-icon { font-size: 22px; margin-bottom: 8px; }
-        .xq-benefit .benefit-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-        .xq-benefit .benefit-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-        .xq-qr-wrap {
-            display: inline-block;
-            background: var(--surface);
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.15);
-            transition: all 0.3s;
-        }
-        .xq-qr-wrap:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            box-shadow: 0 16px 56px rgba(255, 107, 53, 0.25);
-            transform: translateY(-3px);
-        }
-        .xq-qr-wrap img { width: 220px; border-radius: 12px; }
-        .xq-scan-tip {
-            margin-top: 16px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        .xq-scan-tip strong { color: #ff6b35; }
-
-        /* 升级版浮窗 */
-        .xq-float {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 999;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .xq-float:hover { transform: scale(1.05); }
-        .xq-float-btn {
-            width: 68px;
-            height: 68px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.35);
-            position: relative;
-            animation: float-pulse 3s ease-in-out infinite;
-        }
-        @keyframes float-pulse {
-            0%,100% { box-shadow: 0 8px 30px rgba(255, 107, 53, 0.35); }
-            50% { box-shadow: 0 8px 40px rgba(255, 107, 53, 0.55); }
-        }
-        .xq-float-btn img {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-        }
-        .xq-float-label {
-            position: absolute;
-            bottom: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            font-weight: 600;
-            color: #ff6b35;
-            white-space: nowrap;
-            background: var(--surface);
-            padding: 3px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-        /* 浮窗呼吸提示点 */
-        .xq-float-dot {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #ef4444;
-            border: 2px solid var(--bg);
-            animation: dot-breathe 2s ease-in-out infinite;
-        }
-        @keyframes dot-breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
-
-        /* 升级版弹窗 */
-        .xq-popup {
-            display: none;
-            position: fixed;
-            bottom: 104px;
-            right: 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px 24px;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.6);
-            z-index: 1000;
-            text-align: center;
-            width: 300px;
-        }
-        .xq-popup.show { display: block; animation: popup-in 0.3s ease-out; }
-        @keyframes popup-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-        .xq-popup img {
-            width: 200px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-        }
-        .xq-popup .popup-title {
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-        .xq-popup .popup-benefits {
-            text-align: left;
-            margin-bottom: 12px;
-        }
-        .xq-popup .popup-benefit-item {
             font-size: 12px;
-            color: var(--text-secondary);
-            padding: 4px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-family: var(--mono);
         }
-        .xq-popup .popup-benefit-item .check { color: #ff6b35; font-weight: 700; }
-        .xq-popup p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-        .xq-popup .close-btn {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 18px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .xq-popup .close-btn:hover { color: var(--text); }
 
-        /* 图片放大 Lightbox */
-        .img-lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            align-items: center;
-            justify-content: center;
-            cursor: zoom-out;
-            animation: lightbox-in 0.25s ease-out;
-        }
-        .img-lightbox.show { display: flex; }
-        @keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
-        .img-lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 16px;
-            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
-            animation: lightbox-zoom 0.3s ease-out;
-        }
-        @keyframes lightbox-zoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .img-lightbox .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            font-size: 28px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-        .img-lightbox .lightbox-close:hover { background: rgba(255, 255, 255, 0.3); }
-        .img-zoomable { cursor: zoom-in; transition: transform 0.2s; }
-        .img-zoomable:hover { transform: scale(1.03); }
-
-        /* Footer 升级 */
-        .footer-xq {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-        .footer-xq a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #ff6b35;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .footer-xq a:hover { color: #f7931e; }
-
-        /* Animations */
+        /* ===== Scroll Animation ===== */
         .animate-in {
             opacity: 0;
             transform: translateY(20px);
@@ -885,32 +514,21 @@
         }
         .animate-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* Responsive */
+        /* ===== Responsive ===== */
         @media (max-width: 768px) {
-            .hero { padding: 50px 0 30px; }
-            .hero h1 { font-size: 28px; }
-            .hero-cta { flex-direction: column; align-items: center; }
-            .cta-btn { width: 100%; max-width: 280px; justify-content: center; }
+            .hero { padding: 60px 0 40px; }
+            .hero h1 { font-size: 32px; }
             .section { padding: 40px 0; }
-            .section-header h2 { font-size: 22px; }
-            .app-grid { grid-template-columns: repeat(2, 1fr); }
+            .app-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .news-card, .paper-card { padding: 20px; }
-            .article-card { flex-direction: column; gap: 12px; }
-            .article-arrow { display: none; }
-            .section-cta { flex-direction: column; text-align: center; }
-            .section-cta-btn { width: 100%; }
-            .xq-benefits { grid-template-columns: repeat(2, 1fr); }
-            .xq-section { padding: 60px 0; }
+            .blog-card { flex-direction: column; gap: 12px; }
+            .blog-arrow { display: none; }
+            .terminal-line { font-size: 12px; padding: 10px 16px; }
         }
+
         @media (max-width: 480px) {
             .header-inner { padding: 0 16px; }
             .container { padding: 0 16px; }
-            .app-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .app-card { padding: 16px 12px; }
-            .xq-benefits { grid-template-columns: 1fr; }
-            .xq-qr-wrap img { width: 180px; }
-            .xq-popup { right: 12px; bottom: 100px; width: calc(100vw - 24px); }
         }
     </style>
 </head>
@@ -918,18 +536,18 @@
     <header class="header">
         <div class="header-inner">
             <a href="index.html" class="logo">
-                <img src="assets/main_logo.png" alt="VibeWhip Logo" class="logo-img">
-                <span class="logo-text">VibeWhip <span class="gradient">AI 进击场</span></span>
+                <img src="assets/main_logo.png" alt="VibeWhip" class="logo-img">
+                <span class="logo-text">VibeWhip</span>
             </a>
-            <nav class="nav-links">
-                <a href="#apps">应用</a>
-                <a href="#ai-news">AI快讯</a>
-                <a href="#ai-papers">AI论文</a>
-                <a href="#articles">文章</a>
-                <a href="#xq-zone" style="color: #ff6b35; font-weight: 600;">🌟 星球</a>
-            </nav>
-            <div class="page-views">
-                👁️ <span id="busuanzi_value_site_pv">--</span> 次浏览
+            <div class="header-right">
+                <nav class="nav-links">
+                    <a href="#apps"><span data-zh="应用" data-en="Apps">应用</span></a>
+                    <a href="#blog"><span data-zh="博客" data-en="Blog">博客</span></a>
+                </nav>
+                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="globe">🌐</span>
+                    <span class="lang-label">EN</span>
+                </button>
             </div>
         </div>
     </header>
@@ -937,370 +555,139 @@
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                独立开发者 · AI 信息前哨
+            <div class="hero-tag">
+                <span data-zh="$ whoami" data-en="$ whoami">$ whoami</span><span class="cursor"></span>
             </div>
             <h1>
-                VibeWhip<br>
-                <span class="gradient">AI 进击场</span>
+                <span data-zh="Just a coder," data-en="Just a coder,">Just a coder,</span><br>
+                <span class="gradient" data-zh="but not just a coder." data-en="but not just a coder.">but not just a coder.</span>
             </h1>
             <p class="subtitle">
-                macOS 精品应用下载 · 每日 AI 快讯 · 前沿论文速递 · 技术深度文章<br>
-                一个独立开发者的 AI 信息阵地
+                <span data-zh="macOS 独立开发者。用代码解决真实问题，用设计打磨每一个细节。专注 Swift / SwiftUI 原生开发，追求极致的用户体验。" data-en="macOS indie developer. Solving real problems with code, polishing every detail with design. Focused on native Swift / SwiftUI development, pursuing the ultimate user experience.">macOS 独立开发者。用代码解决真实问题，用设计打磨每一个细节。专注 Swift / SwiftUI 原生开发，追求极致的用户体验。</span>
             </p>
-            <div class="hero-cta">
-                <button class="cta-btn primary" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">🌟 加入知识星球</button>
-                <a class="cta-btn secondary" href="#apps">🖥️ 浏览免费应用</a>
+            <div class="terminal-line">
+                <span class="prompt">→</span>
+                <span class="cmd" data-zh="5 款 macOS 原生工具 · 全部免费 · 已签名公证" data-en="5 native macOS tools · all free · signed & notarized">5 款 macOS 原生工具 · 全部免费 · 已签名公证</span>
             </div>
         </div>
     </section>
 
     <hr class="section-divider">
 
-    <!-- Module 1: macOS 应用 -->
+    <!-- Apps -->
     <section class="section" id="apps">
         <div class="container">
-            <div class="section-header">
-                <h2>🖥️ macOS 应用</h2>
-                <p>独立开发的 macOS 精品工具，免费下载体验</p>
-            </div>
+            <div class="section-label"><span class="dot"></span> <span data-zh="作品集" data-en="PORTFOLIO">作品集</span></div>
+            <h2 class="section-title" data-zh="macOS 工具集" data-en="macOS Toolkit">macOS 工具集</h2>
+            <p class="section-desc" data-zh="每一款都是原生 Swift 开发，注重隐私，开箱即用。" data-en="Every app is built with native Swift, privacy-focused, ready to use.">每一款都是原生 Swift 开发，注重隐私，开箱即用。</p>
+
             <div class="app-grid">
                 <!-- VibeWhip -->
-                <div class="app-card animate-in">
-                    <div class="app-icon">⚡</div>
-                    <h3>VibeWhip</h3>
-                    <p class="app-desc">Vibe Coding 项目管理利器，Prompt 库、IDE 切换、白板</p>
-                    <a href="downloads/VibeWhip.zip" class="download-btn primary" onclick="trackDownload('VibeWhip')">⬇ 下载</a>
-                    <div class="download-count">📊 <span id="dl-VibeWhip">0</span> 次下载</div>
-                    <a href="VibeWhip/" class="app-detail-link">查看详情 →</a>
+                <div class="app-card animate-in" style="--card-accent: #8b5cf6;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--accent-soft);">⚡</div>
+                        <div>
+                            <h3>VibeWhip</h3>
+                            <div class="app-tagline" data-zh="Vibe Coding 项目管理" data-en="Vibe Coding Project Manager">Vibe Coding 项目管理</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="为 Vibe Coding 工作流量身打造的一站式工作台。Prompt 库管理（6 大类别）、项目追踪面板、屏幕贴纸、IDE 一键切换（13+ IDE）、Whip Board 看板、Vibing 沉浸模式、Think Notes 思考笔记，配合 iCloud 同步，支持 40 种语言。" data-en="All-in-one workstation built for Vibe Coding. Prompt Library (6 categories), Project Tracking, Screen Stickers, IDE Switcher (13+ IDEs), Whip Board, Vibing Mode, Think Notes — with iCloud sync and 40 languages.">为 Vibe Coding 工作流量身打造的一站式工作台。Prompt 库管理（6 大类别）、项目追踪面板、屏幕贴纸、IDE 一键切换（13+ IDE）、Whip Board 看板、Vibing 沉浸模式、Think Notes 思考笔记，配合 iCloud 同步，支持 40 种语言。</p>
+                    <div class="app-card-footer">
+                        <a href="downloads/VibeWhip.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="VibeWhip/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
+                    </div>
                 </div>
+
                 <!-- ClipVault -->
-                <div class="app-card animate-in">
-                    <div class="app-icon">📋</div>
-                    <h3>ClipVault</h3>
-                    <p class="app-desc">赛博朋克风剪贴板管理器，截图录屏一键呼出</p>
-                    <a href="downloads/ClipVault.zip" class="download-btn primary" onclick="trackDownload('ClipVault')">⬇ 下载</a>
-                    <div class="download-count">📊 <span id="dl-ClipVault">0</span> 次下载</div>
-                    <a href="ClipVault/" class="app-detail-link">查看详情 →</a>
+                <div class="app-card animate-in" style="--card-accent: #06b6d4;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--cyan-soft);">📋</div>
+                        <div>
+                            <h3>ClipVault</h3>
+                            <div class="app-tagline" data-zh="赛博朋克剪贴板管理器" data-en="Cyberpunk Clipboard Manager">赛博朋克剪贴板管理器</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="赛博朋克风格的智能剪贴板管理器。自动捕获文本、链接、图片、颜色代码等所有复制内容，内置区域截图与屏幕录制，支持多维搜索与网格/列表双布局，三个全局快捷键一键呼出。" data-en="Cyberpunk-style smart clipboard manager. Auto-capture text, links, images, color codes. Built-in area screenshots & screen recording, multi-dimensional search, grid/list dual-layout, 3 global hotkeys.">赛博朋克风格的智能剪贴板管理器。自动捕获文本、链接、图片、颜色代码等所有复制内容，内置区域截图与屏幕录制，支持多维搜索与网格/列表双布局，三个全局快捷键一键呼出。</p>
+                    <div class="app-card-footer">
+                        <a href="downloads/ClipVault.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="ClipVault/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
+                    </div>
                 </div>
+
                 <!-- DropShelf -->
-                <div class="app-card animate-in">
-                    <div class="app-icon">📂</div>
-                    <h3>DropShelf</h3>
-                    <p class="app-desc">拖拽文件暂存架，多架子管理、ZIP、PDF 合并</p>
-                    <a href="downloads/DropShelf.zip" class="download-btn primary" onclick="trackDownload('DropShelf')">⬇ 下载</a>
-                    <div class="download-count">📊 <span id="dl-DropShelf">0</span> 次下载</div>
-                    <a href="DropShelf/" class="app-detail-link">查看详情 →</a>
+                <div class="app-card animate-in" style="--card-accent: #6366f1;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--indigo-soft);">📂</div>
+                        <div>
+                            <h3>DropShelf</h3>
+                            <div class="app-tagline" data-zh="拖拽文件搁置架" data-en="Drag & Drop File Shelf">拖拽文件搁置架</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="精巧的 macOS 文件搁置架。拖拽时自动弹出浮动面板暂存文件，支持多架管理、持久化存储、ZIP 压缩、批量重命名、图片格式转换（PNG/JPEG/HEIC/WebP/TIFF）、PDF 合并、Quick Look 预览，四种触发方式随时唤起。" data-en="Sleek macOS file shelf. Auto-popup floating panel when dragging, multi-shelf management, persistent storage, ZIP compression, batch rename, image format conversion, PDF merge, Quick Look preview, 4 trigger methods.">精巧的 macOS 文件搁置架。拖拽时自动弹出浮动面板暂存文件，支持多架管理、持久化存储、ZIP 压缩、批量重命名、图片格式转换（PNG/JPEG/HEIC/WebP/TIFF）、PDF 合并、Quick Look 预览，四种触发方式随时唤起。</p>
+                    <div class="app-card-footer">
+                        <a href="downloads/DropShelf.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="DropShelf/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
+                    </div>
                 </div>
+
                 <!-- PicFlow -->
-                <div class="app-card animate-in">
-                    <div class="app-icon">🖼️</div>
-                    <h3>PicFlow</h3>
-                    <p class="app-desc">菜单栏图床工具，支持 GitHub、阿里云、腾讯云</p>
-                    <a href="downloads/PicFlow.zip" class="download-btn primary" onclick="trackDownload('PicFlow')">⬇ 下载</a>
-                    <div class="download-count">📊 <span id="dl-PicFlow">0</span> 次下载</div>
-                    <a href="PicFlow/" class="app-detail-link">查看详情 →</a>
+                <div class="app-card animate-in" style="--card-accent: #f59e0b;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--amber-soft);">🖼️</div>
+                        <div>
+                            <h3>PicFlow</h3>
+                            <div class="app-tagline" data-zh="菜单栏图床工具" data-en="Menu Bar Image Hosting">菜单栏图床工具</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="精致的菜单栏图床应用。截图自动检测并上传，支持拖拽上传、剪贴板监听、智能压缩。云存储支持 GitHub、阿里云 OSS、腾讯云 COS 三大平台自由切换，上传完成自动复制链接，完整的上传历史记录。" data-en="Refined menu bar image hosting app. Auto-detect screenshots, drag-to-upload, clipboard monitor, smart compression. Supports GitHub, Alibaba Cloud OSS, Tencent Cloud COS. Auto-copy link after upload, full history.">精致的菜单栏图床应用。截图自动检测并上传，支持拖拽上传、剪贴板监听、智能压缩。云存储支持 GitHub、阿里云 OSS、腾讯云 COS 三大平台自由切换，上传完成自动复制链接，完整的上传历史记录。</p>
+                    <div class="app-card-footer">
+                        <a href="downloads/PicFlow.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="PicFlow/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
+                    </div>
                 </div>
+
                 <!-- ClipToNotion -->
-                <div class="app-card animate-in">
-                    <div class="app-icon">📤</div>
-                    <h3>ClipToNotion</h3>
-                    <p class="app-desc">剪贴板一键发到 Notion，轻量菜单栏工具</p>
-                    <a href="downloads/ClipToNotion.zip" class="download-btn primary" onclick="trackDownload('ClipToNotion')">⬇ 下载</a>
-                    <div class="download-count">📊 <span id="dl-ClipToNotion">0</span> 次下载</div>
-                    <a href="ClipToNotion/" class="app-detail-link">查看详情 →</a>
+                <div class="app-card animate-in" style="--card-accent: #3b82f6;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--blue-soft);">📤</div>
+                        <div>
+                            <h3>ClipToNotion</h3>
+                            <div class="app-tagline" data-zh="剪贴板直达 Notion" data-en="Clipboard to Notion">剪贴板直达 Notion</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="极简的菜单栏工具。复制任意文字，按下全局快捷键，内容瞬间追加到你的 Notion 页面顶部。支持剪贴板面板预览、上传记录按日期分组查看、开机自启。通过 Notion 官方 API 直连，不经过任何第三方服务器。" data-en="Minimalist menu bar tool. Copy any text, press the global hotkey, content instantly appends to your Notion page. Clipboard panel preview, upload history grouped by date, launch at login. Direct Notion API connection, no third-party servers.">极简的菜单栏工具。复制任意文字，按下全局快捷键，内容瞬间追加到你的 Notion 页面顶部。支持剪贴板面板预览、上传记录按日期分组查看、开机自启。通过 Notion 官方 API 直连，不经过任何第三方服务器。</p>
+                    <div class="app-card-footer">
+                        <a href="downloads/ClipToNotion.zip" class="download-btn">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
+                        <a href="ClipToNotion/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
+                    </div>
                 </div>
-            </div>
-            <!-- 引导条 -->
-            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
-                <div class="section-cta-text">
-                    <div class="cta-title">🔥 想获取更多独家工具 & 内测资格？</div>
-                    <div class="cta-desc">加入知识星球，第一时间获取新 App 内测、独家效率工具包、开发幕后分享</div>
-                </div>
-                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">加入星球 →</button>
             </div>
         </div>
     </section>
 
     <hr class="section-divider">
 
-    <!-- Module 2: 今日AI快讯 Top5 -->
-    <section class="section" id="ai-news">
+    <!-- Blog -->
+    <section class="section" id="blog">
         <div class="container">
-            <div class="section-header">
-                <h2>⚡ 今日 AI 快讯 Top5</h2>
-                <p>2026-03-27 · 每日精选最值得关注的 AI 动态</p>
-            </div>
-            <div class="news-list">
+            <div class="section-label"><span class="dot"></span> <span data-zh="技术博客" data-en="BLOG">技术博客</span></div>
+            <h2 class="section-title" data-zh="写点东西" data-en="Writings">写点东西</h2>
+            <p class="section-desc" data-zh="技术深度探索与实践经验。" data-en="Technical deep dives and practical experience.">技术深度探索与实践经验。</p>
 
-                <!-- News 1 -->
-                <div class="news-card animate-in">
-                    <div class="news-topic">[主题: Claude Opus 4.6 登顶专业工作任务基准测试]</div>
-                    <div class="news-meta">
-                        <span>🕐 2026-03-25 09:00</span>
-                        <span class="score">🏆 92/100</span>
-                        <span class="author">@VibeWhip（独立开发者 · AI信息前哨 · macOS工具匠人）</span>
-                    </div>
-                    <div class="news-body">
-                        <strong>大概内容：</strong>Anthropic 最新旗舰模型 Claude Opus 4.6 在 Terminal-Bench 2.0 和 OSWorld 等权威基准测试中超越了 Google Gemini 3 Flash 和 OpenAI GPT-5.4，成为现实世界专业工作场景中表现最好的 AI 模型。尤其在编码调试、长文档处理和复杂推理方面表现出色，工程师报告编码生产力达到前所未有的水平。<br>
-                        <span class="field-label">亮点：</span>在实际工作任务（非学术基准）中首次超越所有竞品<br>
-                        <span class="field-label">解决的问题：</span>解决了以往 AI 在复杂调试和长上下文任务中容易"迷路"的问题<br>
-                        <span class="field-label">批判性思考：</span>基准测试的"最优"不等于所有场景最优，实际选型仍需根据具体任务评估
-                    </div>
-                    <a class="news-link" href="https://www.tomsguide.com/ai/claude-opus-4-6-claims-crown-as-best-ai-for-real-work" target="_blank">🔗 Link: Tom's Guide →</a>
-                </div>
-
-                <!-- News 2 -->
-                <div class="news-card animate-in">
-                    <div class="news-topic">[主题: OpenAI 发布 GPT-5.2-Codex 专攻代理编码]</div>
-                    <div class="news-meta">
-                        <span>🕐 2026-03-23 14:30</span>
-                        <span class="score">🏆 88/100</span>
-                        <span class="author">@VibeWhip（独立开发者 · AI信息前哨 · macOS工具匠人）</span>
-                    </div>
-                    <div class="news-body">
-                        <strong>大概内容：</strong>OpenAI 发布 GPT-5.2-Codex，这是专为 Agent 编码任务设计的 GPT-5.2 特殊版本。新版本在上下文管理能力上大幅提升，新增 Windows 平台原生支持，并强化了网络安全防护。Codex 版本可以在更长的代码库中保持一致性，执行多步骤重构任务时显著减少幻觉现象。<br>
-                        <span class="field-label">亮点：</span>Agent 场景专属优化，比通用版本在代码任务上快 40%<br>
-                        <span class="field-label">解决的问题：</span>大模型在长上下文编码任务中容易丢失状态、产生不一致代码的问题<br>
-                        <span class="field-label">批判性思考：</span>专用模型是否意味着通用模型的能力天花板？模型碎片化趋势值得关注
-                    </div>
-                    <a class="news-link" href="https://dentro.de/ai" target="_blank">🔗 Link: dentro.de/ai →</a>
-                </div>
-
-                <!-- News 3 -->
-                <div class="news-card animate-in">
-                    <div class="news-topic">[主题: Anthropic 开源 Agent Skills 框架]</div>
-                    <div class="news-meta">
-                        <span>🕐 2026-03-23 10:00</span>
-                        <span class="score">🏆 90/100</span>
-                        <span class="author">@VibeWhip（独立开发者 · AI信息前哨 · macOS工具匠人）</span>
-                    </div>
-                    <div class="news-body">
-                        <strong>大概内容：</strong>Anthropic 在 GitHub 上以开放标准形式发布了 Agent Skills 框架。多个主流开发工具（包括 Cursor、Windsurf 等）已迅速采纳该框架，但 OpenAI 尚未提供官方支持。该框架定义了 AI Agent 的技能描述标准、工作流编排协议和工具集成规范，为构建可组合的 AI Agent 系统提供了统一基础。<br>
-                        <span class="field-label">亮点：</span>开源标准可能成为 Agent 生态的"USB标准"<br>
-                        <span class="field-label">解决的问题：</span>AI Agent 工具之间缺乏互操作性和统一标准<br>
-                        <span class="field-label">批判性思考：</span>OpenAI 不跟进可能导致生态碎片化，开发者需要为两套标准维护兼容层
-                    </div>
-                    <a class="news-link" href="https://github.com/anthropics" target="_blank">🔗 Link: GitHub →</a>
-                </div>
-
-                <!-- News 4 -->
-                <div class="news-card animate-in">
-                    <div class="news-topic">[主题: Google DeepMind 发布 Genie 3 世界模型和 Lyria 3 音乐AI]</div>
-                    <div class="news-meta">
-                        <span>🕐 2026-03-19 16:00</span>
-                        <span class="score">🏆 85/100</span>
-                        <span class="author">@VibeWhip（独立开发者 · AI信息前哨 · macOS工具匠人）</span>
-                    </div>
-                    <div class="news-body">
-                        <strong>大概内容：</strong>Google DeepMind 一口气发布了多个新 AI 模型：Genie 3 是通用世界模型，可以从纯文本描述生成逼真的交互式 3D 环境；Lyria 3 是高保真音乐创作模型，支持多种风格和乐器的专业级作曲；还有用于图像生成的 Nano Banana 2。这标志着 AI 从"理解世界"向"构建世界"迈出关键一步。<br>
-                        <span class="field-label">亮点：</span>从文本到 3D 世界的跨越，游戏/影视行业将首先受益<br>
-                        <span class="field-label">解决的问题：</span>3D 场景创建依赖大量手工建模，AI 可大幅降低门槛<br>
-                        <span class="field-label">批判性思考：</span>世界模型生成的环境是否足够精确可控，以满足专业级使用需求？
-                    </div>
-                    <a class="news-link" href="https://deepmind.google/" target="_blank">🔗 Link: Google DeepMind →</a>
-                </div>
-
-                <!-- News 5 -->
-                <div class="news-card animate-in">
-                    <div class="news-topic">[主题: AI 编码工具日活跃开发者使用率突破 50%]</div>
-                    <div class="news-meta">
-                        <span>🕐 2026-03-15 11:00</span>
-                        <span class="score">🏆 86/100</span>
-                        <span class="author">@VibeWhip（独立开发者 · AI信息前哨 · macOS工具匠人）</span>
-                    </div>
-                    <div class="news-body">
-                        <strong>大概内容：</strong>Menlo Ventures 最新调研显示，一半的开发者现在每天使用 AI 编码工具。在排名前 25% 的组织中，采用率更高达 65%。代码补全市场规模已增长至 23 亿美元，使用 AI 编码工具的团队报告开发生命周期速度提升超过 15%。Cursor 背后的 Anysphere 刚以 293 亿美元估值融资 23 亿美元。<br>
-                        <span class="field-label">亮点：</span>AI 编码从"尝鲜"正式进入"标配"时代<br>
-                        <span class="field-label">解决的问题：</span>开发者生产力瓶颈和重复性编码工作<br>
-                        <span class="field-label">批判性思考：</span>50%使用率不意味着50%代码由AI生成，质量把控和代码审查依然是关键
-                    </div>
-                    <a class="news-link" href="https://www.menlovc.com/" target="_blank">🔗 Link: Menlo Ventures →</a>
-                </div>
-
-            </div>
-            <!-- 引导条 -->
-            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
-                <div class="section-cta-text">
-                    <div class="cta-title">💡 每条快讯都有深度解读版</div>
-                    <div class="cta-desc">星球内提供完整分析、技术拆解、实操建议，帮你把信息差变成竞争力</div>
-                </div>
-                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">查看深度版 →</button>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- Module 3: 今日AI论文快讯 Top5 -->
-    <section class="section" id="ai-papers">
-        <div class="container">
-            <div class="section-header">
-                <h2>📄 今日 AI 论文快讯 Top5</h2>
-                <p>2026-03-27 · 精选 arXiv / HuggingFace 热门论文</p>
-            </div>
-            <div class="news-list">
-
-                <!-- Paper 1 -->
-                <div class="paper-card animate-in">
-                    <div class="paper-title">📝 Draft-Thinking: Learning Efficient Reasoning in Long Chain-of-Thought LLMs</div>
-                    <div class="paper-body">
-                        <span class="field-label">🔍 解决什么问题：</span>大语言模型的"链式思考"（CoT）推理虽然提升了准确度，但生成过程又长又慢，严重影响推理效率和成本。本文提出让模型在思考过程中先"打草稿"，跳过冗余推理步骤。<br>
-                        <span class="field-label">💡 核心方法：</span>引入"草稿思考"机制，训练模型识别哪些推理步骤可以压缩或跳过，在保持推理质量的同时将生成长度缩短 30-50%。<br>
-                        <span class="field-label">🎯 为什么值得关注：</span>直接解决了 CoT 推理的效率瓶颈，对降低 AI 推理成本和实时应用意义重大，有望让"深度思考"能力在更多场景下实用化。
-                    </div>
-                    <a class="paper-link" href="https://arxiv.org/abs/2603.00578" target="_blank">📎 arXiv: 2603.00578 →</a>
-                </div>
-
-                <!-- Paper 2 -->
-                <div class="paper-card animate-in">
-                    <div class="paper-title">📝 CUA-Suite: Massive Human-annotated Video Demonstrations for Computer-Use Agents</div>
-                    <div class="paper-body">
-                        <span class="field-label">🔍 解决什么问题：</span>AI 代理操作电脑（点击、输入、导航）的能力正在快速发展，但缺乏大规模、高质量的人类操作演示数据来训练和评估这些代理。<br>
-                        <span class="field-label">💡 核心方法：</span>由 ServiceNow 团队构建了大规模人工标注的视频演示数据集 CUA-Suite，包含真实用户在计算机上执行各种任务的操作录像和精确标注。<br>
-                        <span class="field-label">🎯 为什么值得关注：</span>这是目前最大的计算机使用代理训练数据集之一，将直接推动 AI 自动化办公、RPA（机器人流程自动化）等领域的发展。
-                    </div>
-                    <a class="paper-link" href="https://arxiv.org/abs/2603.24440" target="_blank">📎 arXiv: 2603.24440 →</a>
-                </div>
-
-                <!-- Paper 3 -->
-                <div class="paper-card animate-in">
-                    <div class="paper-title">📝 UI-Voyager: A Self-Evolving GUI Agent Learning via Failed Experience</div>
-                    <div class="paper-body">
-                        <span class="field-label">🔍 解决什么问题：</span>现有的 GUI 代理在遇到操作失败时无法有效学习和改进，导致在复杂用户界面中经常重复犯同样的错误。<br>
-                        <span class="field-label">💡 核心方法：</span>设计了一种"从失败中学习"的自进化机制，代理会记录失败的操作轨迹，分析原因，并自动调整后续策略，实现类似人类"吃一堑长一智"的行为模式。<br>
-                        <span class="field-label">🎯 为什么值得关注：</span>让 AI 代理具备了自我纠错和持续改进的能力，这是向通用 AI 助手迈进的重要一步，直接影响所有 GUI 自动化工具的可靠性。
-                    </div>
-                    <a class="paper-link" href="https://arxiv.org/abs/2603.24533" target="_blank">📎 arXiv: 2603.24533 →</a>
-                </div>
-
-                <!-- Paper 4 -->
-                <div class="paper-card animate-in">
-                    <div class="paper-title">📝 Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?</div>
-                    <div class="paper-body">
-                        <span class="field-label">🔍 解决什么问题：</span>自蒸馏（模型用自己的输出来训练自己）被广泛用于模型压缩和能力提升，但人们发现它有时反而会损害大语言模型的推理能力，原因一直不清楚。<br>
-                        <span class="field-label">💡 核心方法：</span>Microsoft Research 通过系统实验发现了自蒸馏降低推理能力的具体条件和机制，包括"推理捷径"陷阱和"能力塌缩"现象，并提出了缓解策略。<br>
-                        <span class="field-label">🎯 为什么值得关注：</span>对于正在做模型训练和微调的团队极具参考价值，避免在自蒸馏过程中无意间"损坏"模型核心推理能力。
-                    </div>
-                    <a class="paper-link" href="https://arxiv.org/abs/2603.24472" target="_blank">📎 arXiv: 2603.24472 →</a>
-                </div>
-
-                <!-- Paper 5 -->
-                <div class="paper-card animate-in">
-                    <div class="paper-title">📝 T-MAP: Red-Teaming LLM Agents with Trajectory-aware Evolutionary Search</div>
-                    <div class="paper-body">
-                        <span class="field-label">🔍 解决什么问题：</span>AI 代理在执行复杂任务时可能被恶意利用，但现有的安全测试方法无法有效发现 Agent 在多步骤交互中的漏洞。<br>
-                        <span class="field-label">💡 核心方法：</span>KAIST AI 提出了一种轨迹感知的进化搜索方法 T-MAP，通过追踪 Agent 的完整操作轨迹，自动搜索可能触发危险行为的输入序列，远比单轮攻击更全面。<br>
-                        <span class="field-label">🎯 为什么值得关注：</span>AI Agent 安全是当下最紧迫的问题之一，该方法为 Agent 安全评估提供了实用工具，帮助在部署前发现潜在风险。
-                    </div>
-                    <a class="paper-link" href="https://arxiv.org/abs/2603.22341" target="_blank">📎 arXiv: 2603.22341 →</a>
-                </div>
-
-            </div>
-            <!-- 引导条 -->
-            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
-                <div class="section-cta-text">
-                    <div class="cta-title">📖 论文精读 & 代码复现笔记</div>
-                    <div class="cta-desc">星球内提供逐段精读、核心代码复现、落地实践指南，让你真正读懂前沿论文</div>
-                </div>
-                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">获取精读 →</button>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- Module 4: VibeWhip 内部文章 -->
-    <section class="section" id="articles">
-        <div class="container">
-            <div class="section-header">
-                <h2>📚 VibeWhip 内部文章</h2>
-                <p>技术深度探索与实践经验分享</p>
-            </div>
-            <div class="article-grid">
-                <!-- Article 1: Git Worktree -->
-                <a class="article-card animate-in" href="blogs/git-worktree-tutorial.html">
-                    <div class="article-icon" style="background: var(--amber-soft);">🌳</div>
-                    <div class="article-content">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a class="blog-card animate-in" href="blogs/git-worktree-tutorial.html">
+                    <div class="blog-icon" style="background: var(--amber-soft);">🌳</div>
+                    <div class="blog-content">
                         <h3>Git Worktree 完全指南</h3>
-                        <p>深入了解 Git Worktree：在同一仓库创建多个工作目录，并行开发不同分支，节省 55% 磁盘空间。从基本操作到实战案例，一篇文章全面掌握。</p>
-                        <div class="article-meta">
-                            <span class="article-tag" style="background: var(--amber-soft); color: var(--amber);">Git</span>
-                            <span class="article-tag" style="background: var(--green-soft); color: var(--green);">DevOps</span>
+                        <p data-zh="深入了解 Git Worktree：在同一仓库创建多个工作目录，并行开发不同分支，节省 55% 磁盘空间。" data-en="Deep dive into Git Worktree: create multiple working directories in the same repo, develop branches in parallel, save 55% disk space.">深入了解 Git Worktree：在同一仓库创建多个工作目录，并行开发不同分支，节省 55% 磁盘空间。</p>
+                        <div class="blog-meta">
+                            <span class="blog-tag" style="background: var(--amber-soft); color: var(--amber);">Git</span>
+                            <span class="blog-tag" style="background: var(--green-soft); color: var(--green);">DevOps</span>
                             <span>2026-03-24</span>
                         </div>
                     </div>
-                    <span class="article-arrow">→</span>
+                    <span class="blog-arrow">→</span>
                 </a>
-
-                <!-- Placeholder -->
-                <div class="article-card animate-in" style="border-style: dashed; opacity: 0.5; cursor: default; justify-content: center; padding: 28px;">
-                    <div style="text-align: center; color: var(--text-muted);">
-                        <div style="font-size: 28px; margin-bottom: 6px;">✍️</div>
-                        <p style="font-size: 13px; margin: 0;">更多文章持续更新中，敬请期待...</p>
-                    </div>
-                </div>
-            </div>
-            <!-- 引导条 -->
-            <div class="section-cta animate-in" onclick="document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
-                <div class="section-cta-text">
-                    <div class="cta-title">✍️ 更多独家深度文章</div>
-                    <div class="cta-desc">星球内持续更新 AI 实战、独立开发、效率方法论等独家内容</div>
-                </div>
-                <button class="section-cta-btn" onclick="event.stopPropagation(); document.getElementById('xq-zone').scrollIntoView({behavior:'smooth'})">解锁全部 →</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ★★★ 知识星球专区 — 核心转化区 ★★★ -->
-    <section class="xq-section" id="xq-zone">
-        <div class="container">
-            <div class="xq-section-inner animate-in">
-                <div class="xq-section-badge">
-                    🌟 核心社区
-                </div>
-                <h2>加入 <span class="gradient">VibeWhip 知识星球</span></h2>
-                <p class="xq-subtitle">
-                    这里不只是信息聚合，而是一个<strong style="color:var(--text);">可以互动的 AI 前哨站</strong>。<br>
-                    每天精选内容只是冰山一角，星球内有更多你在别处找不到的东西。
-                </p>
-                <div class="xq-benefits">
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">⚡</div>
-                        <div class="benefit-title">AI 快讯深度版</div>
-                        <div class="benefit-desc">不只是快讯，还有完整技术拆解和实操建议</div>
-                    </div>
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">📄</div>
-                        <div class="benefit-title">论文逐段精读</div>
-                        <div class="benefit-desc">核心论文精读笔记 + 代码复现 + 落地指南</div>
-                    </div>
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">🖥️</div>
-                        <div class="benefit-title">App 内测资格</div>
-                        <div class="benefit-desc">第一时间获取新 App 内测版、Bug 反馈直通车</div>
-                    </div>
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">🧰</div>
-                        <div class="benefit-title">独家工具包</div>
-                        <div class="benefit-desc">Prompt 模板、效率工作流、开发资源合集</div>
-                    </div>
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">💬</div>
-                        <div class="benefit-title">1v1 提问</div>
-                        <div class="benefit-desc">直接向作者提问，AI 开发、独立开发经验交流</div>
-                    </div>
-                    <div class="xq-benefit">
-                        <div class="benefit-icon">🎯</div>
-                        <div class="benefit-title">开发幕后</div>
-                        <div class="benefit-desc">App 设计决策、踩坑记录、商业化复盘</div>
-                    </div>
-                </div>
-                <div class="xq-qr-wrap">
-                    <img src="assets/zhishixingqiu.jpg" alt="VibeWhip 知识星球二维码" class="img-zoomable" onclick="openLightbox(this.src)">
-                </div>
-                <p class="xq-scan-tip">📱 <strong>微信扫码</strong>即可加入 · 限时早鸟价</p>
             </div>
         </div>
     </section>
@@ -1309,132 +696,57 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <a href="#apps">应用</a>
-                <a href="#ai-news">AI快讯</a>
-                <a href="#ai-papers">AI论文</a>
-                <a href="#articles">文章</a>
-                <a href="#xq-zone" style="color: #ff6b35;">🌟 知识星球</a>
+                <a href="#apps"><span data-zh="应用" data-en="Apps">应用</span></a>
+                <a href="#blog"><span data-zh="博客" data-en="Blog">博客</span></a>
+                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a>
             </div>
-            <div class="footer-xq">
-                <a href="#xq-zone">🌟 加入知识星球，获取独家 AI 深度内容 →</a>
-            </div>
-            <p style="margin-top: 12px;">© 2026 VibeWhip AI 进击场. All rights reserved.</p>
+            <p>© 2026 VibeWhip. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- 知识星球浮窗（升级版） -->
-    <div class="xq-float" id="xqFloat" onclick="toggleXQPopup()">
-        <div class="xq-float-btn">
-            <img src="assets/zhishixingqiu.jpg" alt="知识星球">
-            <span class="xq-float-dot"></span>
-        </div>
-        <span class="xq-float-label">加入星球</span>
-    </div>
-    <div class="xq-popup" id="xqPopup">
-        <button class="close-btn" onclick="toggleXQPopup()">✕</button>
-        <img src="assets/zhishixingqiu.jpg" alt="知识星球二维码" class="img-zoomable" onclick="event.stopPropagation(); openLightbox(this.src)">
-        <div class="popup-title">加入 VibeWhip 知识星球</div>
-        <div class="popup-benefits">
-            <div class="popup-benefit-item"><span class="check">✓</span> AI 快讯深度版 + 实操建议</div>
-            <div class="popup-benefit-item"><span class="check">✓</span> 论文精读 + 代码复现笔记</div>
-            <div class="popup-benefit-item"><span class="check">✓</span> 新 App 内测资格 + 独家工具包</div>
-            <div class="popup-benefit-item"><span class="check">✓</span> 1v1 提问 · 直接交流</div>
-        </div>
-        <p style="font-size: 12px; color: var(--text-muted);">📱 微信扫码即可加入</p>
-    </div>
 
     <!-- 不蒜子统计 -->
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <script>
-    // ===== 下载量统计（localStorage，每个用户独立计数） =====
-    function trackDownload(appName) {
-        var key = 'vibewhip_dl_' + appName;
-        var count = parseInt(localStorage.getItem(key) || '0', 10);
-        count++;
-        localStorage.setItem(key, count);
-        updateDownloadCounts();
-    }
-
-    function updateDownloadCounts() {
-        var apps = ['VibeWhip', 'ClipVault', 'DropShelf', 'PicFlow', 'ClipToNotion'];
-        apps.forEach(function(name) {
-            var key = 'vibewhip_dl_' + name;
-            var count = parseInt(localStorage.getItem(key) || '0', 10);
-            var el = document.getElementById('dl-' + name);
-            if(el) el.textContent = count;
-        });
-    }
-    document.addEventListener('DOMContentLoaded', updateDownloadCounts);
-
-    // ===== 知识星球弹窗 =====
-    function toggleXQPopup() {
-        var popup = document.getElementById('xqPopup');
-        popup.classList.toggle('show');
-        // 标记已交互过，不再自动弹
-        sessionStorage.setItem('xq_interacted', '1');
-    }
-
-    // 点击外部关闭
-    document.addEventListener('click', function(e) {
-        var popup = document.getElementById('xqPopup');
-        var float = document.getElementById('xqFloat');
-        if (popup.classList.contains('show') && !popup.contains(e.target) && !float.contains(e.target)) {
-            popup.classList.remove('show');
-        }
-    });
-
-    // 首次访问 8 秒后自动弹出一次（每次会话仅一次）
+    // ===== Language Toggle =====
     (function(){
-        if (!sessionStorage.getItem('xq_interacted')) {
-            setTimeout(function(){
-                if (!sessionStorage.getItem('xq_interacted')) {
-                    var popup = document.getElementById('xqPopup');
-                    if (popup && !popup.classList.contains('show')) {
-                        popup.classList.add('show');
-                    }
-                }
-            }, 8000);
+        var K='declaration_lang';
+        function gL(){return localStorage.getItem(K)||'zh';}
+        function sL(l){localStorage.setItem(K,l);}
+        function apply(lang){
+            document.querySelectorAll('[data-zh]').forEach(function(el){
+                el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');
+            });
+            document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
+            document.title=lang==='zh'?'VibeWhip':'VibeWhip';
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
         }
+        document.addEventListener('DOMContentLoaded',function(){
+            var lang=gL();
+            apply(lang);
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){
+                var next=gL()==='zh'?'en':'zh';
+                sL(next);
+                apply(next);
+            });
+        });
     })();
 
-    // ===== 滚动动画 =====
+    // ===== Scroll Animation =====
     (function(){
-        var observer = new IntersectionObserver(function(entries){
+        var observer=new IntersectionObserver(function(entries){
             entries.forEach(function(entry){
                 if(entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-        document.addEventListener('DOMContentLoaded', function(){
+        },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+        document.addEventListener('DOMContentLoaded',function(){
             document.querySelectorAll('.animate-in').forEach(function(el){
                 observer.observe(el);
             });
         });
     })();
-    </script>
-
-    <!-- 图片放大 Lightbox -->
-    <div class="img-lightbox" id="imgLightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-        <img id="lightboxImg" src="" alt="放大预览">
-    </div>
-    <script>
-    function openLightbox(src) {
-        var lb = document.getElementById('imgLightbox');
-        var img = document.getElementById('lightboxImg');
-        img.src = src;
-        lb.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-        var lb = document.getElementById('imgLightbox');
-        lb.classList.remove('show');
-        document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeLightbox();
-    });
     </script>
 </body>
 </html>

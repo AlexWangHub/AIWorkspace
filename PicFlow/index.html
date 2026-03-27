@@ -1,919 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PicFlow — Efficient Image Hosting Tool</title>
-    <meta name="description" content="PicFlow is a refined macOS menu bar image hosting tool. Supports GitHub, Alibaba Cloud OSS, Tencent Cloud COS. Auto screenshot detection, drag-to-upload, one-click link copy.">
-    <meta name="keywords" content="PicFlow, image hosting, macOS, menu bar, GitHub, Alibaba Cloud OSS, Tencent Cloud COS, screenshot, upload, markdown">
+    <title>PicFlow — 高效图床上传工具</title>
+    <meta name="description" content="PicFlow 是一款精致的 macOS 菜单栏图床工具。支持 GitHub、阿里云 OSS、腾讯云 COS，截图自动检测、拖拽上传、一键复制链接。">
     <meta name="author" content="VibeWhip">
     <link rel="canonical" href="https://vibewhip.com/PicFlow/">
-    <!-- Open Graph -->
     <meta property="og:type" content="product">
     <meta property="og:url" content="https://vibewhip.com/PicFlow/">
-    <meta property="og:title" content="PicFlow — Efficient Image Hosting Tool">
-    <meta property="og:description" content="macOS menu bar image hosting tool. Supports GitHub, Alibaba Cloud OSS, Tencent COS. Auto screenshot detection & one-click upload.">
+    <meta property="og:title" content="PicFlow — 高效图床上传工具">
     <meta property="og:site_name" content="VibeWhip">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PicFlow — Efficient Image Hosting Tool">
-    <meta name="twitter:description" content="macOS menu bar image hosting. GitHub, Alibaba Cloud OSS, Tencent COS. Auto screenshot & one-click upload.">
-    <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "PicFlow",
-      "url": "https://vibewhip.com/PicFlow/",
-      "description": "A refined macOS menu bar image hosting tool supporting GitHub, Alibaba Cloud OSS and Tencent Cloud COS with auto screenshot detection and drag-to-upload.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "macOS",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "author": { "@type": "Organization", "name": "VibeWhip", "url": "https://vibewhip.com/" }
-    }
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PicFlow","url":"https://vibewhip.com/PicFlow/","applicationCategory":"UtilitiesApplication","operatingSystem":"macOS","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"VibeWhip","url":"https://vibewhip.com/"}}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0a0b;
-            --surface: #141416;
-            --surface-hover: #1c1c20;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent: #6366f1;
-            --accent-soft: rgba(99, 102, 241, 0.12);
-            --accent-glow: rgba(99, 102, 241, 0.25);
-            --purple: #8b5cf6;
-            --green: #22c55e;
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .header {
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .container-narrow {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-        }
-
-        .nav-links a.active {
-            color: var(--text);
-            background: var(--surface);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.06) 40%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .hero-badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 19px;
-            color: var(--text-secondary);
-            max-width: 540px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-        }
-
-        .hero-cta svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .hero-meta {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Upload animation */
-        .upload-demo {
-            margin: 60px auto 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            position: relative;
-        }
-
-        .demo-card {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 22px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            animation: demoFloat 3s ease-in-out infinite;
-        }
-
-        .demo-card .icon { font-size: 20px; }
-
-        @keyframes demoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        .demo-arrow {
-            color: var(--text-muted);
-            font-size: 20px;
-            animation: arrowPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; color: var(--accent); }
-        }
-
-        .demo-result {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 22px;
-            background: var(--green);
-            color: #000;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0;
-            animation: fadeResult 3s ease-in-out infinite;
-        }
-
-        @keyframes fadeResult {
-            0%, 60%, 100% { opacity: 0; transform: translateX(-8px); }
-            70%, 90% { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Features */
-        .features {
-            padding: 80px 0;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .features-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .features-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 28px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #3f3f46;
-            transform: translateY(-3px);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 18px;
-        }
-
-        .feature-icon.indigo { background: var(--accent-soft); }
-        .feature-icon.purple { background: rgba(139, 92, 246, 0.12); }
-        .feature-icon.green { background: rgba(34, 197, 94, 0.12); }
-        .feature-icon.amber { background: rgba(245, 158, 11, 0.12); }
-        .feature-icon.rose { background: rgba(244, 63, 94, 0.12); }
-        .feature-icon.cyan { background: rgba(6, 182, 212, 0.12); }
-
-        .feature-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .feature-card.highlight {
-            grid-column: span 2;
-            background: linear-gradient(135deg, rgba(99,102,241,0.06), rgba(139,92,246,0.06));
-            border-color: rgba(99, 102, 241, 0.2);
-        }
-
-        /* How it works */
-        .how-it-works {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .how-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .how-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .how-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .flow {
-            display: flex;
-            align-items: stretch;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .flow-step {
-            flex: 1;
-            max-width: 280px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 17px;
-            font-weight: 800;
-            margin: 0 auto 16px;
-        }
-
-        .flow-step .flow-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .flow-step h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .flow-step p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .flow-arrow {
-            display: flex;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Providers */
-        .providers {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .providers-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .providers-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .providers-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .provider-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            max-width: 780px;
-            margin: 0 auto;
-        }
-
-        .provider-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .provider-card:hover {
-            border-color: #3f3f46;
-            transform: translateY(-3px);
-        }
-
-        .provider-card .p-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .provider-card h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .provider-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Privacy */
-        .privacy-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .privacy-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 48px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .privacy-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--green), transparent);
-        }
-
-        .privacy-box .shield {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .privacy-box h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .privacy-box p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .privacy-tags {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
-        .privacy-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.15);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--green);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .hero { padding: 70px 0 50px; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .feature-card.highlight { grid-column: span 1; }
-            .flow { flex-direction: column; align-items: center; }
-            .flow-arrow { transform: rotate(90deg); }
-            .features-header h2, .how-header h2, .providers-header h2 { font-size: 28px; }
-            .privacy-box { padding: 32px 24px; }
-            .upload-demo { flex-wrap: wrap; }
-            .provider-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Entrance animations */
-        .animate-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        .animate-in:nth-child(1) { animation-delay: 0.05s; }
-        .animate-in:nth-child(2) { animation-delay: 0.1s; }
-        .animate-in:nth-child(3) { animation-delay: 0.15s; }
-        .animate-in:nth-child(4) { animation-delay: 0.2s; }
-        .animate-in:nth-child(5) { animation-delay: 0.25s; }
-        .animate-in:nth-child(6) { animation-delay: 0.3s; }
-
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            white-space: nowrap;
-        }
-
-        .lang-toggle:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-            border-color: #3f3f46;
-        }
-
-        .lang-toggle .globe {
-            font-size: 14px;
-        }
+        :root{--bg:#0a0a0b;--surface:#111113;--surface-hover:#19191d;--border:#222226;--border-hover:#333338;--text:#fafafa;--text-secondary:#a1a1aa;--text-muted:#63636e;--accent:#6366f1;--accent-soft:rgba(99,102,241,0.10);--purple:#8b5cf6;--green:#22c55e;--green-soft:rgba(34,197,94,0.08);--amber:#f59e0b;--amber-soft:rgba(245,158,11,0.08);--cyan:#06b6d4;--cyan-soft:rgba(6,182,212,0.08);--rose:#f43f5e;--rose-soft:rgba(244,63,94,0.08);--radius:16px;--mono:'JetBrains Mono',monospace;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;}
+        .header{border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;background:rgba(10,10,11,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:100;}
+        .container{max-width:960px;margin:0 auto;padding:0 24px;}
+        .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto;padding:0 24px;}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);}
+        .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+        .logo-text{font-family:var(--mono);font-weight:700;font-size:16px;}
+        .header-right{display:flex;align-items:center;gap:14px;}
+        .nav-links{display:flex;gap:6px;}.nav-links a{color:var(--text-muted);text-decoration:none;font-size:13px;padding:6px 14px;border-radius:8px;transition:all 0.2s;font-weight:500;}.nav-links a:hover{color:var(--text-secondary);background:var(--surface-hover);}.nav-links a.active{color:var(--text);background:var(--surface);}
+        .lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:all 0.2s;font-family:var(--mono);}.lang-toggle:hover{color:var(--text-secondary);border-color:var(--border-hover);}
+
+        .hero{padding:100px 0 80px;text-align:center;position:relative;}
+        .hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(99,102,241,0.08) 0%,rgba(139,92,246,0.04) 40%,transparent 70%);pointer-events:none;}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text-muted);margin-bottom:32px;font-family:var(--mono);}
+        .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+        .hero h1{font-size:clamp(36px,5vw,56px);font-weight:900;letter-spacing:-0.04em;line-height:1.15;margin-bottom:20px;}
+        .hero h1 .gradient{background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero .subtitle{font-size:17px;color:var(--text-secondary);max-width:540px;margin:0 auto 40px;font-weight:300;line-height:1.8;}
+        .hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:600;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 24px rgba(99,102,241,0.25);cursor:pointer;font-family:inherit;}.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.35);}
+        .hero-cta svg{width:18px;height:18px;}
+        .hero-meta{margin-top:20px;font-size:13px;color:var(--text-muted);font-family:var(--mono);}
+
+        .upload-demo{margin:56px auto 0;display:flex;align-items:center;justify-content:center;gap:16px;}
+        .demo-card{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-size:14px;color:var(--text-secondary);animation:demoFloat 3s ease-in-out infinite;}
+        .demo-card .icon{font-size:20px;}
+        @keyframes demoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+        .demo-arrow{color:var(--text-muted);font-size:20px;animation:arrowPulse 3s ease-in-out infinite;}
+        @keyframes arrowPulse{0%,100%{opacity:0.4;}50%{opacity:1;color:var(--accent);}}
+        .demo-result{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;background:var(--green);color:#000;border-radius:12px;font-size:14px;font-weight:600;opacity:0;animation:fadeResult 3s ease-in-out infinite;}
+        @keyframes fadeResult{0%,60%,100%{opacity:0;transform:translateX(-8px);}70%,90%{opacity:1;transform:translateX(0);}}
+
+        .features{padding:80px 0;}
+        .features-header{text-align:center;margin-bottom:56px;}.features-header h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}.features-header p{font-size:15px;color:var(--text-secondary);}
+        .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+        .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;transition:all 0.3s;}.feature-card:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+        .feature-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:16px;}
+        .feature-card h3{font-size:15px;font-weight:700;margin-bottom:8px;}.feature-card p{font-size:13px;color:var(--text-secondary);line-height:1.7;}
+        .feature-card.highlight{grid-column:span 2;background:linear-gradient(135deg,rgba(99,102,241,0.04),rgba(139,92,246,0.04));border-color:rgba(99,102,241,0.15);}
+
+        .providers{padding:80px 0;border-top:1px solid var(--border);}
+        .providers-header{text-align:center;margin-bottom:48px;}.providers-header h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}.providers-header p{font-size:15px;color:var(--text-secondary);}
+        .provider-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:780px;margin:0 auto;}
+        .provider-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:all 0.3s;}.provider-card:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+        .provider-card .p-icon{font-size:36px;margin-bottom:16px;}.provider-card h4{font-size:16px;font-weight:600;margin-bottom:6px;}.provider-card p{font-size:13px;color:var(--text-muted);}
+
+        .privacy-section{padding:80px 0;border-top:1px solid var(--border);}
+        .privacy-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;position:relative;overflow:hidden;}
+        .privacy-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);}
+        .privacy-box .shield{font-size:44px;margin-bottom:18px;}.privacy-box h3{font-size:22px;font-weight:700;margin-bottom:12px;}.privacy-box p{font-size:14px;color:var(--text-secondary);max-width:500px;margin:0 auto;line-height:1.8;}
+        .privacy-tags{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+        .privacy-tag{display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--green-soft);border:1px solid rgba(34,197,94,0.12);border-radius:100px;font-size:12px;color:var(--green);font-weight:500;}
+        .footer{border-top:1px solid var(--border);padding:36px 0;text-align:center;}.footer p{font-size:12px;color:var(--text-muted);font-family:var(--mono);}.footer a{color:var(--text-secondary);text-decoration:none;}.footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:14px;}.footer-links a{font-size:13px;color:var(--text-muted);}
+        .animate-in{opacity:0;transform:translateY(20px);animation:slideUp 0.6s ease forwards;}.animate-in:nth-child(1){animation-delay:.05s}.animate-in:nth-child(2){animation-delay:.1s}.animate-in:nth-child(3){animation-delay:.15s}.animate-in:nth-child(4){animation-delay:.2s}.animate-in:nth-child(5){animation-delay:.25s}.animate-in:nth-child(6){animation-delay:.3s}
+        @keyframes slideUp{to{opacity:1;transform:translateY(0);}}
+        @media(max-width:768px){.hero h1{font-size:32px;}.hero{padding:70px 0 50px;}.feature-grid{grid-template-columns:1fr;}.feature-card.highlight{grid-column:span 1;}.nav-links{display:none;}.upload-demo{flex-wrap:wrap;}.provider-grid{grid-template-columns:1fr;}.privacy-box{padding:32px 20px;}}
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🖼</div>
-                <span class="logo-text">PicFlow</span>
-            </a>
-            <nav class="nav-links">
-                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-            </nav>
-                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
-                    <span class="globe">🌐</span>
-                    <span class="lang-label">中文</span>
-                </button>
+    <header class="header"><div class="header-inner">
+        <a href="index.html" class="logo"><div class="logo-icon">🖼</div><span class="logo-text">PicFlow</span></a>
+        <div class="header-right">
+            <nav class="nav-links"><a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a><a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a><a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a></nav>
+            <button id="langToggle" class="lang-toggle"><span>🌐</span><span class="lang-label">EN</span></button>
         </div>
-    </header>
+    </div></header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                <span data-zh="macOS 菜单栏图床工具" data-en="macOS Menu Bar Image Hosting">macOS Menu Bar Image Hosting</span>
-            </div>
-            <h1>
-                <span data-zh="截图，拖拽" data-en="Screenshot, Drag">Screenshot, Drag</span><br>
-                <span class="gradient"><span data-zh="一键上云" data-en="One-Click Upload">One-Click Upload</span></span>
-            </h1>
-            <p class="subtitle">
-                <span data-zh="一款精致的 macOS 菜单栏图床应用。" data-en="A refined macOS menu bar image hosting app.">A refined macOS menu bar image hosting app.</span><br>
-                <span data-zh="截图自动检测、拖拽上传、全局快捷键，图片瞬间上传到云端并复制链接。" data-en="Auto-detect screenshots, drag-to-upload, hotkeys — upload and copy link instantly.">Auto-detect screenshots, drag-to-upload, hotkeys — upload and copy link instantly.</span>
-            </p>
-
-            <a href="https://apps.apple.com/app/picflow" class="hero-cta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                <span data-zh="在 Mac App Store 下载" data-en="Download on Mac App Store">Download on Mac App Store</span>
-            </a>
-            <p class="hero-meta"><span data-zh="免费下载 · macOS 14.0+ · Apple Silicon & Intel" data-en="Free · macOS 14.0+ · Apple Silicon & Intel">Free · macOS 14.0+ · Apple Silicon & Intel</span></p>
-
-            <div class="upload-demo">
-                <div class="demo-card">
-                    <span class="icon">📸</span>
-                    <span data-zh="截图 / 拖拽图片" data-en="Screenshot / Drag Image">Screenshot / Drag Image</span>
-                </div>
-                <span class="demo-arrow">→</span>
-                <div class="demo-card">
-                    <span class="icon">☁️</span>
-                    <span data-zh="上传到云端" data-en="Upload to Cloud">Upload to Cloud</span>
-                </div>
-                <span class="demo-arrow">→</span>
-                <div class="demo-result"><span data-zh="✅ 链接已复制" data-en="✅ Link Copied">✅ Link Copied</span></div>
-            </div>
+    <section class="hero"><div class="container">
+        <div class="hero-badge"><span class="dot"></span><span data-zh="macOS 菜单栏图床工具" data-en="macOS Menu Bar Image Hosting">macOS 菜单栏图床工具</span></div>
+        <h1><span data-zh="截图，拖拽" data-en="Screenshot, Drag">截图，拖拽</span><br><span class="gradient" data-zh="一键上云" data-en="One-Click Upload">一键上云</span></h1>
+        <p class="subtitle" data-zh="一款精致的 macOS 菜单栏图床应用。截图自动检测、拖拽上传、全局快捷键，图片瞬间上传到云端并复制链接。" data-en="A refined macOS menu bar image hosting app. Auto-detect screenshots, drag-to-upload, hotkeys — upload and copy link instantly.">一款精致的 macOS 菜单栏图床应用。截图自动检测、拖拽上传、全局快捷键，图片瞬间上传到云端并复制链接。</p>
+        <a href="../downloads/PicFlow.zip" class="hero-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-zh="下载 PicFlow" data-en="Download PicFlow">下载 PicFlow</span>
+        </a>
+        <p class="hero-meta" data-zh="免费 · macOS 14.0+ · Apple Silicon & Intel · 已公证签名" data-en="Free · macOS 14.0+ · Apple Silicon & Intel · Notarized">免费 · macOS 14.0+ · Apple Silicon & Intel · 已公证签名</p>
+        <div class="upload-demo">
+            <div class="demo-card"><span class="icon">📸</span><span data-zh="截图 / 拖拽图片" data-en="Screenshot / Drag">截图 / 拖拽图片</span></div>
+            <span class="demo-arrow">→</span>
+            <div class="demo-card"><span class="icon">☁️</span><span data-zh="上传到云端" data-en="Upload to Cloud">上传到云端</span></div>
+            <span class="demo-arrow">→</span>
+            <div class="demo-result"><span data-zh="✅ 链接已复制" data-en="✅ Link Copied">✅ 链接已复制</span></div>
         </div>
-    </section>
+    </div></section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="container">
-            <div class="features-header">
-                <h2><span data-zh="为创作者而生" data-en="Built for Creators">Built for Creators</span></h2>
-                <p><span data-zh="从截图到分享，全程自动化，专注你的创作" data-en="From screenshot to sharing, fully automated — focus on your creation">From screenshot to sharing, fully automated — focus on your creation</span></p>
+    <section class="features"><div class="container">
+        <div class="features-header">
+            <h2 data-zh="为创作者而生" data-en="Built for Creators">为创作者而生</h2>
+            <p data-zh="从截图到分享，全程自动化，专注你的创作" data-en="From screenshot to sharing, fully automated — focus on creation">从截图到分享，全程自动化，专注你的创作</p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card highlight animate-in">
+                <div class="feature-icon" style="background:var(--accent-soft);">📸</div>
+                <h3 data-zh="截图自动检测" data-en="Auto Screenshot Detection">截图自动检测</h3>
+                <p data-zh="智能监控系统截图行为，截图后自动弹出上传提示。无需手动操作，截图即上传，链接即可用。搭配全局快捷键，效率拉满。" data-en="Intelligently monitors screenshots. Auto-prompts upload after capture. Screenshot, upload, link ready — paired with global hotkeys for max efficiency.">智能监控系统截图行为，截图后自动弹出上传提示。无需手动操作，截图即上传，链接即可用。搭配全局快捷键，效率拉满。</p>
             </div>
-
-            <div class="feature-grid">
-                <div class="feature-card highlight animate-in">
-                    <div class="feature-icon indigo">📸</div>
-                    <h3><span data-zh="截图自动检测" data-en="Auto Screenshot Detection">Auto Screenshot Detection</span></h3>
-                    <p><span data-zh="智能监控系统截图行为，截图后自动弹出上传提示。无需手动操作，截图即上传，链接即可用。搭配全局快捷键，效率拉满。" data-en="Intelligently monitors system screenshot behavior. Auto-prompts upload after screenshot. No manual action needed — screenshot, upload, and link ready. Paired with global hotkeys for maximum efficiency.">Intelligently monitors system screenshot behavior. Auto-prompts upload after screenshot. No manual action needed — screenshot, upload, and link ready. Paired with global hotkeys for maximum efficiency.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon purple">🖱</div>
-                    <h3><span data-zh="拖拽上传" data-en="Drag & Upload">Drag & Upload</span></h3>
-                    <p><span data-zh="将图片直接拖入菜单栏弹窗，支持多图批量上传，进度实时显示。" data-en="Drag images directly into the menu bar popover. Supports batch upload with real-time progress.">Drag images directly into the menu bar popover. Supports batch upload with real-time progress.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon green">📋</div>
-                    <h3><span data-zh="剪贴板监听" data-en="Clipboard Monitor">Clipboard Monitor</span></h3>
-                    <p><span data-zh="自动检测剪贴板中的图片内容，一键上传。复制即就绪，快捷键即发送。" data-en="Auto-detects images in clipboard, one-click upload. Copy and it's ready — hotkey to send.">Auto-detects images in clipboard, one-click upload. Copy and it's ready — hotkey to send.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon amber">🗜</div>
-                    <h3><span data-zh="智能压缩" data-en="Smart Compression">Smart Compression</span></h3>
-                    <p><span data-zh="上传前自动压缩图片，可自定义压缩质量和最大尺寸，节省存储空间和带宽。" data-en="Auto-compresses before upload. Customizable quality and max size to save storage and bandwidth.">Auto-compresses before upload. Customizable quality and max size to save storage and bandwidth.</span></p>
-                </div>
-
-                <div class="feature-card highlight animate-in">
-                    <div class="feature-icon cyan">☁️</div>
-                    <h3><span data-zh="多平台云存储" data-en="Multi-Platform Cloud Storage">Multi-Platform Cloud Storage</span></h3>
-                    <p><span data-zh="支持 GitHub、阿里云 OSS、腾讯云 COS 三大存储平台，自由切换。每个平台独立配置，灵活管理多个存储方案，满足不同场景的需求。" data-en="Supports GitHub, Alibaba Cloud OSS, and Tencent Cloud COS. Switch freely between platforms. Independent configuration for each, flexibly manage multiple storage solutions for different scenarios.">Supports GitHub, Alibaba Cloud OSS, and Tencent Cloud COS. Switch freely between platforms. Independent configuration for each, flexibly manage multiple storage solutions for different scenarios.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon rose">📊</div>
-                    <h3><span data-zh="历史记录" data-en="Upload History">Upload History</span></h3>
-                    <p><span data-zh="完整的上传历史，支持搜索、筛选、预览，随时回溯和重新复制链接。" data-en="Complete upload history with search, filter, and preview. Re-copy links anytime.">Complete upload history with search, filter, and preview. Re-copy links anytime.</span></p>
-                </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.10);">🖱</div>
+                <h3 data-zh="拖拽上传" data-en="Drag & Upload">拖拽上传</h3>
+                <p data-zh="将图片直接拖入菜单栏弹窗，支持多图批量上传，进度实时显示。" data-en="Drag images into menu bar popover. Batch upload with real-time progress.">将图片直接拖入菜单栏弹窗，支持多图批量上传，进度实时显示。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--green-soft);">📋</div>
+                <h3 data-zh="剪贴板监听" data-en="Clipboard Monitor">剪贴板监听</h3>
+                <p data-zh="自动检测剪贴板中的图片内容，一键上传。复制即就绪，快捷键即发送。" data-en="Auto-detects clipboard images, one-click upload. Copy and it's ready.">自动检测剪贴板中的图片内容，一键上传。复制即就绪，快捷键即发送。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--amber-soft);">🗜</div>
+                <h3 data-zh="智能压缩" data-en="Smart Compression">智能压缩</h3>
+                <p data-zh="上传前自动压缩图片，可自定义压缩质量和最大尺寸，节省存储空间和带宽。" data-en="Auto-compress before upload. Customizable quality and max size.">上传前自动压缩图片，可自定义压缩质量和最大尺寸，节省存储空间和带宽。</p>
+            </div>
+            <div class="feature-card highlight animate-in">
+                <div class="feature-icon" style="background:var(--cyan-soft);">☁️</div>
+                <h3 data-zh="多平台云存储" data-en="Multi-Platform Cloud">多平台云存储</h3>
+                <p data-zh="支持 GitHub、阿里云 OSS、腾讯云 COS 三大存储平台，自由切换。每个平台独立配置，灵活管理多个存储方案，满足不同场景需求。" data-en="Supports GitHub, Alibaba Cloud OSS, Tencent Cloud COS. Independent config per platform, flexible multi-storage management.">支持 GitHub、阿里云 OSS、腾讯云 COS 三大存储平台，自由切换。每个平台独立配置，灵活管理多个存储方案，满足不同场景需求。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--rose-soft);">📊</div>
+                <h3 data-zh="历史记录" data-en="Upload History">历史记录</h3>
+                <p data-zh="完整的上传历史，支持搜索、筛选、预览，随时回溯和重新复制链接。" data-en="Full upload history with search, filter, preview. Re-copy links anytime.">完整的上传历史，支持搜索、筛选、预览，随时回溯和重新复制链接。</p>
             </div>
         </div>
-    </section>
+    </div></section>
 
-    <!-- How it works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="how-header">
-                <h2><span data-zh="三步开始，即刻使用" data-en="Three Steps to Get Started">Three Steps to Get Started</span></h2>
-                <p><span data-zh="简洁的引导流程，几分钟完成设置" data-en="Simple guided setup in minutes">Simple guided setup in minutes</span></p>
-            </div>
+    <section class="providers"><div class="container">
+        <div class="providers-header">
+            <h2 data-zh="支持主流存储平台" data-en="Major Platforms">支持主流存储平台</h2>
+            <p data-zh="灵活选择，自由切换" data-en="Flexible, switch freely">灵活选择，自由切换</p>
+        </div>
+        <div class="provider-grid">
+            <div class="provider-card animate-in"><div class="p-icon">🐙</div><h4>GitHub</h4><p data-zh="免费 · 全球 CDN · 开源友好" data-en="Free · Global CDN · Open Source">免费 · 全球 CDN · 开源友好</p></div>
+            <div class="provider-card animate-in"><div class="p-icon">🟠</div><h4 data-zh="阿里云 OSS" data-en="Alibaba Cloud OSS">阿里云 OSS</h4><p data-zh="高速 · 稳定 · 国内首选" data-en="Fast · Stable · Top Choice">高速 · 稳定 · 国内首选</p></div>
+            <div class="provider-card animate-in"><div class="p-icon">🔵</div><h4 data-zh="腾讯云 COS" data-en="Tencent Cloud COS">腾讯云 COS</h4><p data-zh="安全 · 可靠 · 灵活计费" data-en="Secure · Reliable · Flexible">安全 · 可靠 · 灵活计费</p></div>
+        </div>
+    </div></section>
 
-            <div class="flow">
-                <div class="flow-step">
-                    <div class="flow-number">1</div>
-                    <div class="flow-icon">⚙️</div>
-                    <h4><span data-zh="配置存储平台" data-en="Configure Storage">Configure Storage</span></h4>
-                    <p><span data-zh="选择 GitHub / OSS / COS，填入密钥和存储桶信息" data-en="Choose GitHub / OSS / COS, enter your keys and bucket info">Choose GitHub / OSS / COS, enter your keys and bucket info</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">2</div>
-                    <div class="flow-icon">📸</div>
-                    <h4><span data-zh="截图或拖拽" data-en="Screenshot or Drag">Screenshot or Drag</span></h4>
-                    <p><span data-zh="截图自动检测，或将图片拖入菜单栏弹窗" data-en="Auto-detect screenshots, or drag images into the menu bar popover">Auto-detect screenshots, or drag images into the menu bar popover</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">3</div>
-                    <div class="flow-icon">🔗</div>
-                    <h4><span data-zh="链接已就绪" data-en="Link Ready">Link Ready</span></h4>
-                    <p><span data-zh="上传完成自动复制 URL，直接粘贴到任何地方" data-en="URL auto-copied after upload, paste anywhere">URL auto-copied after upload, paste anywhere</span></p>
-                </div>
+    <section class="privacy-section"><div class="container" style="max-width:780px;">
+        <div class="privacy-box">
+            <div class="shield">🛡️</div>
+            <h3 data-zh="隐私安全，值得信赖" data-en="Privacy First">隐私安全，值得信赖</h3>
+            <p data-zh="所有配置信息通过 macOS Keychain 加密存储，图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。" data-en="Credentials encrypted via macOS Keychain. Images upload directly to your storage — never through third-party relay.">所有配置信息通过 macOS Keychain 加密存储，图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。</p>
+            <div class="privacy-tags">
+                <span class="privacy-tag" data-zh="✓ 无第三方中转" data-en="✓ No Relay">✓ 无第三方中转</span>
+                <span class="privacy-tag" data-zh="✓ Keychain 加密" data-en="✓ Keychain Encrypted">✓ Keychain 加密</span>
+                <span class="privacy-tag" data-zh="✓ 直连云存储" data-en="✓ Direct to Cloud">✓ 直连云存储</span>
+                <span class="privacy-tag" data-zh="✓ 无数据收集" data-en="✓ No Collection">✓ 无数据收集</span>
             </div>
         </div>
-    </section>
+    </div></section>
 
-    <!-- Providers -->
-    <section class="providers">
-        <div class="container">
-            <div class="providers-header">
-                <h2><span data-zh="支持主流存储平台" data-en="Major Storage Platforms Supported">Major Storage Platforms Supported</span></h2>
-                <p><span data-zh="灵活选择，自由切换" data-en="Flexible choices, switch freely">Flexible choices, switch freely</span></p>
-            </div>
-
-            <div class="provider-grid">
-                <div class="provider-card animate-in">
-                    <div class="p-icon">🐙</div>
-                    <h4>GitHub</h4>
-                    <p><span data-zh="免费 · 全球 CDN · 开源友好" data-en="Free · Global CDN · Open Source Friendly">Free · Global CDN · Open Source Friendly</span></p>
-                </div>
-                <div class="provider-card animate-in">
-                    <div class="p-icon">🟠</div>
-                    <h4><span data-zh="阿里云 OSS" data-en="Alibaba Cloud OSS">Alibaba Cloud OSS</span></h4>
-                    <p><span data-zh="高速 · 稳定 · 国内首选" data-en="Fast · Stable · China's Top Choice">Fast · Stable · China's Top Choice</span></p>
-                </div>
-                <div class="provider-card animate-in">
-                    <div class="p-icon">🔵</div>
-                    <h4><span data-zh="腾讯云 COS" data-en="Tencent Cloud COS">Tencent Cloud COS</span></h4>
-                    <p><span data-zh="安全 · 可靠 · 灵活计费" data-en="Secure · Reliable · Flexible Pricing">Secure · Reliable · Flexible Pricing</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Privacy -->
-    <section class="privacy-section">
-        <div class="container-narrow">
-            <div class="privacy-box">
-                <div class="shield">🛡️</div>
-                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">Privacy First, Trustworthy</span></h3>
-                <p>
-                    <span data-zh="PicFlow 注重你的隐私安全。所有配置信息通过 macOS Keychain 加密存储，图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。" data-en="PicFlow values your privacy. All credentials are encrypted via macOS Keychain. Images upload directly to your own storage — never through any third-party relay server.">PicFlow values your privacy. All credentials are encrypted via macOS Keychain. Images upload directly to your own storage — never through any third-party relay server.</span>
-                </p>
-                <div class="privacy-tags">
-                    <span class="privacy-tag"><span data-zh="✓ 无第三方中转" data-en="✓ No Third-Party Relay">✓ No Third-Party Relay</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ Keychain 加密存储" data-en="✓ Keychain Encrypted Storage">✓ Keychain Encrypted Storage</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 直连你的云存储" data-en="✓ Direct to Your Cloud">✓ Direct to Your Cloud</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ No Data Collection</span></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="index.html"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">Contact</span></a>
-            </div>
-            <p>© 2026 PicFlow. All rights reserved.</p>
-        </div>
-    </footer>
+    <footer class="footer"><div class="container"><div class="footer-links"><a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a><a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a><a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 PicFlow. All rights reserved.</p></div></footer>
 
     <script>
-    (function() {
-        var K = 'declaration_lang';
-        function gL() { return localStorage.getItem(K) || 'en'; }
-        function sL(l) { localStorage.setItem(K, l); }
-
-        function apply(lang) {
-            document.querySelectorAll('[data-zh]').forEach(function(el) {
-                el.textContent = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
-            });
-            document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
-            document.title = lang === 'zh' ? 'PicFlow — 高效图床上传工具' : 'PicFlow — Efficient Image Hosting Tool';
-            var btn = document.getElementById('langToggle');
-            if (btn) btn.querySelector('.lang-label').textContent = lang === 'zh' ? 'EN' : '中文';
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var lang = gL();
-            if (lang === 'zh') apply('zh');
-            var btn = document.getElementById('langToggle');
-            if (btn) btn.addEventListener('click', function() {
-                var next = gL() === 'zh' ? 'en' : 'zh';
-                sL(next);
-                apply(next);
-            });
-        });
-    })();
+    (function(){var K='declaration_lang';function gL(){return localStorage.getItem(K)||'zh';}function sL(l){localStorage.setItem(K,l);}function apply(lang){document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});document.documentElement.lang=lang==='zh'?'zh-Hans':'en';document.title=lang==='zh'?'PicFlow — 高效图床上传工具':'PicFlow — Efficient Image Hosting Tool';var btn=document.getElementById('langToggle');if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';}document.addEventListener('DOMContentLoaded',function(){var lang=gL();apply(lang);var btn=document.getElementById('langToggle');if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});});})();
     </script>
 </body>
 </html>

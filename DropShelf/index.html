@@ -1,836 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DropShelf — macOS Drag & Drop File Shelf</title>
-    <meta name="description" content="DropShelf is a native macOS file shelf tool. Store files on a floating panel while dragging, with multi-shelf management, persistence, ZIP compression, renaming, image conversion, PDF merging and more.">
-    <meta name="keywords" content="DropShelf, macOS, drag drop, file shelf, file management, floating panel, ZIP compression, PDF merge, image conversion, productivity">
+    <title>DropShelf — macOS 拖拽文件搁置架</title>
+    <meta name="description" content="DropShelf 是一款精巧的 macOS 文件搁置架工具。拖拽时浮动面板自动弹出，多架管理、ZIP 压缩、PDF 合并、图片转换一站完成。">
     <meta name="author" content="VibeWhip">
     <link rel="canonical" href="https://vibewhip.com/DropShelf/">
-    <!-- Open Graph -->
     <meta property="og:type" content="product">
     <meta property="og:url" content="https://vibewhip.com/DropShelf/">
-    <meta property="og:title" content="DropShelf — Drag & Drop File Shelf">
-    <meta property="og:description" content="Native macOS file shelf. Floating panel for drag & drop, multi-shelf management, ZIP, rename, image conversion & PDF merge.">
+    <meta property="og:title" content="DropShelf — 拖拽文件搁置架">
     <meta property="og:site_name" content="VibeWhip">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DropShelf — Drag & Drop File Shelf">
-    <meta name="twitter:description" content="Native macOS file shelf. Floating panel for drag & drop, multi-shelf management, ZIP, rename & PDF merge.">
-    <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "DropShelf",
-      "url": "https://vibewhip.com/DropShelf/",
-      "description": "A native macOS file shelf tool with floating panel, multi-shelf management, ZIP compression, renaming, image conversion and PDF merging.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "macOS",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "author": { "@type": "Organization", "name": "VibeWhip", "url": "https://vibewhip.com/" }
-    }
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"DropShelf","url":"https://vibewhip.com/DropShelf/","applicationCategory":"UtilitiesApplication","operatingSystem":"macOS","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"VibeWhip","url":"https://vibewhip.com/"}}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0a0b;
-            --surface: #141416;
-            --surface-hover: #1c1c20;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent: #5B6EF5;
-            --accent-soft: rgba(91, 110, 245, 0.12);
-            --accent-glow: rgba(91, 110, 245, 0.25);
-            --purple: #8b5cf6;
-            --green: #22c55e;
-            --amber: #f59e0b;
-            --cyan: #06b6d4;
-            --rose: #f43f5e;
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .header {
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .container-narrow {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #5B6EF5, #8b5cf6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-        }
-
-        .nav-links a.active {
-            color: var(--text);
-            background: var(--surface);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(91,110,245,0.12) 0%, rgba(139,92,246,0.06) 40%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .hero-badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, #5B6EF5, #8b5cf6, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 19px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #5B6EF5, #6366f1);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 24px rgba(91, 110, 245, 0.3);
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(91, 110, 245, 0.4);
-        }
-
-        .hero-cta svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .hero-meta {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Drag animation */
-        .drag-demo {
-            margin: 60px auto 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            position: relative;
-        }
-
-        .drag-file {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 20px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            animation: dragFloat 3s ease-in-out infinite;
-        }
-
-        .drag-file .file-icon {
-            font-size: 20px;
-        }
-
-        @keyframes dragFloat {
-            0%, 100% { transform: translateX(0); opacity: 0.7; }
-            40% { transform: translateX(20px); opacity: 1; }
-            60% { transform: translateX(20px); opacity: 1; }
-            80% { transform: translateX(0); opacity: 0.7; }
-        }
-
-        .drag-arrow {
-            color: var(--text-muted);
-            font-size: 20px;
-            animation: arrowPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { opacity: 0.3; }
-            40%, 60% { opacity: 1; color: var(--accent); }
-        }
-
-        .drag-shelf {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 20px;
-            background: var(--accent-soft);
-            border: 2px dashed rgba(91, 110, 245, 0.3);
-            border-radius: 12px;
-            font-size: 14px;
-            color: var(--accent);
-            font-weight: 600;
-            animation: shelfGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes shelfGlow {
-            0%, 100% { border-color: rgba(91, 110, 245, 0.2); background: var(--accent-soft); }
-            40%, 60% { border-color: rgba(91, 110, 245, 0.5); background: rgba(91, 110, 245, 0.18); }
-        }
-
-        /* Features */
-        .features {
-            padding: 80px 0;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .features-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .features-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 28px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #3f3f46;
-            transform: translateY(-3px);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 18px;
-        }
-
-        .feature-icon.blue { background: var(--accent-soft); }
-        .feature-icon.purple { background: rgba(139, 92, 246, 0.12); }
-        .feature-icon.green { background: rgba(34, 197, 94, 0.12); }
-        .feature-icon.amber { background: rgba(245, 158, 11, 0.12); }
-        .feature-icon.rose { background: rgba(244, 63, 94, 0.12); }
-        .feature-icon.cyan { background: rgba(6, 182, 212, 0.12); }
-
-        .feature-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .feature-card.highlight {
-            grid-column: span 2;
-            background: linear-gradient(135deg, rgba(91,110,245,0.06), rgba(139,92,246,0.06));
-            border-color: rgba(91, 110, 245, 0.2);
-        }
-
-        /* How it works */
-        .how-it-works {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .how-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .how-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-        }
-
-        .how-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        .flow {
-            display: flex;
-            align-items: stretch;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .flow-step {
-            flex: 1;
-            max-width: 280px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 17px;
-            font-weight: 800;
-            margin: 0 auto 16px;
-        }
-
-        .flow-step .flow-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .flow-step h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .flow-step p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .flow-arrow {
-            display: flex;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Privacy */
-        .privacy-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .privacy-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 48px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .privacy-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--green), transparent);
-        }
-
-        .privacy-box .shield {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .privacy-box h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .privacy-box p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .privacy-tags {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
-        .privacy-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.15);
-            border-radius: 100px;
-            font-size: 13px;
-            color: var(--green);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .hero { padding: 70px 0 50px; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .feature-card.highlight { grid-column: span 1; }
-            .flow { flex-direction: column; align-items: center; }
-            .flow-arrow { transform: rotate(90deg); }
-            .features-header h2, .how-header h2 { font-size: 28px; }
-            .privacy-box { padding: 32px 24px; }
-            .drag-demo { flex-wrap: wrap; }
-        }
-
-        /* Entrance animations */
-        .animate-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        .animate-in:nth-child(1) { animation-delay: 0.05s; }
-        .animate-in:nth-child(2) { animation-delay: 0.1s; }
-        .animate-in:nth-child(3) { animation-delay: 0.15s; }
-        .animate-in:nth-child(4) { animation-delay: 0.2s; }
-        .animate-in:nth-child(5) { animation-delay: 0.25s; }
-        .animate-in:nth-child(6) { animation-delay: 0.3s; }
-        .animate-in:nth-child(7) { animation-delay: 0.35s; }
-        .animate-in:nth-child(8) { animation-delay: 0.4s; }
-
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            white-space: nowrap;
-        }
-
-        .lang-toggle:hover {
-            color: var(--text);
-            background: var(--surface-hover);
-            border-color: #3f3f46;
-        }
-
-        .lang-toggle .globe {
-            font-size: 14px;
-        }
+        :root{--bg:#0a0a0b;--surface:#111113;--surface-hover:#19191d;--border:#222226;--border-hover:#333338;--text:#fafafa;--text-secondary:#a1a1aa;--text-muted:#63636e;--accent:#5B6EF5;--accent-soft:rgba(91,110,245,0.10);--purple:#8b5cf6;--green:#22c55e;--green-soft:rgba(34,197,94,0.08);--amber:#f59e0b;--amber-soft:rgba(245,158,11,0.08);--cyan:#06b6d4;--cyan-soft:rgba(6,182,212,0.08);--rose:#f43f5e;--rose-soft:rgba(244,63,94,0.08);--radius:16px;--mono:'JetBrains Mono',monospace;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;}
+        .header{border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;background:rgba(10,10,11,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:100;}
+        .container{max-width:960px;margin:0 auto;padding:0 24px;}
+        .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto;padding:0 24px;}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);}
+        .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#5B6EF5,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+        .logo-text{font-family:var(--mono);font-weight:700;font-size:16px;}
+        .header-right{display:flex;align-items:center;gap:14px;}
+        .nav-links{display:flex;gap:6px;}.nav-links a{color:var(--text-muted);text-decoration:none;font-size:13px;padding:6px 14px;border-radius:8px;transition:all 0.2s;font-weight:500;}.nav-links a:hover{color:var(--text-secondary);background:var(--surface-hover);}.nav-links a.active{color:var(--text);background:var(--surface);}
+        .lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:all 0.2s;font-family:var(--mono);}.lang-toggle:hover{color:var(--text-secondary);border-color:var(--border-hover);}
+
+        .hero{padding:100px 0 80px;text-align:center;position:relative;}
+        .hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(91,110,245,0.08) 0%,rgba(139,92,246,0.04) 40%,transparent 70%);pointer-events:none;}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text-muted);margin-bottom:32px;font-family:var(--mono);}
+        .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+        .hero h1{font-size:clamp(36px,5vw,56px);font-weight:900;letter-spacing:-0.04em;line-height:1.15;margin-bottom:20px;}
+        .hero h1 .gradient{background:linear-gradient(135deg,#5B6EF5,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero .subtitle{font-size:17px;color:var(--text-secondary);max-width:560px;margin:0 auto 40px;font-weight:300;line-height:1.8;}
+        .hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:linear-gradient(135deg,#5B6EF5,#6366f1);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:600;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 24px rgba(91,110,245,0.25);cursor:pointer;font-family:inherit;}.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(91,110,245,0.35);}
+        .hero-cta svg{width:18px;height:18px;}
+        .hero-meta{margin-top:20px;font-size:13px;color:var(--text-muted);font-family:var(--mono);}
+
+        .drag-demo{margin:56px auto 0;display:flex;align-items:center;justify-content:center;gap:16px;}
+        .drag-file{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-size:14px;color:var(--text-secondary);font-family:var(--mono);animation:dragFloat 3s ease-in-out infinite;}
+        @keyframes dragFloat{0%,100%{transform:translateX(0);opacity:0.7;}40%{transform:translateX(20px);opacity:1;}60%{transform:translateX(20px);opacity:1;}80%{transform:translateX(0);opacity:0.7;}}
+        .drag-arrow{color:var(--text-muted);font-size:20px;animation:arrowPulse 3s ease-in-out infinite;}
+        @keyframes arrowPulse{0%,100%{opacity:0.3;}40%,60%{opacity:1;color:var(--accent);}}
+        .drag-shelf{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;background:var(--accent-soft);border:2px dashed rgba(91,110,245,0.25);border-radius:12px;font-size:14px;color:var(--accent);font-weight:600;animation:shelfGlow 3s ease-in-out infinite;}
+        @keyframes shelfGlow{0%,100%{border-color:rgba(91,110,245,0.15);}40%,60%{border-color:rgba(91,110,245,0.4);background:rgba(91,110,245,0.14);}}
+
+        .features{padding:80px 0;}
+        .features-header{text-align:center;margin-bottom:56px;}.features-header h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}.features-header p{font-size:15px;color:var(--text-secondary);}
+        .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+        .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;transition:all 0.3s;}.feature-card:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+        .feature-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:16px;}
+        .feature-card h3{font-size:15px;font-weight:700;margin-bottom:8px;}.feature-card p{font-size:13px;color:var(--text-secondary);line-height:1.7;}
+        .feature-card.highlight{grid-column:span 2;background:linear-gradient(135deg,rgba(91,110,245,0.04),rgba(139,92,246,0.04));border-color:rgba(91,110,245,0.15);}
+
+        .privacy-section{padding:80px 0;border-top:1px solid var(--border);}
+        .privacy-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;position:relative;overflow:hidden;}
+        .privacy-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);}
+        .privacy-box .shield{font-size:44px;margin-bottom:18px;}.privacy-box h3{font-size:22px;font-weight:700;margin-bottom:12px;}.privacy-box p{font-size:14px;color:var(--text-secondary);max-width:500px;margin:0 auto;line-height:1.8;}
+        .privacy-tags{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+        .privacy-tag{display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--green-soft);border:1px solid rgba(34,197,94,0.12);border-radius:100px;font-size:12px;color:var(--green);font-weight:500;}
+        .footer{border-top:1px solid var(--border);padding:36px 0;text-align:center;}.footer p{font-size:12px;color:var(--text-muted);font-family:var(--mono);}.footer a{color:var(--text-secondary);text-decoration:none;}.footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:14px;}.footer-links a{font-size:13px;color:var(--text-muted);}
+
+        .animate-in{opacity:0;transform:translateY(20px);animation:slideUp 0.6s ease forwards;}.animate-in:nth-child(1){animation-delay:.05s}.animate-in:nth-child(2){animation-delay:.1s}.animate-in:nth-child(3){animation-delay:.15s}.animate-in:nth-child(4){animation-delay:.2s}.animate-in:nth-child(5){animation-delay:.25s}.animate-in:nth-child(6){animation-delay:.3s}.animate-in:nth-child(7){animation-delay:.35s}.animate-in:nth-child(8){animation-delay:.4s}
+        @keyframes slideUp{to{opacity:1;transform:translateY(0);}}
+        @media(max-width:768px){.hero h1{font-size:32px;}.hero{padding:70px 0 50px;}.feature-grid{grid-template-columns:1fr;}.feature-card.highlight{grid-column:span 1;}.nav-links{display:none;}.drag-demo{flex-wrap:wrap;}.privacy-box{padding:32px 20px;}}
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">📂</div>
-                <span class="logo-text">DropShelf</span>
-            </a>
-            <nav class="nav-links">
-                <a href="index.html" class="active"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-            </nav>
-                <button id="langToggle" class="lang-toggle" aria-label="Switch Language">
-                    <span class="globe">🌐</span>
-                    <span class="lang-label">中文</span>
-                </button>
+    <header class="header"><div class="header-inner">
+        <a href="index.html" class="logo"><div class="logo-icon">📂</div><span class="logo-text">DropShelf</span></a>
+        <div class="header-right">
+            <nav class="nav-links"><a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a><a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a><a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a></nav>
+            <button id="langToggle" class="lang-toggle"><span>🌐</span><span class="lang-label">EN</span></button>
         </div>
-    </header>
+    </div></header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                <span data-zh="macOS 原生文件工具" data-en="macOS Native File Tool">macOS Native File Tool</span>
-            </div>
-            <h1>
-                <span data-zh="拖拽文件" data-en="Drag Files">Drag Files</span><br>
-                <span class="gradient"><span data-zh="随手搁置" data-en="Drop Anywhere">Drop Anywhere</span></span>
-            </h1>
-            <p class="subtitle">
-                <span data-zh="一款精巧的 macOS 文件搁置架。" data-en="A sleek macOS file shelf tool.">A sleek macOS file shelf tool.</span><br>
-                <span data-zh="拖拽时暂存文件到浮动面板，支持多架管理、批量操作，让文件整理行云流水。" data-en="Store files on a floating panel while dragging. Multi-shelf management and batch operations for seamless file organization.">Store files on a floating panel while dragging. Multi-shelf management and batch operations for seamless file organization.</span>
-            </p>
+    <section class="hero"><div class="container">
+        <div class="hero-badge"><span class="dot"></span><span data-zh="macOS 原生文件工具" data-en="macOS Native File Tool">macOS 原生文件工具</span></div>
+        <h1><span data-zh="拖拽文件" data-en="Drag Files">拖拽文件</span><br><span class="gradient" data-zh="随手搁置" data-en="Drop Anywhere">随手搁置</span></h1>
+        <p class="subtitle" data-zh="一款精巧的 macOS 文件搁置架。拖拽时暂存文件到浮动面板，支持多架管理、批量操作，让文件整理行云流水。" data-en="A sleek macOS file shelf. Store files on a floating panel while dragging. Multi-shelf management and batch operations for seamless file organization.">一款精巧的 macOS 文件搁置架。拖拽时暂存文件到浮动面板，支持多架管理、批量操作，让文件整理行云流水。</p>
+        <a href="../downloads/DropShelf.zip" class="hero-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-zh="下载 DropShelf" data-en="Download DropShelf">下载 DropShelf</span>
+        </a>
+        <p class="hero-meta" data-zh="免费 · macOS 13.0+ · Apple Silicon & Intel · 已公证签名" data-en="Free · macOS 13.0+ · Apple Silicon & Intel · Notarized">免费 · macOS 13.0+ · Apple Silicon & Intel · 已公证签名</p>
+        <div class="drag-demo"><div class="drag-file"><span>📄</span> report.pdf</div><span class="drag-arrow">→</span><div class="drag-shelf"><span data-zh="📂 DropShelf 面板" data-en="📂 DropShelf Panel">📂 DropShelf 面板</span></div></div>
+    </div></section>
 
-            <a href="https://apps.apple.com/app/dropshelf" class="hero-cta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                <span data-zh="在 Mac App Store 下载" data-en="Download on Mac App Store">Download on Mac App Store</span>
-            </a>
-            <p class="hero-meta"><span data-zh="免费下载 · macOS 13.0+ · Apple Silicon & Intel" data-en="Free · macOS 13.0+ · Apple Silicon & Intel">Free · macOS 13.0+ · Apple Silicon & Intel</span></p>
-
-            <div class="drag-demo">
-                <div class="drag-file">
-                    <span class="file-icon">📄</span>
-                    report.pdf
-                </div>
-                <span class="drag-arrow">→</span>
-                <div class="drag-shelf"><span data-zh="📂 DropShelf 面板" data-en="📂 DropShelf Panel">📂 DropShelf Panel</span></div>
-            </div>
+    <section class="features"><div class="container">
+        <div class="features-header">
+            <h2 data-zh="为拖拽而生" data-en="Built for Drag & Drop">为拖拽而生</h2>
+            <p data-zh="不打断操作流，暂存、整理、批量处理一气呵成" data-en="Without interrupting your workflow — store, organize, batch process seamlessly">不打断操作流，暂存、整理、批量处理一气呵成</p>
         </div>
-    </section>
-
-    <!-- Features -->
-    <section class="features">
-        <div class="container">
-            <div class="features-header">
-                <h2><span data-zh="为拖拽而生" data-en="Built for Drag & Drop">Built for Drag & Drop</span></h2>
-                <p><span data-zh="不打断操作流，暂存、整理、批量处理一气呵成" data-en="Without interrupting your workflow — store, organize, batch process seamlessly">Without interrupting your workflow — store, organize, batch process seamlessly</span></p>
+        <div class="feature-grid">
+            <div class="feature-card highlight animate-in">
+                <div class="feature-icon" style="background:var(--accent-soft);">🖱️</div>
+                <h3 data-zh="多种触发方式" data-en="Multiple Triggers">多种触发方式</h3>
+                <p data-zh="拖拽文件时自动弹出、屏幕边缘热区激活、全局快捷键唤起（⌥Space）、菜单栏图标点击——四种触发方式覆盖各种场景，随时随地打开搁置架。" data-en="Auto-popup when dragging, screen edge hot zone, global hotkey (⌥Space), menu bar icon — four trigger methods for every scenario.">拖拽文件时自动弹出、屏幕边缘热区激活、全局快捷键唤起（⌥Space）、菜单栏图标点击——四种触发方式覆盖各种场景，随时随地打开搁置架。</p>
             </div>
-
-            <div class="feature-grid">
-                <div class="feature-card highlight animate-in">
-                    <div class="feature-icon blue">🖱️</div>
-                    <h3><span data-zh="多种触发方式" data-en="Multiple Trigger Methods">Multiple Trigger Methods</span></h3>
-                    <p><span data-zh="拖拽文件时自动弹出、屏幕边缘热区激活、全局快捷键唤起（⌥Space）、菜单栏图标点击——四种触发方式覆盖各种使用场景，随时随地打开搁置架。" data-en="Auto-appears when dragging files, screen edge hot zone activation, global hotkey (⌥Space), menu bar icon click — four trigger methods cover all scenarios, open the shelf anytime, anywhere.">Auto-appears when dragging files, screen edge hot zone activation, global hotkey (⌥Space), menu bar icon click — four trigger methods cover all scenarios, open the shelf anytime, anywhere.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon purple">📚</div>
-                    <h3><span data-zh="多架管理" data-en="Multi-Shelf Management">Multi-Shelf Management</span></h3>
-                    <p><span data-zh="创建多个搁置架，按项目或任务分类。切换 Tab 即可在不同架之间自由操作。" data-en="Create multiple shelves, organize by project or task. Switch tabs to freely operate between different shelves.">Create multiple shelves, organize by project or task. Switch tabs to freely operate between different shelves.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon green">💾</div>
-                    <h3><span data-zh="持久化存储" data-en="Persistent Storage">Persistent Storage</span></h3>
-                    <p><span data-zh="文件暂存不会因重启丢失。所有搁置架内容自动持久化，下次开机数据依然完好。" data-en="Stored files won't be lost after restart. All shelf contents are automatically persisted, your data remains intact on next boot.">Stored files won't be lost after restart. All shelf contents are automatically persisted, your data remains intact on next boot.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon amber">🗜️</div>
-                    <h3><span data-zh="ZIP 压缩" data-en="ZIP Compression">ZIP Compression</span></h3>
-                    <p><span data-zh="选中多个文件一键压缩为 ZIP 归档，省去额外工具，进度实时可见。" data-en="Select multiple files and compress to ZIP archive with one click, no extra tools needed, with real-time progress.">Select multiple files and compress to ZIP archive with one click, no extra tools needed, with real-time progress.</span></p>
-                </div>
-
-                <div class="feature-card highlight animate-in">
-                    <div class="feature-icon cyan">🖼️</div>
-                    <h3><span data-zh="图片转换 & PDF 合并" data-en="Image Conversion & PDF Merge">Image Conversion & PDF Merge</span></h3>
-                    <p><span data-zh="图片格式批量转换（PNG、JPEG、HEIC、WebP、TIFF），多图/多PDF一键合并。强大的文件操作能力让搁置架不只是暂存，更是轻量级工作台。" data-en="Batch convert image formats (PNG, JPEG, HEIC, WebP, TIFF), merge multiple images/PDFs with one click. Powerful file operations make the shelf not just storage, but a lightweight workstation.">Batch convert image formats (PNG, JPEG, HEIC, WebP, TIFF), merge multiple images/PDFs with one click. Powerful file operations make the shelf not just storage, but a lightweight workstation.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon rose">👁️</div>
-                    <h3><span data-zh="Quick Look 预览" data-en="Quick Look Preview">Quick Look Preview</span></h3>
-                    <p><span data-zh="按空格键快速预览搁置架中的文件，支持图片、PDF、文档等多种格式。" data-en="Press Space to quickly preview files in the shelf, supporting images, PDFs, documents and more.">Press Space to quickly preview files in the shelf, supporting images, PDFs, documents and more.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon blue">✏️</div>
-                    <h3><span data-zh="批量重命名" data-en="Batch Rename">Batch Rename</span></h3>
-                    <p><span data-zh="选中文件直接重命名，支持批量操作，文件整理更高效。" data-en="Select files and rename directly, with batch support for more efficient file organization.">Select files and rename directly, with batch support for more efficient file organization.</span></p>
-                </div>
-
-                <div class="feature-card animate-in">
-                    <div class="feature-icon purple">📌</div>
-                    <h3><span data-zh="菜单栏常驻" data-en="Menu Bar Resident">Menu Bar Resident</span></h3>
-                    <p><span data-zh="安静地待在菜单栏，不占 Dock 栏位。纯原生实现，轻量无负担，开机自启随时待命。" data-en="Quietly stays in the menu bar, no Dock space occupied. Pure native implementation, lightweight and always ready on startup.">Quietly stays in the menu bar, no Dock space occupied. Pure native implementation, lightweight and always ready on startup.</span></p>
-                </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.10);">📚</div>
+                <h3 data-zh="多架管理" data-en="Multi-Shelf">多架管理</h3>
+                <p data-zh="创建多个搁置架，按项目或任务分类。Tab 切换在不同架之间自由操作。" data-en="Create multiple shelves by project or task. Switch tabs to operate between shelves.">创建多个搁置架，按项目或任务分类。Tab 切换在不同架之间自由操作。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--green-soft);">💾</div>
+                <h3 data-zh="持久化存储" data-en="Persistent Storage">持久化存储</h3>
+                <p data-zh="文件暂存不会因重启丢失。所有搁置架内容自动持久化，下次开机数据依然完好。" data-en="Stored files persist after restart. All shelf contents auto-saved.">文件暂存不会因重启丢失。所有搁置架内容自动持久化，下次开机数据依然完好。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--amber-soft);">🗜️</div>
+                <h3 data-zh="ZIP 压缩" data-en="ZIP Compression">ZIP 压缩</h3>
+                <p data-zh="选中多个文件一键压缩为 ZIP 归档，省去额外工具，进度实时可见。" data-en="Select files and compress to ZIP with one click, real-time progress.">选中多个文件一键压缩为 ZIP 归档，省去额外工具，进度实时可见。</p>
+            </div>
+            <div class="feature-card highlight animate-in">
+                <div class="feature-icon" style="background:var(--cyan-soft);">🖼️</div>
+                <h3 data-zh="图片转换 & PDF 合并" data-en="Image Conversion & PDF Merge">图片转换 & PDF 合并</h3>
+                <p data-zh="图片格式批量转换（PNG、JPEG、HEIC、WebP、TIFF），多图/多 PDF 一键合并。强大的文件操作能力让搁置架不只是暂存，更是轻量级工作台。" data-en="Batch convert images (PNG, JPEG, HEIC, WebP, TIFF), merge multiple images/PDFs. Powerful operations make it a lightweight workstation.">图片格式批量转换（PNG、JPEG、HEIC、WebP、TIFF），多图/多 PDF 一键合并。强大的文件操作能力让搁置架不只是暂存，更是轻量级工作台。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--rose-soft);">👁️</div>
+                <h3 data-zh="Quick Look 预览" data-en="Quick Look Preview">Quick Look 预览</h3>
+                <p data-zh="按空格键快速预览搁置架中的文件，支持图片、PDF、文档等多种格式。" data-en="Press Space to preview files — images, PDFs, documents and more.">按空格键快速预览搁置架中的文件，支持图片、PDF、文档等多种格式。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:var(--accent-soft);">✏️</div>
+                <h3 data-zh="批量重命名" data-en="Batch Rename">批量重命名</h3>
+                <p data-zh="选中文件直接重命名，支持批量操作，文件整理更高效。" data-en="Select and rename files directly with batch support.">选中文件直接重命名，支持批量操作，文件整理更高效。</p>
+            </div>
+            <div class="feature-card animate-in">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.10);">📌</div>
+                <h3 data-zh="菜单栏常驻" data-en="Menu Bar Resident">菜单栏常驻</h3>
+                <p data-zh="安静地待在菜单栏，不占 Dock 栏位。纯原生实现，轻量无负担，开机自启随时待命。" data-en="Quietly in menu bar, no Dock space. Pure native, lightweight, auto-start.">安静地待在菜单栏，不占 Dock 栏位。纯原生实现，轻量无负担，开机自启随时待命。</p>
             </div>
         </div>
-    </section>
+    </div></section>
 
-    <!-- How it works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="how-header">
-                <h2><span data-zh="三步上手，即刻使用" data-en="Three Steps to Get Started">Three Steps to Get Started</span></h2>
-                <p><span data-zh="零配置开箱即用，拖拽就对了" data-en="Zero config, just drag and drop">Zero config, just drag and drop</span></p>
-            </div>
-
-            <div class="flow">
-                <div class="flow-step">
-                    <div class="flow-number">1</div>
-                    <div class="flow-icon">📥</div>
-                    <h4><span data-zh="拖拽暂存" data-en="Drag & Store">Drag & Store</span></h4>
-                    <p><span data-zh="拖拽文件时浮动面板自动弹出，松手即暂存到搁置架" data-en="Floating panel auto-appears when dragging files, release to store on shelf">Floating panel auto-appears when dragging files, release to store on shelf</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">2</div>
-                    <div class="flow-icon">⚡</div>
-                    <h4><span data-zh="整理操作" data-en="Organize & Process">Organize & Process</span></h4>
-                    <p><span data-zh="在搁置架中预览、重命名、压缩、转换——一站式处理" data-en="Preview, rename, compress, convert in the shelf — all-in-one processing">Preview, rename, compress, convert in the shelf — all-in-one processing</span></p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-number">3</div>
-                    <div class="flow-icon">📤</div>
-                    <h4><span data-zh="拖出使用" data-en="Drag Out & Use">Drag Out & Use</span></h4>
-                    <p><span data-zh="将文件从搁置架拖到目标位置，或直接在 Finder 中打开" data-en="Drag files from the shelf to target location, or open directly in Finder">Drag files from the shelf to target location, or open directly in Finder</span></p>
-                </div>
+    <section class="privacy-section"><div class="container" style="max-width:780px;">
+        <div class="privacy-box">
+            <div class="shield">🛡️</div>
+            <h3 data-zh="隐私安全，值得信赖" data-en="Privacy First">隐私安全，值得信赖</h3>
+            <p data-zh="所有文件操作均在本地完成，不连接任何远程服务器，不上传任何文件内容，你的数据始终留在你的 Mac 上。" data-en="All file operations performed locally. No remote servers, no uploads — your data stays on your Mac.">所有文件操作均在本地完成，不连接任何远程服务器，不上传任何文件内容，你的数据始终留在你的 Mac 上。</p>
+            <div class="privacy-tags">
+                <span class="privacy-tag" data-zh="✓ 完全离线" data-en="✓ Fully Offline">✓ 完全离线</span>
+                <span class="privacy-tag" data-zh="✓ 数据本地存储" data-en="✓ Local Storage">✓ 数据本地存储</span>
+                <span class="privacy-tag" data-zh="✓ 无网络通信" data-en="✓ No Network">✓ 无网络通信</span>
+                <span class="privacy-tag" data-zh="✓ 无数据收集" data-en="✓ No Collection">✓ 无数据收集</span>
             </div>
         </div>
-    </section>
+    </div></section>
 
-    <!-- Privacy -->
-    <section class="privacy-section">
-        <div class="container-narrow">
-            <div class="privacy-box">
-                <div class="shield">🛡️</div>
-                <h3><span data-zh="隐私安全，值得信赖" data-en="Privacy First, Trustworthy">Privacy First, Trustworthy</span></h3>
-                <p>
-                    <span data-zh="DropShelf 注重你的隐私安全。所有文件操作均在本地完成，不连接任何远程服务器，不上传任何文件内容，你的数据始终留在你的 Mac 上。" data-en="DropShelf values your privacy. All file operations are performed locally, no connection to any remote servers, no uploading of any file content — your data always stays on your Mac.">DropShelf values your privacy. All file operations are performed locally, no connection to any remote servers, no uploading of any file content — your data always stays on your Mac.</span>
-                </p>
-                <div class="privacy-tags">
-                    <span class="privacy-tag"><span data-zh="✓ 完全离线运行" data-en="✓ Fully Offline">✓ Fully Offline</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 数据本地存储" data-en="✓ Local Data Storage">✓ Local Data Storage</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 无网络通信" data-en="✓ No Network Communication">✓ No Network Communication</span></span>
-                    <span class="privacy-tag"><span data-zh="✓ 无数据收集" data-en="✓ No Data Collection">✓ No Data Collection</span></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="index.html"><span data-zh="首页" data-en="Home">Home</span></a>
-                <a href="support.html"><span data-zh="技术支持" data-en="Support">Support</span></a>
-                <a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">Privacy</span></a>
-                <a href="mailto:lleowang@foxmail.com"><span data-zh="联系我们" data-en="Contact">Contact</span></a>
-            </div>
-            <p>© 2026 DropShelf. All rights reserved.</p>
-        </div>
-    </footer>
+    <footer class="footer"><div class="container"><div class="footer-links"><a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a><a href="support.html"><span data-zh="技术支持" data-en="Support">技术支持</span></a><a href="privacy.html"><span data-zh="隐私政策" data-en="Privacy">隐私政策</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 DropShelf. All rights reserved.</p></div></footer>
 
     <script>
-    (function(){
-        var K='declaration_lang';
-        function gL(){return localStorage.getItem(K)||'en';}
-        function sL(l){localStorage.setItem(K,l);}
-        function apply(lang){
-            document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});
-            document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
-            document.title=lang==='zh'?'DropShelf — macOS 拖拽文件搁置架':'DropShelf — macOS Drag & Drop File Shelf';
-            var btn=document.getElementById('langToggle');
-            if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';
-        }
-        document.addEventListener('DOMContentLoaded',function(){
-            var lang=gL();if(lang==='zh')apply('zh');
-            var btn=document.getElementById('langToggle');
-            if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});
-        });
-    })();
+    (function(){var K='declaration_lang';function gL(){return localStorage.getItem(K)||'zh';}function sL(l){localStorage.setItem(K,l);}function apply(lang){document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});document.documentElement.lang=lang==='zh'?'zh-Hans':'en';document.title=lang==='zh'?'DropShelf — macOS 拖拽文件搁置架':'DropShelf — macOS Drag & Drop File Shelf';var btn=document.getElementById('langToggle');if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';}document.addEventListener('DOMContentLoaded',function(){var lang=gL();apply(lang);var btn=document.getElementById('langToggle');if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});});})();
     </script>
 </body>
 </html>
