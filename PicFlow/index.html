@@ -82,9 +82,9 @@
 </head>
 <body>
     <header class="header"><div class="header-inner">
-        <a href="index.html" class="logo"><div class="logo-icon">🖼</div><span class="logo-text">PicFlow</span></a>
+        <a href="../" class="logo"><div class="logo-icon">🖼</div><span class="logo-text">PicFlow</span></a>
         <div class="header-right">
-            <nav class="nav-links"><a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a></nav>
+            <nav class="nav-links"><a href="../"><span data-zh="首页" data-en="Home">首页</span></a></nav>
             <button id="langToggle" class="lang-toggle"><span>🌐</span><span class="lang-label">EN</span></button>
         </div>
     </div></header>
@@ -158,21 +158,7 @@
         </div>
     </div></section>
 
-    <section class="privacy-section"><div class="container" style="max-width:780px;">
-        <div class="privacy-box">
-            <div class="shield">🛡️</div>
-            <h3 data-zh="隐私安全，值得信赖" data-en="Privacy First">隐私安全，值得信赖</h3>
-            <p data-zh="所有配置信息通过 macOS Keychain 加密存储，图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。" data-en="Credentials encrypted via macOS Keychain. Images upload directly to your storage — never through third-party relay.">所有配置信息通过 macOS Keychain 加密存储，图片直接上传到你自己的存储平台，全程不经过任何第三方中转服务器。</p>
-            <div class="privacy-tags">
-                <span class="privacy-tag" data-zh="✓ 无第三方中转" data-en="✓ No Relay">✓ 无第三方中转</span>
-                <span class="privacy-tag" data-zh="✓ Keychain 加密" data-en="✓ Keychain Encrypted">✓ Keychain 加密</span>
-                <span class="privacy-tag" data-zh="✓ 直连云存储" data-en="✓ Direct to Cloud">✓ 直连云存储</span>
-                <span class="privacy-tag" data-zh="✓ 无数据收集" data-en="✓ No Collection">✓ 无数据收集</span>
-            </div>
-        </div>
-    </div></section>
-
-    <footer class="footer"><div class="container"><div class="footer-links"><a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 PicFlow. All rights reserved.</p></div></footer>
+    <footer class="footer"><div class="container"><div class="footer-links"><a href="../"><span data-zh="首页" data-en="Home">首页</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 PicFlow. All rights reserved.</p></div></footer>
 
     <script>
     (function(){var K='declaration_lang';function gL(){return localStorage.getItem(K)||'zh';}function sL(l){localStorage.setItem(K,l);}function apply(lang){document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});document.documentElement.lang=lang==='zh'?'zh-Hans':'en';document.title=lang==='zh'?'PicFlow — 高效图床上传工具':'PicFlow — Efficient Image Hosting Tool';var btn=document.getElementById('langToggle');if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';}document.addEventListener('DOMContentLoaded',function(){var lang=gL();apply(lang);var btn=document.getElementById('langToggle');if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});});})();

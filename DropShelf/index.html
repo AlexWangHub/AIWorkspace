@@ -76,9 +76,9 @@
 </head>
 <body>
     <header class="header"><div class="header-inner">
-        <a href="index.html" class="logo"><div class="logo-icon">📂</div><span class="logo-text">DropShelf</span></a>
+        <a href="../" class="logo"><div class="logo-icon">📂</div><span class="logo-text">DropShelf</span></a>
         <div class="header-right">
-            <nav class="nav-links"><a href="index.html" class="active"><span data-zh="首页" data-en="Home">首页</span></a></nav>
+            <nav class="nav-links"><a href="../"><span data-zh="首页" data-en="Home">首页</span></a></nav>
             <button id="langToggle" class="lang-toggle"><span>🌐</span><span class="lang-label">EN</span></button>
         </div>
     </div></header>
@@ -144,21 +144,7 @@
         </div>
     </div></section>
 
-    <section class="privacy-section"><div class="container" style="max-width:780px;">
-        <div class="privacy-box">
-            <div class="shield">🛡️</div>
-            <h3 data-zh="隐私安全，值得信赖" data-en="Privacy First">隐私安全，值得信赖</h3>
-            <p data-zh="所有文件操作均在本地完成，不连接任何远程服务器，不上传任何文件内容，你的数据始终留在你的 Mac 上。" data-en="All file operations performed locally. No remote servers, no uploads — your data stays on your Mac.">所有文件操作均在本地完成，不连接任何远程服务器，不上传任何文件内容，你的数据始终留在你的 Mac 上。</p>
-            <div class="privacy-tags">
-                <span class="privacy-tag" data-zh="✓ 完全离线" data-en="✓ Fully Offline">✓ 完全离线</span>
-                <span class="privacy-tag" data-zh="✓ 数据本地存储" data-en="✓ Local Storage">✓ 数据本地存储</span>
-                <span class="privacy-tag" data-zh="✓ 无网络通信" data-en="✓ No Network">✓ 无网络通信</span>
-                <span class="privacy-tag" data-zh="✓ 无数据收集" data-en="✓ No Collection">✓ 无数据收集</span>
-            </div>
-        </div>
-    </div></section>
-
-    <footer class="footer"><div class="container"><div class="footer-links"><a href="index.html"><span data-zh="首页" data-en="Home">首页</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 DropShelf. All rights reserved.</p></div></footer>
+    <footer class="footer"><div class="container"><div class="footer-links"><a href="../"><span data-zh="首页" data-en="Home">首页</span></a><a href="mailto:lleowang@foxmail.com"><span data-zh="联系" data-en="Contact">联系</span></a></div><p>© 2026 DropShelf. All rights reserved.</p></div></footer>
 
     <script>
     (function(){var K='declaration_lang';function gL(){return localStorage.getItem(K)||'zh';}function sL(l){localStorage.setItem(K,l);}function apply(lang){document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=lang==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');});document.documentElement.lang=lang==='zh'?'zh-Hans':'en';document.title=lang==='zh'?'DropShelf — macOS 拖拽文件搁置架':'DropShelf — macOS Drag & Drop File Shelf';var btn=document.getElementById('langToggle');if(btn)btn.querySelector('.lang-label').textContent=lang==='zh'?'EN':'中文';}document.addEventListener('DOMContentLoaded',function(){var lang=gL();apply(lang);var btn=document.getElementById('langToggle');if(btn)btn.addEventListener('click',function(){var next=gL()==='zh'?'en':'zh';sL(next);apply(next);});});})();
