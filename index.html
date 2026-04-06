@@ -617,7 +617,7 @@
                         <a href="downloads/VibeWhip.zip" class="download-btn" onclick="trackDownload('VibeWhip')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="VibeWhip/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
-                    <div class="download-count">📊 <span id="dl-VibeWhip">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
+                    <div class="download-count">📊 <span id="dl-VibeWhip">--</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- ClipVault -->
@@ -634,7 +634,7 @@
                         <a href="downloads/ClipVault.zip" class="download-btn" onclick="trackDownload('ClipVault')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="ClipVault/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
-                    <div class="download-count">📊 <span id="dl-ClipVault">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
+                    <div class="download-count">📊 <span id="dl-ClipVault">--</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- DropShelf -->
@@ -651,7 +651,7 @@
                         <a href="downloads/DropShelf.zip" class="download-btn" onclick="trackDownload('DropShelf')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="DropShelf/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
-                    <div class="download-count">📊 <span id="dl-DropShelf">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
+                    <div class="download-count">📊 <span id="dl-DropShelf">--</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- PicFlow -->
@@ -668,7 +668,7 @@
                         <a href="downloads/PicFlow.zip" class="download-btn" onclick="trackDownload('PicFlow')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="PicFlow/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
-                    <div class="download-count">📊 <span id="dl-PicFlow">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
+                    <div class="download-count">📊 <span id="dl-PicFlow">--</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
 
                 <!-- ClipToNotion -->
@@ -685,7 +685,7 @@
                         <a href="downloads/ClipToNotion.zip" class="download-btn" onclick="trackDownload('ClipToNotion')">⬇ <span data-zh="下载" data-en="Download">下载</span></a>
                         <a href="ClipToNotion/" class="detail-link" data-zh="详情 →" data-en="Details →">详情 →</a>
                     </div>
-                    <div class="download-count">📊 <span id="dl-ClipToNotion">0</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
+                    <div class="download-count">📊 <span id="dl-ClipToNotion">--</span> <span data-zh="次下载" data-en="downloads">次下载</span></div>
                 </div>
             </div>
         </div>
@@ -706,24 +706,71 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <script>
-    // ===== 下载量统计（localStorage） =====
+    // ===== 下载量统计（远端累计计数） =====
+    var DOWNLOAD_COUNTER_NAMESPACE = 'vibewhip-downloads';
+    var DOWNLOAD_COUNTERS = {
+        VibeWhip: { slug: 'vibewhip' },
+        ClipVault: { slug: 'clipvault' },
+        DropShelf: { slug: 'dropshelf' },
+        PicFlow: { slug: 'picflow' },
+        ClipToNotion: { slug: 'cliptonotion' }
+    };
+
+    function setDownloadCount(appName, count) {
+        var el = document.getElementById('dl-' + appName);
+        if (!el) return;
+        el.textContent = typeof count === 'number' && isFinite(count) ? count : '--';
+    }
+
+    function counterUrl(appName, action) {
+        var counter = DOWNLOAD_COUNTERS[appName];
+        if (!counter) return null;
+        var base = 'https://api.counterapi.dev/v1/' + DOWNLOAD_COUNTER_NAMESPACE + '/' + counter.slug;
+        return action === 'up' ? base + '/up' : base + '/';
+    }
+
+    function requestDownloadCount(appName, action) {
+        var url = counterUrl(appName, action);
+        if (!url) return Promise.reject(new Error('Unknown app: ' + appName));
+
+        return fetch(url, {
+            cache: 'no-store',
+            keepalive: action === 'up'
+        }).then(function(response) {
+            if (response.status === 404 && action !== 'up') {
+                return { count: 0 };
+            }
+            if (!response.ok) {
+                throw new Error('Counter API request failed: ' + response.status);
+            }
+            return response.json();
+        });
+    }
+
+    function syncDownloadCount(appName) {
+        return requestDownloadCount(appName).then(function(data) {
+            setDownloadCount(appName, data.count);
+        }).catch(function(error) {
+            console.error('Failed to load download count for ' + appName + '.', error);
+            setDownloadCount(appName, '--');
+        });
+    }
+
     function trackDownload(appName) {
-        var key = 'vibewhip_dl_' + appName;
-        var count = parseInt(localStorage.getItem(key) || '0', 10);
-        count++;
-        localStorage.setItem(key, count);
-        updateDownloadCounts();
+        requestDownloadCount(appName, 'up').then(function(data) {
+            setDownloadCount(appName, data.count);
+        }).catch(function(error) {
+            console.error('Failed to increment download count for ' + appName + '.', error);
+            syncDownloadCount(appName);
+        });
     }
 
     function updateDownloadCounts() {
-        var apps = ['VibeWhip', 'ClipVault', 'DropShelf', 'PicFlow', 'ClipToNotion'];
-        apps.forEach(function(name) {
-            var key = 'vibewhip_dl_' + name;
-            var count = parseInt(localStorage.getItem(key) || '0', 10);
-            var el = document.getElementById('dl-' + name);
-            if(el) el.textContent = count;
+        Object.keys(DOWNLOAD_COUNTERS).forEach(function(name) {
+            syncDownloadCount(name);
         });
     }
+
     document.addEventListener('DOMContentLoaded', updateDownloadCounts);
 
     // ===== Language Toggle =====
