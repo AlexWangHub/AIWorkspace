@@ -43,9 +43,9 @@ Declaration/
 └── ClipToNotion/
 ```
 
-App 源文件：`/Users/blibli/Desktop/AIWorkspace/AppTest/`
-Logo 源文件：`/Users/blibli/Desktop/AIWorkspace/Workflow/main_logo.png`
-星球图片源文件：`/Users/blibli/Desktop/AIWorkspace/Workflow/知识星球.jpg`
+App 源文件：`/Users/blibli/Desktop/codex/Vibe应用/AIWorkspace/AppTest/`
+Logo 源文件：`/Users/blibli/Desktop/codex/Vibe应用/AIWorkspace/Workflow/main_logo.png`
+星球图片源文件：`/Users/blibli/Desktop/codex/Vibe应用/AIWorkspace/Workflow/知识星球.jpg`
 
 ## 每日更新流程
 
