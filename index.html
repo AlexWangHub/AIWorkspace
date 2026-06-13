@@ -69,6 +69,8 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { overflow-x: hidden; }
+
         body {
             font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
             background: var(--bg);
@@ -257,6 +259,8 @@
             margin-top: 48px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 8px;
             font-family: var(--mono);
             font-size: 14px;
@@ -265,6 +269,7 @@
             border: 1px solid var(--border);
             padding: 12px 24px;
             border-radius: 10px;
+            max-width: calc(100vw - 32px);
         }
 
         .terminal-line .prompt { color: var(--green); font-weight: 700; }
@@ -590,7 +595,7 @@
             </h1>
             <div class="terminal-line">
                 <span class="prompt">→</span>
-                <span class="cmd" data-zh="5 款 macOS 原生工具 · 已签名公证" data-en="5 native macOS tools · signed & notarized">5 款 macOS 原生工具 · 已签名公证</span>
+                <span class="cmd" data-zh="5 款 macOS 工具 + 1 款 iOS App" data-en="5 macOS tools + 1 iOS app">5 款 macOS 工具 + 1 款 iOS App</span>
             </div>
         </div>
     </section>
@@ -601,10 +606,27 @@
     <section class="section" id="apps">
         <div class="container">
             <div class="section-label"><span class="dot"></span> <span data-zh="作品集" data-en="PORTFOLIO">作品集</span></div>
-            <h2 class="section-title" data-zh="macOS 工具集" data-en="macOS Toolkit">macOS 工具集</h2>
-            <p class="section-desc" data-zh="每一款都是原生 Swift 开发，注重隐私，开箱即用。" data-en="Every app is built with native Swift, privacy-focused, ready to use.">每一款都是原生 Swift 开发，注重隐私，开箱即用。</p>
+            <h2 class="section-title" data-zh="App 作品集" data-en="App Portfolio">App 作品集</h2>
+            <p class="section-desc" data-zh="覆盖 macOS 原生工具和 iOS AI 应用，注重隐私、效率和可用性。" data-en="Native macOS tools and an iOS AI app, built around privacy, speed, and practical workflows.">覆盖 macOS 原生工具和 iOS AI 应用，注重隐私、效率和可用性。</p>
 
             <div class="app-grid">
+                <!-- Knowcast -->
+                <div class="app-card animate-in" style="--card-accent: #ef4444;">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: var(--rose-soft);">🎧</div>
+                        <div>
+                            <h3>听个响 / Knowcast</h3>
+                            <div class="app-tagline" data-zh="AI 定制私人播客" data-en="AI podcast for long reads">AI 定制私人播客</div>
+                        </div>
+                    </div>
+                    <p class="app-desc" data-zh="把网页、PDF、长文和灵感主题变成更容易吸收的内容。支持 AI 内容扩写、AI 润色、直接转播客、对话式播客、文字解读和漫画解读，适合通勤、散步和碎片时间学习。" data-en="Turn web pages, PDFs, long reads, and raw ideas into formats you can actually finish. Supports AI content expansion, AI polishing, direct podcast generation, conversational podcasts, text summaries, and comic-style explanations.">把网页、PDF、长文和灵感主题变成更容易吸收的内容。支持 AI 内容扩写、AI 润色、直接转播客、对话式播客、文字解读和漫画解读，适合通勤、散步和碎片时间学习。</p>
+                    <div class="app-card-footer">
+                        <a href="https://apps.apple.com/us/app/%E5%90%AC%E4%B8%AA%E5%93%8D-ai%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84%E7%A7%81%E4%BA%BA%E6%92%AD%E5%AE%A2/id6766254112?l=zh-Hans-CN" class="download-btn" target="_blank" rel="noopener" onclick="trackDownload('Knowcast')">⬇ <span data-zh="App Store 下载" data-en="App Store">App Store 下载</span></a>
+                        <a href="https://vibewhip.com/share.html" class="detail-link" data-zh="分享页 →" data-en="Share →">分享页 →</a>
+                    </div>
+                    <div class="download-count">📊 <span id="dl-Knowcast">--</span> <span data-zh="次点击" data-en="clicks">次点击</span></div>
+                </div>
+
                 <!-- VibeWhip -->
                 <div class="app-card animate-in" style="--card-accent: #8b5cf6;">
                     <div class="app-card-header">
@@ -711,6 +733,7 @@
     // ===== 下载量统计（远端累计计数） =====
     var DOWNLOAD_COUNTER_NAMESPACE = 'vibewhip-downloads';
     var DOWNLOAD_COUNTERS = {
+        Knowcast: { slug: 'knowcast' },
         VibeWhip: { slug: 'vibewhip' },
         ClipVault: { slug: 'clipvault' },
         DropShelf: { slug: 'dropshelf' },
